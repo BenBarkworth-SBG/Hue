@@ -22,6 +22,7 @@ body {
 h1 {
     font-size: 72px;
     background: -webkit-linear-gradient(#000000, #00eeff);
+    background-clip: border-box; /* This may need changing - it just stops VS Code complaining about webkit*/
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -30,6 +31,8 @@ h1 {
 
 .topnav {
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
 }
 
 .topnav a {
