@@ -1,6 +1,8 @@
+// require("dotenv").config();
+// require("./db");
 const express = require('express');
+const path = require("path");
 const app = express();
-const port = 3000;
 
 const routes = require("./routes/routes");
 
@@ -21,16 +23,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", routes);
 
 
-app.get('/home', (req, res) => {    
-  res.sendFile("home");
+app.get('/', (req, res) => {    
+  res.render("home");
 })
 app.get('/register', (req, res) => {    
-  res.sendFile("register");
+  res.render("register");
 })
 app.get('/login', (req, res) => {    
-  res.sendFile("login");
+  res.render("login");
 })
 
-app.listen(port, () => {
-  console.log(__dirname);
+app.listen(3000, () => {
+  console.log("Server listening on port 3000");
 })
