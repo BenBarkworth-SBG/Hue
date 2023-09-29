@@ -18,6 +18,12 @@
 }
 */
 
+* {
+    background-color: #ffffff;
+    font-family: 'Gabarito', cursive;
+    font-family: 'Roboto', sans-serif;
+}
+
 .logo{
     width: 50px;
     height: 50px;
@@ -100,4 +106,35 @@ h1 {
 .topnav a.active {
     background-color: #aa0491;
     color: white;
+}
+
+.gradient>a {
+    font-family: 'Paytone One', sans-serif;
+    ;
+    font-weight: bold;
+    font-size: 36px;
+    letter-spacing: 3px;
+    background: linear-gradient(to right,
+            #9AD0F8 20%,
+            #8DB2f3 40%,
+            #7B86ED 60%,
+            #7577Ec 80%,
+            #6d62e9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: 500% auto;
+    animation: textShine 2s ease-in-out infinite alternate;
+    border: none;
+}
+
+@keyframes textShine {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
 }
