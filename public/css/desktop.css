@@ -18,6 +18,7 @@
 }
 */
 
+
 * {
     background-color: #ffffff;
     font-family: 'Gabarito', cursive;
@@ -91,6 +92,8 @@ h1 {
     overflow: hidden;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 1px #333;
 }
 
 .topnav a {
@@ -102,6 +105,7 @@ h1 {
     font-size: 17px;
 }
 
+/* This looks at the nav bar buttons, when the user hovers over one of them the animation that is also used on the logo will be displayed */
 .topnav a:hover {
     background: linear-gradient(to right,
             #9AD0F8 20%,
