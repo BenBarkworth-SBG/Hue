@@ -24,33 +24,34 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.logo{
+.logo {
     width: 50px;
     height: 50px;
     background-image: url("../images/Leeds_United_Fc_Black.png");
 }
 
-#outputs{
+#outputs {
     height: 200px;
     width: 92%;
     background: #000;
-    border: top left radius 5px;;
+    border: top left radius 5px;
+    ;
     border-top-right-radius: 5px;
 }
 
-.wrapper{
+.wrapper {
     width: 100%;
     text-align: center;
 }
 
-input[type="range"]{
+input[type="range"] {
     display: inline-block;
-    width:80%;
+    width: 80%;
     margin-left: 10px;
     margin-top: 25px;
 }
 
-span{
+span {
     display: inline-block;
     text-align: center;
     margin: 20px 0;
@@ -62,6 +63,7 @@ span{
     letter-spacing: 0.5px;
     border-radius: 2px;
 }
+
 /*
 body {
     margin: 0;
@@ -69,7 +71,7 @@ body {
 }
 */
 
-.pbody{
+.pbody {
     margin: 10px;
     display: grid;
 }
@@ -77,10 +79,12 @@ body {
 h1 {
     font-size: 72px;
     background: -webkit-linear-gradient(#000000, #00eeff);
-    background-clip: border-box; /* This may need changing - it just stops VS Code complaining about webkit*/
+    background-clip: border-box;
+    /* This may need changing - it just stops VS Code complaining about webkit*/
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 /* Navbar */
 
 .topnav {
@@ -99,13 +103,35 @@ h1 {
 }
 
 .topnav a:hover {
-    background-color: #ddd;
-    color: black;
+    background: linear-gradient(to right,
+            #9AD0F8 20%,
+            #8DB2f3 40%,
+            #7B86ED 60%,
+            #7577Ec 80%,
+            #6d62e9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: 500% auto;
+    animation: textShine 2s ease-in-out infinite alternate;
+    border: none;
 }
 
+@keyframes textShine {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+
 .topnav a.active {
-    background-color: #aa0491;
-    color: white;
+
+    color: black;
 }
 
 .gradient>a {
