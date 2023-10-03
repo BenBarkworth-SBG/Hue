@@ -18,39 +18,41 @@
 }
 */
 
+
 * {
     background-color: #ffffff;
     font-family: 'Gabarito', cursive;
     font-family: 'Roboto', sans-serif;
 }
 
-.logo{
+.logo {
     width: 50px;
     height: 50px;
     background-image: url("../images/Leeds_United_Fc_Black.png");
 }
 
-#outputs{
+#outputs {
     height: 200px;
     width: 92%;
     background: #000;
-    border: top left radius 5px;;
+    border: top left radius 5px;
+    ;
     border-top-right-radius: 5px;
 }
 
-.wrapper{
+.wrapper {
     width: 100%;
     text-align: center;
 }
 
-input[type="range"]{
+input[type="range"] {
     display: inline-block;
-    width:80%;
+    width: 80%;
     margin-left: 10px;
     margin-top: 25px;
 }
 
-span{
+span {
     display: inline-block;
     text-align: center;
     margin: 20px 0;
@@ -62,6 +64,7 @@ span{
     letter-spacing: 0.5px;
     border-radius: 2px;
 }
+
 /*
 body {
     margin: 0;
@@ -69,7 +72,7 @@ body {
 }
 */
 
-.pbody{
+.pbody {
     margin: 10px;
     display: grid;
 }
@@ -77,16 +80,20 @@ body {
 h1 {
     font-size: 72px;
     background: -webkit-linear-gradient(#000000, #00eeff);
-    background-clip: border-box; /* This may need changing - it just stops VS Code complaining about webkit*/
+    background-clip: border-box;
+    /* This may need changing - it just stops VS Code complaining about webkit*/
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 /* Navbar */
 
 .topnav {
     overflow: hidden;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 1px #333;
 }
 
 .topnav a {
@@ -98,19 +105,41 @@ h1 {
     font-size: 17px;
 }
 
+/* This looks at the nav bar buttons, when the user hovers over one of them the animation that is also used on the logo will be displayed */
 .topnav a:hover {
-    background-color: #ddd;
+    background: linear-gradient(to right,
+            #9AD0F8 20%,
+            #8DB2f3 40%,
+            #7B86ED 60%,
+            #7577Ec 80%,
+            #6d62e9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: 500% auto;
+    animation: textShine 2s ease-in-out infinite alternate;
+    border: none;
+}
+
+@keyframes textShine {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+
+.topnav a.active {
+
     color: black;
 }
 
-.topnav a.active {
-    background-color: #aa0491;
-    color: white;
-}
-
-.gradient>a {
+.gradient > a {
     font-family: 'Paytone One', sans-serif;
-    ;
     font-weight: bold;
     font-size: 36px;
     letter-spacing: 3px;
@@ -138,3 +167,76 @@ h1 {
         background-position: 100% 50%;
     }
 }
+
+/* Bordered form */
+form {
+    border: 3px solid #f1f1f1;
+  }
+  
+  /* Full-width inputs */
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* Set a style for all buttons */
+  button {
+    background: linear-gradient(to right,
+            #9AD0F8 20%,
+            #8DB2f3 40%,
+            #7B86ED 60%,
+            #7577Ec 80%,
+            #6d62e9 100%);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Extra style for the cancel button (red) */
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  
+  /* Center the avatar image inside this container */
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+  
+  /* Avatar image */
+  img.avatar {
+    width: 40%;
+    border-radius: 50%;
+  }
+  
+  /* Add padding to containers */
+  .container {
+    padding: 16px;
+  }
+  
+  /* The "Forgot password" text */
+  
+  
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    .forgotpasswordbtn {
+      float: right;
+    }
+    .cancelbtn {
+      width: 100%;
+    }
+  }
