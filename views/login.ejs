@@ -1,36 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Log-in Hue</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/css/desktop.css" >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gabarito&family=Paytone+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400;1,500&display=swap"
+        rel="stylesheet">
   <!-- add css stylesheet in this and other EJS files -->
 </head>
 <body>
+<!--top nav bar-->
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">HUE</a>
+  <div class="container">
+    <div class="topnav">
+          <div class="leftnav">
+              <nav>
+                  <div class="gradient">
+                      <a href="#home">Hue</a>
+                  </div>
+              </nav>
+            </div>
+            <div class="rightnav">
+              <nav>
+                <a class="active" href="#home">Home</a>
+                <a href="#pallets">Palettes</a>
+                <a href="#about">About</a>
+                <a href="#account">Account</a>
+              </nav>
+            </div>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Hue Picker</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">My profile</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
   </div>
-</nav>
-  
-<div class="container">
-  <h3>Hue Picker</h3>
-  <p>Select a colour from the grid below and see a variety of palettes. Save them in to your favourites and view them on your profile.</p>
+
+<!--log-in form-->
+
+<div class="login">
+  <form action="action_page.php" method="post">
+  <div class="imgcontainer">
+    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button type="submit">Login</button>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <button type="button" class="forgotpasswordbtn">Forgot Password?</button>
+  </div>
+</form>
 </div>
 
 </body>
