@@ -1,5 +1,9 @@
-// require("dotenv").config();
-// require("./db");
+// explicitly stating that path to the .env file
+require('dotenv').config({path: __dirname + '/.env'});
+// imports db module from db.js file
+require("./db");
+const dataController = require('./controllers/controllers');
+
 const express = require('express');
 const path = require("path");
 const app = express();
@@ -32,6 +36,16 @@ app.get('/register', (req, res) => {
 app.get('/login', (req, res) => {    
   res.render("login");
 })
+
+app.get('/data', async (req, res) => {    
+  try {
+  const data = await dataController.getAllData();
+  res.render("home", {colours: data});
+} catch (err) {
+  console.error(err);
+  res.status(500).json({ error: "Internal Server Error" });
+}
+});
 
 app.listen(3000, () => {
   console.log("Server listening on port 3000");
