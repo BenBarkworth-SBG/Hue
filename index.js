@@ -1,5 +1,8 @@
-// require("dotenv").config();
-// require("./db");
+// imports db module from db.js file
+require("./db");
+// explicityl stating that path to the .env file
+require('dotenv').config({path: __dirname + '/.env'});
+
 const express = require('express');
 const path = require("path");
 const app = express();
