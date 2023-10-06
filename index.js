@@ -27,24 +27,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", routes);
 
 
-app.get('/', (req, res) => {    
-  res.render("home");
-})
+app.get('/', async (req, res) => {    
+  try {
+    const data = await dataController.getAllData();
+    res.render("home", {colours: data});
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.get('/register', (req, res) => {    
   res.render("register");
-})
+});
+
 app.get('/login', (req, res) => {    
   res.render("login");
-})
-
-app.get('/data', async (req, res) => {    
-  try {
-  const data = await dataController.getAllData();
-  res.render("home", {colours: data});
-} catch (err) {
-  console.error(err);
-  res.status(500).json({ error: "Internal Server Error" });
-}
 });
 
 app.listen(3000, () => {
