@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&family=Paytone+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400;1,500&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
 /*
 .container{
     background-color: #F4dAAA;
@@ -23,12 +25,6 @@
     background-color: #ffffff;
     font-family: 'Gabarito', cursive;
     font-family: 'Roboto', sans-serif;
-}
-
-.logo {
-    width: 50px;
-    height: 50px;
-    background-image: url("../images/Leeds_United_Fc_Black.png");
 }
 
 #outputs {
@@ -72,18 +68,11 @@ body {
 }
 */
 
+
+
 .pbody {
     margin: 10px;
     display: grid;
-}
-
-h1 {
-    font-size: 72px;
-    background: -webkit-linear-gradient(#000000, #00eeff);
-    background-clip: border-box;
-    /* This may need changing - it just stops VS Code complaining about webkit*/
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 /* Navbar */
@@ -138,7 +127,9 @@ h1 {
     color: black;
 }
 
-.gradient > a {
+
+
+.gradient>a {
     font-family: 'Paytone One', sans-serif;
     font-weight: bold;
     font-size: 72px;
@@ -171,15 +162,17 @@ h1 {
 /* Bordered form */
 form {
     border: 3px solid white;
-  }
-  
-  .usernamecontainer {
+}
+
+.usernamecontainer {
     text-align: center;
     width: 100%;
-  }
+}
 
-  /* Full-width inputs */
-  input[type=text], input[type=password] {
+/* Full-width inputs */
+input[type=text],
+input[type=password],
+input[type=email] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -188,61 +181,101 @@ form {
     box-sizing: border-box;
     text-align: center;
     border-radius: 4px;
-  }
-  
-  /* Set a style for login button */
-  .loginbtn {
+}
+
+/* Sets the display for the register and login buttons */
+.accountbtns {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* Set a style for login button */
+.loginbtn {
     background: linear-gradient(to right,
             #9AD0F8 20%,
             #8DB2f3 40%,
             #7B86ED 60%,
             #7577Ec 80%,
             #6d62e9 100%);
-            animation: forwards;
-            
+    animation: forwards;
+
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 25%;
     border-radius: 4px;
-  }
-  
-  /* Add a hover effect for buttons */
-  button:hover {
+}
+/* Adds the gradient effect to the button */
+.signupbtn {
+    background: linear-gradient(to right,
+            #6d62e9 20%,
+            #7577Ec 40%,
+            #7B86ED 60%,
+            #8DB2f3 80%,
+            #9AD0F8 100%);
+    animation: forwards;
+
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 25%;
+    border-radius: 4px;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
     opacity: 0.8;
-  }
-  
-  /* Center the avatar image inside this container */
-  .imgcontainer {
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
-  }
-  
-  /* Avatar image */
-  img.avatar {
+}
+
+/* Avatar image */
+img.avatar {
     width: 40%;
     border-radius: 50%;
-  }
-  
-  /* Add padding to containers */
-  .container {
+}
+
+/* Add padding to containers */
+.container {
     padding: 16px;
-  }
-  
-  /* The "Forgot password" text */
-  
-  
-  /* Change styles for forgot and cancel button on extra small screens */
-  .forgotpasswordcontainer {
+}
+
+/* The "Forgot password" text */
+
+
+/* Change styles for forgot and cancel button on extra small screens */
+.forgotpasswordcontainer {
     display: flex;
     justify-content: right;
-  } 
-  
-  .forgotpasswordbtn {
-        text-align: center;
-      width: 20%;
-      border-radius: 4px;
-    } 
-  
+}
+
+.forgotpasswordbtn {
+    text-align: center;
+    width: 20%;
+    border-radius: 4px;
+    border: none;
+}
+
+.forgotpasswordbtn:hover {
+        background: linear-gradient(to right,
+                    #9AD0F8 20%,
+                    #8DB2f3 40%,
+                    #7B86ED 60%,
+                    #7577Ec 80%,
+                    #6d62e9 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            background-size: 500% auto;
+            animation: textShine 2s ease-in-out infinite alternate;
+            border: none;
+}
