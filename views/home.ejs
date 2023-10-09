@@ -68,8 +68,43 @@
         <span id="hexOutput">hex(#000000)</span>
     </div>
     </div>
+     <!-- palette checkboxes-->
+    <div class="checkbox-group">
+        <label><input type="checkbox" id="monochromaticCheckbox"> Monochromatic</label>
+        <label><input type="checkbox" id="complementaryCheckbox"> Complementary</label>
+        <label><input type="checkbox" id="analogousCheckbox"> Analogous</label>
+    </div>
+    <button onclick="generatePalettes()">Generate Palettes</button>
+    <div class="palette-container" id="paletteContainer"></div>
+    
     <script src="/js/colourPicker.js"></script>
+    <script>
+        function generatePalettes() {
+            // Get checkbox states
+            const monochromaticChecked = document.getElementById('monochromaticCheckbox').checked;
+            const complementaryChecked = document.getElementById('complementaryCheckbox').checked;
+            const analogousChecked = document.getElementById('analogousCheckbox').checked;
 
+            // Container for displaying color palettes
+            const paletteContainer = document.getElementById('paletteContainer');
+
+            // Clear previous palettes
+            paletteContainer.innerHTML = '';
+
+            // Generate and display selected color palettes inside the grey box
+            if (monochromaticChecked) {
+                paletteContainer.innerHTML += '<h2>Monochromatic Palette</h2>';
+                // Generate and display monochromatic palette here
+            }
+            if (complementaryChecked) {
+                paletteContainer.innerHTML += '<h2>Complementary Palette</h2>';
+                // Generate and display complementary palette here
+            }
+            if (analogousChecked) {
+                paletteContainer.innerHTML += '<h2>Analogous Palette</h2>';
+                // Generate and display analogous palette here
+            }
+        }
+    </script>
 </body>
-
 </html>
