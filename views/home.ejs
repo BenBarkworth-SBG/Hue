@@ -22,27 +22,28 @@
                     </div>
                 </nav>
             </div>
+            <div class="midnav">
+                <nav>
+                    <ul class="navbarlist">
+                        <li><a class="active" href="/">Home</a></li>
+                        <li><a href="#pallets">Palettes</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="/profile">Profile</a></li>
+                    </ul>
+                </nav>
+            </div>
             <div class="rightnav">
                 <nav>
-                    <a class="active" href="#home">Home</a>
-                    <a href="#pallets">Palettes</a>
-                    <a href="#about">About</a>
-                    <a href="#account">Account</a>
+                    <ul class="navbarlist">
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Sign Up</a></li>
+                    </ul>
                 </nav>
             </div>
         </div>
         <div class="pbody">
-            <p>still testing the text</p>
-            <h2>Hue</h2>
-            <h3>This is a test website where colour palettes will be displayed on the site</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti fugit nulla qui quasi voluptate quia
-                porro,
-                molestiae omnis commodi. Quia, amet deleniti suscipit quis eveniet explicabo consectetur corrupti sunt
-                id ad ab
-                nesciunt dolore corporis! Sint laboriosam cumque accusamus dolore reprehenderit error incidunt,
-                consequuntur
-                delectus iure maiores numquam maxime voluptates? </p>
-
+            <h2 class="h2">Live your life in</h2>
+            <h2 class="h2Colour">Colour</h2>
         </div>
 
 
@@ -52,15 +53,15 @@
 
         <!-- range slider -->
         <div class="wrapper">
-            Red<input type="range" min="0" max="255" value="0" id="red" oninput="colors()">
+            <label>Red</label><input type="range" min="0" max="255" value="0" id="red" oninput="colors()">
         </div>
 
         <div class="wrapper">
-            Green<input type="range" min="0" max="255" value="0" id="green" oninput="colors()">
+            <label>Green</label><input type="range" min="0" max="255" value="0" id="green" oninput="colors()">
         </div>
 
         <div class="wrapper">
-            Blue<input type="range" min="0" max="255" value="0" id="blue" oninput="colors()">
+            <label>Blue</label><input type="range" min="0" max="255" value="0" id="blue" oninput="colors()">
         </div>
 
         <!-- colour code output-->
