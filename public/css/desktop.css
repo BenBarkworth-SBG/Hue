@@ -84,7 +84,34 @@ span {
 }
 
 /* Ensures H2 lines up across dfferent screen widths */
+
+@media screen and (max-width: 1124px) {
+	.pbody>.h2Colour {
+		font-size: 54px;
+	}
+	.h2 {
+		font-size: 54px;
+	}
+	.pbody {
+    display: flex;
+    gap: 0.5em;
+}
+}
+
 @media screen and (max-width: 924px) {
+	.pbody>.h2Colour {
+		font-size: 48px;
+	}
+	.h2 {
+		font-size: 48px;
+	}
+	.pbody {
+    display: flex;
+    gap: 0.5em;
+}
+}
+
+@media screen and (max-width: 724px) {
 	.pbody>.h2Colour {
 		font-size: 36px;
 	}
@@ -99,10 +126,10 @@ span {
 
 @media screen and (max-width: 524px) {
 	.pbody>.h2Colour {
-		font-size: 24px;
+		font-size: 20px;
 	}
 	.h2 {
-		font-size: 24px;
+		font-size: 20px;
 	}
 	.pbody {
     display: flex;
@@ -197,6 +224,36 @@ span {
     100% {
         background-position: 100% 50%;
     }
+}
+
+/* Dictionary homepage element */
+/* add media queries for different screen widths */
+/* might not be needed due to height being fixed? */
+.dictionary {
+	height: 300px;
+	width: 60%;
+	background-color: #bebebe;
+	margin-left: 5%;
+}
+
+.dictionaryWords, .dictionaryPro, .dictionaryTitle {
+	background-color: #bebebe;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+.dictionaryTitle {
+	font-size: 48px;
+	padding-top: 5%;
+	font-weight: 500;
+}
+
+.dictionaryPro {
+	font-size: 30px;
+}
+
+.dictionaryWords {
+	font-size: 20px;
 }
 
 /* Bordered form */
