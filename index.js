@@ -45,6 +45,10 @@ app.get('/login', (req, res) => {
   res.render("login");
 });
 
+app.get('/palette', (req, res) => {    
+  res.render("palette");
+});
+
 app.listen(3000, () => {
   console.log("Server listening on port 3000");
 })
