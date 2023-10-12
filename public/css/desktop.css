@@ -44,7 +44,7 @@ span {
     margin: 20px 0;
     background: #84c4e1;
     color: #fff;
-    padding: 10px 30px;
+    padding: 2px 20px;
     box-shadow: 0 0 20px rgba(0, 139, 253, 0.25);
     font-size: 18px;
     letter-spacing: 0.5px;
@@ -139,15 +139,16 @@ span {
 
 /* Navbar */
 
-.topnav {
+.navbar {
     overflow: hidden;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* border-bottom: solid 1px #333; */
+    padding: 1rem 1.5rem;
+
 }
 
-.topnav a {
+.navbar a {
     float: left;
     color: #333;
     text-align: center;
@@ -157,7 +158,7 @@ span {
 }
 
 /* This looks at the nav bar buttons, when the user hovers over one of them the animation that is also used on the logo will be displayed */
-.topnav a:hover {
+.navbar a:hover {
     background: linear-gradient(to right,
         #9AD0F8 20%,
         #8DB2f3 40%,
@@ -192,7 +193,132 @@ span {
     }
 }
 
-.topnav a.active {
+/* burger */
+.header{
+    border-bottom: solid 1px #E2E8F0;
+}
+
+.header > li {
+    list-style: none;
+}
+
+.header > a {
+    text-decoration: none;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    font-family: ;
+}
+
+
+.hamburger {
+    display: none;
+}
+
+.bar {
+    display: block;
+    width: 20px;
+    height: 2px;
+    margin: 2px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: #101010;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    gap: 10px;
+}
+
+.nav-item {
+    margin-left: 5rem;
+}
+
+.nav-link {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #475569;
+}
+
+.nav-link:hover {
+    color: #482ff7;
+}
+
+@media only screen and (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        left: 100%;
+        top: 1rem;
+        flex-direction: column;
+        background-color: #ffffff;
+        width: 100%;
+        border-radius: 10px;
+        text-align: center;
+        transition: 0.3s;
+        list-style: none;
+
+    }
+
+    .nav-menu.a.active {
+            color: black;
+        }
+    
+        .gradient>a {
+            font-family: 'Paytone One', sans-serif;
+            font-weight: bold;
+            font-size: 72px;
+            letter-spacing: 3px;
+            background: linear-gradient(to right,
+                    #9AD0F8 20%,
+                    #8DB2f3 40%,
+                    #7B86ED 60%,
+                    #7577Ec 80%,
+                    #6d62e9 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            background-size: 500% auto;
+            animation: textShine 2s ease-in-out infinite alternate;
+            border: none;
+        }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 2.5rem 0;
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+}
+/* end of burger */
+
+.navbar a.active {
     color: black;
 }
 
