@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Gabarito&family=Paytone+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400;1,500&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Candal&family=Gabarito:wght@400;500;600;700;800;900&family=Paytone+One&display=swap');
 
 * {
     background-color: #ffffff;
@@ -8,7 +8,7 @@
 
 /* Add margin to container  */
 .container {
-  margin: 0px 20px 0px 20px;
+    margin: 0px 20px 0px 20px;
 }
 
 #outputs {
@@ -27,8 +27,8 @@
 
 /* Ensures three input lines are lined up vertically */
 label {
-	display: inline-block;
-	min-width: 5%;
+    display: inline-block;
+    min-width: 5%;
 }
 
 input[type="range"] {
@@ -69,11 +69,11 @@ span {
     font-size: 72px;
     letter-spacing: 3px;
     background: linear-gradient(to right,
-        #9AD0F8 20%,
-        #8DB2f3 40%,
-        #7B86ED 60%,
-        #7577Ec 80%,
-        #6d62e9 100%);
+            #9AD0F8 20%,
+            #8DB2f3 40%,
+            #7B86ED 60%,
+            #7577Ec 80%,
+            #6d62e9 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -86,55 +86,63 @@ span {
 /* Ensures H2 lines up across dfferent screen widths */
 
 @media screen and (max-width: 1124px) {
-	.pbody>.h2Colour {
-		font-size: 54px;
-	}
-	.h2 {
-		font-size: 54px;
-	}
-	.pbody {
-    display: flex;
-    gap: 0.5em;
-}
+    .pbody>.h2Colour {
+        font-size: 54px;
+    }
+
+    .h2 {
+        font-size: 54px;
+    }
+
+    .pbody {
+        display: flex;
+        gap: 0.5em;
+    }
 }
 
 @media screen and (max-width: 924px) {
-	.pbody>.h2Colour {
-		font-size: 48px;
-	}
-	.h2 {
-		font-size: 48px;
-	}
-	.pbody {
-    display: flex;
-    gap: 0.5em;
-}
+    .pbody>.h2Colour {
+        font-size: 48px;
+    }
+
+    .h2 {
+        font-size: 48px;
+    }
+
+    .pbody {
+        display: flex;
+        gap: 0.5em;
+    }
 }
 
 @media screen and (max-width: 724px) {
-	.pbody>.h2Colour {
-		font-size: 36px;
-	}
-	.h2 {
-		font-size: 36px;
-	}
-	.pbody {
-    display: flex;
-    gap: 0.5em;
-}
+    .pbody>.h2Colour {
+        font-size: 36px;
+    }
+
+    .h2 {
+        font-size: 36px;
+    }
+
+    .pbody {
+        display: flex;
+        gap: 0.5em;
+    }
 }
 
 @media screen and (max-width: 524px) {
-	.pbody>.h2Colour {
-		font-size: 20px;
-	}
-	.h2 {
-		font-size: 20px;
-	}
-	.pbody {
-    display: flex;
-    gap: 0.25em;
-}
+    .pbody>.h2Colour {
+        font-size: 20px;
+    }
+
+    .h2 {
+        font-size: 20px;
+    }
+
+    .pbody {
+        display: flex;
+        gap: 0.25em;
+    }
 }
 
 /* Navbar */
@@ -160,11 +168,11 @@ span {
 /* This looks at the nav bar buttons, when the user hovers over one of them the animation that is also used on the logo will be displayed */
 .navbar a:hover {
     background: linear-gradient(to right,
-        #9AD0F8 20%,
-        #8DB2f3 40%,
-        #7B86ED 60%,
-        #7577Ec 80%,
-        #6d62e9 100%);
+            #9AD0F8 20%,
+            #8DB2f3 40%,
+            #7B86ED 60%,
+            #7577Ec 80%,
+            #6d62e9 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -194,15 +202,15 @@ span {
 }
 
 /* burger */
-.header{
+.header {
     border-bottom: solid 1px #E2E8F0;
 }
 
-.header > li {
+.header>li {
     list-style: none;
 }
 
-.header > a {
+.header>a {
     text-decoration: none;
 }
 
@@ -211,7 +219,6 @@ span {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 1.5rem;
-    font-family: ;
 }
 
 
@@ -234,22 +241,9 @@ span {
     justify-content: space-between;
     align-items: center;
     list-style: none;
-    gap: 10px;
+    gap: 20px;
 }
 
-.nav-item {
-    margin-left: 5rem;
-}
-
-.nav-link {
-    font-size: 1.6rem;
-    font-weight: 400;
-    color: #475569;
-}
-
-.nav-link:hover {
-    color: #482ff7;
-}
 
 @media only screen and (max-width: 768px) {
     .nav-menu {
@@ -266,29 +260,27 @@ span {
 
     }
 
-    .nav-menu.a.active {
-            color: black;
-        }
-    
-        .gradient>a {
-            font-family: 'Paytone One', sans-serif;
-            font-weight: bold;
-            font-size: 72px;
-            letter-spacing: 3px;
-            background: linear-gradient(to right,
-                    #9AD0F8 20%,
-                    #8DB2f3 40%,
-                    #7B86ED 60%,
-                    #7577Ec 80%,
-                    #6d62e9 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-fill-color: transparent;
-            background-size: 500% auto;
-            animation: textShine 2s ease-in-out infinite alternate;
-            border: none;
-        }
+
+
+    .gradient>a {
+        font-family: 'Paytone One', sans-serif;
+        font-weight: bold;
+        font-size: 72px;
+        letter-spacing: 3px;
+        background: linear-gradient(to right,
+                #9AD0F8 20%,
+                #8DB2f3 40%,
+                #7B86ED 60%,
+                #7577Ec 80%,
+                #6d62e9 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-fill-color: transparent;
+        background-size: 500% auto;
+        animation: textShine 2s ease-in-out infinite alternate;
+        border: none;
+    }
 
     .nav-menu.active {
         left: 0;
@@ -316,6 +308,7 @@ span {
     }
 
 }
+
 /* end of burger */
 
 .navbar a.active {
@@ -328,11 +321,11 @@ span {
     font-size: 72px;
     letter-spacing: 3px;
     background: linear-gradient(to right,
-        #9AD0F8 20%,
-        #8DB2f3 40%,
-        #7B86ED 60%,
-        #7577Ec 80%,
-        #6d62e9 100%);
+            #9AD0F8 20%,
+            #8DB2f3 40%,
+            #7B86ED 60%,
+            #7577Ec 80%,
+            #6d62e9 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -356,30 +349,32 @@ span {
 /* add media queries for different screen widths */
 /* might not be needed due to height being fixed? */
 .dictionary {
-	height: 300px;
-	width: 60%;
-	background-color: #bebebe;
-	margin-left: 5%;
+    height: 300px;
+    width: 60%;
+    background-color: #bebebe;
+    margin-left: 5%;
 }
 
-.dictionaryWords, .dictionaryPro, .dictionaryTitle {
-	background-color: #bebebe;
-	padding-left: 10%;
-	padding-right: 10%;
+.dictionaryWords,
+.dictionaryPro,
+.dictionaryTitle {
+    background-color: #bebebe;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .dictionaryTitle {
-	font-size: 48px;
-	padding-top: 5%;
-	font-weight: 500;
+    font-size: 48px;
+    padding-top: 5%;
+    font-weight: 500;
 }
 
 .dictionaryPro {
-	font-size: 30px;
+    font-size: 30px;
 }
 
 .dictionaryWords {
-	font-size: 20px;
+    font-size: 20px;
 }
 
 /* Bordered form */
@@ -415,11 +410,11 @@ input[type=email] {
 /* Set a style for login button */
 .loginbtn {
     background: linear-gradient(to right,
-        #9AD0F8 20%,
-        #8DB2f3 40%,
-        #7B86ED 60%,
-        #7577Ec 80%,
-        #6d62e9 100%);
+            #9AD0F8 20%,
+            #8DB2f3 40%,
+            #7B86ED 60%,
+            #7577Ec 80%,
+            #6d62e9 100%);
     animation: forwards;
     color: white;
     padding: 14px 20px;
@@ -429,14 +424,15 @@ input[type=email] {
     width: 25%;
     border-radius: 4px;
 }
+
 /* Adds the gradient effect to the button */
 .signupbtn {
     background: linear-gradient(to right,
-        #6d62e9 20%,
-        #7577Ec 40%,
-        #7B86ED 60%,
-        #8DB2f3 80%,
-        #9AD0F8 100%);
+            #6d62e9 20%,
+            #7577Ec 40%,
+            #7B86ED 60%,
+            #8DB2f3 80%,
+            #9AD0F8 100%);
     animation: forwards;
     color: white;
     padding: 14px 20px;
@@ -482,11 +478,11 @@ img.avatar {
 
 .forgotpasswordbtn:hover {
     background: linear-gradient(to right,
-        #9AD0F8 20%,
-        #8DB2f3 40%,
-        #7B86ED 60%,
-        #7577Ec 80%,
-        #6d62e9 100%);
+            #9AD0F8 20%,
+            #8DB2f3 40%,
+            #7B86ED 60%,
+            #7577Ec 80%,
+            #6d62e9 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -497,16 +493,105 @@ img.avatar {
 }
 
 .palette-container {
-            background-color: #f2f2f2;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 5px;
-        }
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
 .checkbox-group {
-            display: flex;
-            justify-content: space-between;
-        }
+    display: flex;
+    x justify-content: space-between;
+}
+
 .checkbox-group label {
-            margin-right: 20px;
-        }
-    
+    margin-right: 20px;
+}
+
+footer {
+    background-color: #a9c3f634;
+    color: #9AA8C4;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+}
+
+.footercontainer {
+    display: flex;
+
+}
+
+.containerfoot {
+    display: flex;
+    font-size: 20px;
+    flex-direction: column;
+}
+
+.Hue {
+    flex-basis: 100%;
+    padding-bottom: 10px;
+}
+
+.follow {
+    display: flex;
+    flex-basis: 0%;
+    float: left;
+}
+
+.contact {
+    flex-basis: 30%;
+}
+
+
+.logofoot {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.strapline {
+    color: #000000;
+    font-family: 'Paytone One', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.4px;
+}
+
+spanfoot {
+    font-family: 'Paytone One', sans-serif;
+    font-weight: bold;
+    background: linear-gradient(to right,
+            #9AD0F8 20%,
+            #8DB2f3 40%,
+            #7B86ED 60%,
+            #7577Ec 80%,
+            #6d62e9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: 500% auto;
+}
+
+.social {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+}
+
+.email {
+    font-family: 'Candal', sans-serif;
+    font-size: 16px;
+
+}
+
+.footheading {
+    font-family: 'Candal';
+    font-size: 12pt;
+    letter-spacing: 0.5pt;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 150px 150px;
+    padding-right: 200px;
+}
