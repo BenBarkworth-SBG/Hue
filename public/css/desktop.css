@@ -19,7 +19,6 @@
 */
 
 * {
-    background-color: #ffffff;
     font-family: 'Gabarito', cursive;
     font-family: 'Roboto', sans-serif;
 }
@@ -108,9 +107,8 @@ h1 {
     color: white;
 }
 
-.gradient>a {
+.gradient>a, .logofoot {
     font-family: 'Paytone One', sans-serif;
-    ;
     font-weight: bold;
     font-size: 36px;
     letter-spacing: 3px;
@@ -137,4 +135,85 @@ h1 {
     100% {
         background-position: 100% 50%;
     }
+}
+
+footer{
+    background-color: #a9c3f634;
+    color: #9AA8C4;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+}
+.footercontainer{
+    display: flex;
+    
+}
+.containerfoot{
+    display: flex;
+    font-size: 20px;
+    flex-direction: column;
+}
+.Hue{
+    flex-basis: 100%;
+    padding-bottom: 10px;
+}
+.follow{
+    display: flex;
+    flex-basis: 0%;
+    float: left;
+}
+.contact{
+    flex-basis: 30%;
+}
+ul{
+    flex-direction: column;
+}
+
+.logofoot{
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+.strapline{
+    color: #000000;
+    font-family: 'Paytone One', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.4px;
+}
+spanfoot{
+    font-family: 'Paytone One', sans-serif;
+    font-weight: bold;
+    background: linear-gradient(to right,
+            #9AD0F8 20%,
+            #8DB2f3 40%,
+            #7B86ED 60%,
+            #7577Ec 80%,
+            #6d62e9 100%);
+            -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: 500% auto;
+}
+.social{
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        
+}
+.email{
+    font-family: 'Candal', sans-serif;
+    font-size: 16px;
+   
+}
+
+.footheading{
+    font-family: 'Candal';
+    font-size: 12pt;
+    letter-spacing: 0.5pt;
+}
+.grid{
+    display: grid;
+    grid-template-columns: 150px 150px;
+    padding-right: 200px;
+
 }
