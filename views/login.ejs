@@ -1,37 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Bootstrap Example</title>
+  <title>Log-in Hue</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/css/desktop.css">
+
   <!-- add css stylesheet in this and other EJS files -->
 </head>
-<body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">HUE</a>
+<body>
+  <!--top nav bar-->
+
+  <div class="container">
+    <div class="navbar">
+      <div class="leftnav">
+        <nav>
+          <div class="gradient">
+            <a href="/">Hue</a>
+          </div>
+        </nav>
+      </div>
+      <div class="midnav">
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="/" class="nav-link">Home</a></li>
+            <li><a href="/palette" class="nav-link">Palettes</a></li>
+            <li><a href="/about" class="nav-link">About</a></li>
+            <li><a href="/profile" class="nav-link">Profile</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="rightnav">
+        <nav>
+          <ul class="nav-menu">
+            <li><a href="/login" class="nav-link">Login</a></li>
+            <li><a href="/register" class="nav-link">Sign Up</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Hue Picker</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">My profile</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
   </div>
-</nav>
-  
-<div class="container">
-  <h3>Hue Picker</h3>
-  <p>Select a colour from the grid below and see a variety of palettes. Save them in to your favourites and view them on your profile.</p>
-</div>
+
+  <!--log-in form-->
+
+  <div class="login">
+    <form action="action_page.php" method="post">
+
+      <div class="usernamecontainer">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <div class="forgotpasswordcontainer" style="background-color:white">
+          <button type="button" class="forgotpasswordbtn">Forgot Password?</button>
+        </div>
+
+        <div class="accountbtns">
+          <button type="submit" class="loginbtn">Login</button>
+          <button type="submit" class="signupbtn">Sign-up</button>
+        </div>
+
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Remember me
+
+        </label>
+
+      </div>
+
+
+    </form>
+  </div>
+  <script src="/js/hamburger.js"></script>
 
 </body>
+
 </html>

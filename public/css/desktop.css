@@ -23,76 +23,153 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.logo{
-    width: 50px;
-    height: 50px;
-    background-image: url("../images/Leeds_United_Fc_Black.png");
+/* Add margin to container  */
+.container {
+  margin: 0px 20px 0px 20px;
 }
 
-#outputs{
+#outputs {
     height: 200px;
     width: 92%;
     background: #000;
-    border: top left radius 5px;;
+    border: top left radius 5px;
+    ;
     border-top-right-radius: 5px;
 }
 
-.wrapper{
+.wrapper {
     width: 100%;
-    text-align: center;
+    text-align: start;
 }
 
-input[type="range"]{
+/* Ensures three input lines are lined up vertically */
+label {
+	display: inline-block;
+	min-width: 5%;
+}
+
+input[type="range"] {
     display: inline-block;
-    width:80%;
+    width: 80%;
     margin-left: 10px;
     margin-top: 25px;
 }
 
-span{
+span {
     display: inline-block;
     text-align: center;
     margin: 20px 0;
     background: #84c4e1;
     color: #fff;
-    padding: 10px 30px;
+    padding: 2px 20px;
     box-shadow: 0 0 20px rgba(0, 139, 253, 0.25);
     font-size: 18px;
     letter-spacing: 0.5px;
     border-radius: 2px;
 }
-/*
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-}
-*/
 
-.pbody{
-    margin: 10px;
-    display: grid;
+.pbody {
+    display: flex;
+    gap: 1em;
 }
 
-h1 {
+.h2 {
+    font-weight: bold;
     font-size: 72px;
-    background: -webkit-linear-gradient(#000000, #00eeff);
-    background-clip: border-box; /* This may need changing - it just stops VS Code complaining about webkit*/
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    letter-spacing: 3px;
+    font-family: 'Paytone One', sans-serif;
 }
+
+.pbody>.h2Colour {
+    font-family: 'Paytone One', sans-serif;
+    font-weight: bold;
+    font-size: 72px;
+    letter-spacing: 3px;
+    background: linear-gradient(to right,
+        #9AD0F8 20%,
+        #8DB2f3 40%,
+        #7B86ED 60%,
+        #7577Ec 80%,
+        #6d62e9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: 500% auto;
+    animation: textShine 2s ease-in-out infinite alternate;
+    border: none;
+}
+
+/* Ensures H2 lines up across dfferent screen widths */
+
+@media screen and (max-width: 1124px) {
+	.pbody>.h2Colour {
+		font-size: 54px;
+	}
+	.h2 {
+		font-size: 54px;
+	}
+	.pbody {
+    display: flex;
+    gap: 0.5em;
+}
+}
+
+@media screen and (max-width: 924px) {
+	.pbody>.h2Colour {
+		font-size: 48px;
+	}
+	.h2 {
+		font-size: 48px;
+	}
+	.pbody {
+    display: flex;
+    gap: 0.5em;
+}
+}
+
+@media screen and (max-width: 724px) {
+	.pbody>.h2Colour {
+		font-size: 36px;
+	}
+	.h2 {
+		font-size: 36px;
+	}
+	.pbody {
+    display: flex;
+    gap: 0.5em;
+}
+}
+
+@media screen and (max-width: 524px) {
+	.pbody>.h2Colour {
+		font-size: 20px;
+	}
+	.h2 {
+		font-size: 20px;
+	}
+	.pbody {
+    display: flex;
+    gap: 0.25em;
+}
+}
+
 /* Navbar */
 
-.topnav {
+.navbar {
     overflow: hidden;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+
 }
 
-.topnav a {
+.navbar a {
     float: left;
     color: #333;
     text-align: center;
-    padding: 14px 16px;
+    padding: 0px 0px;
     text-decoration: none;
     font-size: 17px;
 }
@@ -110,14 +187,14 @@ h1 {
 .gradient>a, .logofoot {
     font-family: 'Paytone One', sans-serif;
     font-weight: bold;
-    font-size: 36px;
+    font-size: 72px;
     letter-spacing: 3px;
     background: linear-gradient(to right,
-            #9AD0F8 20%,
-            #8DB2f3 40%,
-            #7B86ED 60%,
-            #7577Ec 80%,
-            #6d62e9 100%);
+        #9AD0F8 20%,
+        #8DB2f3 40%,
+        #7B86ED 60%,
+        #7577Ec 80%,
+        #6d62e9 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -136,6 +213,165 @@ h1 {
         background-position: 100% 50%;
     }
 }
+
+/* Dictionary homepage element */
+/* add media queries for different screen widths */
+/* might not be needed due to height being fixed? */
+.dictionary {
+	height: 300px;
+	width: 60%;
+	background-color: #bebebe;
+	margin-left: 5%;
+}
+
+.dictionaryWords, .dictionaryPro, .dictionaryTitle {
+	background-color: #bebebe;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+.dictionaryTitle {
+	font-size: 48px;
+	padding-top: 5%;
+	font-weight: 500;
+}
+
+.dictionaryPro {
+	font-size: 30px;
+}
+
+.dictionaryWords {
+	font-size: 20px;
+}
+
+/* Bordered form */
+form {
+    border: 3px solid white;
+}
+
+.usernamecontainer {
+    text-align: center;
+    width: 100%;
+}
+
+/* Full-width inputs */
+input[type=text],
+input[type=password],
+input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 4px;
+}
+
+/* Sets the display for the register and login buttons */
+.accountbtns {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/* Set a style for login button */
+.loginbtn {
+    background: linear-gradient(to right,
+        #9AD0F8 20%,
+        #8DB2f3 40%,
+        #7B86ED 60%,
+        #7577Ec 80%,
+        #6d62e9 100%);
+    animation: forwards;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 25%;
+    border-radius: 4px;
+}
+/* Adds the gradient effect to the button */
+.signupbtn {
+    background: linear-gradient(to right,
+        #6d62e9 20%,
+        #7577Ec 40%,
+        #7B86ED 60%,
+        #8DB2f3 80%,
+        #9AD0F8 100%);
+    animation: forwards;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 25%;
+    border-radius: 4px;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+/* The "Forgot password" text */
+
+
+/* Change styles for forgot and cancel button on extra small screens */
+.forgotpasswordcontainer {
+    display: flex;
+    justify-content: right;
+}
+
+.forgotpasswordbtn {
+    text-align: center;
+    width: 20%;
+    border-radius: 4px;
+    border: none;
+}
+
+.forgotpasswordbtn:hover {
+    background: linear-gradient(to right,
+        #9AD0F8 20%,
+        #8DB2f3 40%,
+        #7B86ED 60%,
+        #7577Ec 80%,
+        #6d62e9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-size: 500% auto;
+    animation: textShine 2s ease-in-out infinite alternate;
+    border: none;
+}
+
+.palette-container {
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+.checkbox-group {
+            display: flex;
+            justify-content: space-between;
+        }
+.checkbox-group label {
+            margin-right: 20px;
+        }
+    
 
 footer{
     background-color: #a9c3f634;

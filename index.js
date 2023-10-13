@@ -1,5 +1,8 @@
-// require("dotenv").config();
-// require("./db");
+// explicitly stating that path to the .env file
+require('dotenv').config({path: __dirname + '/.env'});
+// imports db module from db.js file
+require("./db");
+
 const express = require('express');
 const path = require("path");
 const app = express();
@@ -22,17 +25,6 @@ app.use(express.urlencoded({ extended: true }));
 // Mount the routes
 app.use("/", routes);
 
-
-app.get('/', (req, res) => {    
-  res.render("home");
-})
-app.get('/register', (req, res) => {    
-  res.render("register");
-})
-app.get('/login', (req, res) => {    
-  res.render("login");
-})
-
 app.listen(3000, () => {
   console.log("Server listening on port 3000");
-})
+});

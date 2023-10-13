@@ -1,1 +1,106 @@
-vfafa
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palette</title>
+    <link rel="stylesheet" href="/css/desktop.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="navbar">
+            <div class="leftnav">
+                <nav>
+                    <div class="gradient">
+                        <a href="/">Hue</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="midnav">
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="/" class="nav-link">Home</a></li>
+                        <li><a href="/palette" class="nav-link">Palettes</a></li>
+                        <li><a href="/about" class="nav-link">About</a></li>
+                        <li><a href="/profile" class="nav-link">Profile</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="rightnav">
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="/login" class="nav-link">Login</a></li>
+                        <li><a href="/register" class="nav-link">Sign Up</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+
+        <div id="outputs"> </div>
+
+
+        <!-- range slider -->
+        <div class="wrapper">
+            <label>Red</label><input type="range" min="0" max="255" value="0" id="red" oninput="colors()">
+        </div>
+
+        <div class="wrapper">
+            <label>Green</label><input type="range" min="0" max="255" value="0" id="green" oninput="colors()">
+        </div>
+
+        <div class="wrapper">
+            <label>Blue</label><input type="range" min="0" max="255" value="0" id="blue" oninput="colors()">
+        </div>
+
+        <!-- colour code output-->
+        <span id="output">rgb(0, 0, 0)</span>
+        <span id="hexOutput">hex(#000000)</span>
+    
+        <div class="checkbox-group">
+            <label><input type="checkbox" id="monochromaticCheckbox"> Monochromatic</label>
+            <label><input type="checkbox" id="complementaryCheckbox"> Complementary</label>
+            <label><input type="checkbox" id="analogousCheckbox"> Analogous</label>
+        </div>
+        <button onclick="generatePalettes()">Generate Palettes</button>
+        <div class="palette-container" id="paletteContainer"></div>
+    </div>
+
+        <script src="/js/colourPicker.js"></script>
+        <script>
+            function generatePalettes() {
+                // Get checkbox states
+                const monochromaticChecked = document.getElementById('monochromaticCheckbox').checked;
+                const complementaryChecked = document.getElementById('complementaryCheckbox').checked;
+                const analogousChecked = document.getElementById('analogousCheckbox').checked;
+
+                // Container for displaying color palettes
+                const paletteContainer = document.getElementById('paletteContainer');
+
+                // Clear previous palettes
+                paletteContainer.innerHTML = '';
+
+                // Generate and display selected color palettes inside the grey box
+                if (monochromaticChecked) {
+                    paletteContainer.innerHTML += '<h2>Monochromatic Palette</h2>';
+                    // Generate and display monochromatic palette here
+                }
+                if (complementaryChecked) {
+                    paletteContainer.innerHTML += '<h2>Complementary Palette</h2>';
+                    // Generate and display complementary palette here
+                }
+                if (analogousChecked) {
+                    paletteContainer.innerHTML += '<h2>Analogous Palette</h2>';
+                    // Generate and display analogous palette here
+                }
+            }
+        </script>
+        <script src="/js/hamburger.js"></script>
+
+</body>
+</html>
