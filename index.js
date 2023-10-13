@@ -2,7 +2,6 @@
 require('dotenv').config({path: __dirname + '/.env'});
 // imports db module from db.js file
 require("./db");
-const dataController = require('./controllers/controllers');
 
 const express = require('express');
 const path = require("path");
@@ -26,33 +25,6 @@ app.use(express.urlencoded({ extended: true }));
 // Mount the routes
 app.use("/", routes);
 
-
-app.get('/', async (req, res) => {    
-  try {
-    const data = await dataController.getAllData();
-    res.render("home", {colours: data});
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-app.get('/register', (req, res) => {    
-  res.render("register");
-});
-
-app.get('/login', (req, res) => {    
-  res.render("login");
-});
-
-app.get('/palette', (req, res) => {    
-  res.render("palette");
-});
-
-app.post('/login', (req, res) => {    
-  console.log(req.body);
-});
-
 app.listen(3000, () => {
   console.log("Server listening on port 3000");
-})
+});
