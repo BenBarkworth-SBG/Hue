@@ -67,6 +67,8 @@ function generatePalettes(hexInput) {
   }
 }
 
+// implement the following functions within generate palettes function above
+
 const colorPicker = document.getElementById('colorPicker');
 const colorPalette = document.getElementById('colorPalette');
 colorPicker.addEventListener('input', updatePalette);

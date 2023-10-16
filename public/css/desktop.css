@@ -496,7 +496,7 @@ img.avatar {
 
 .checkbox-group {
     display: flex;
-    x justify-content: space-between;
+    justify-content: space-between;
 }
 
 .checkbox-group label {
