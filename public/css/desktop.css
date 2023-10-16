@@ -3,7 +3,6 @@
 * {
     font-family: 'Gabarito', cursive;
     font-family: 'Roboto', sans-serif;
-    background-color: #ffffff;
 }
 
 /* Add margin to container  */
@@ -311,7 +310,7 @@ span {
     color: black;
 }
 
-.gradient>a {
+.gradient>a, .logofoot {
     font-family: 'Paytone One', sans-serif;
     font-weight: bold;
     font-size: 72px;
@@ -512,7 +511,6 @@ footer {
     padding-left: 50px;
 }
 
-
 .footercontainer {
     display: flex;
 
@@ -538,7 +536,6 @@ footer {
 .contact {
     flex-basis: 30%;
 }
-
 
 .logofoot {
     font-size: 36px;
@@ -591,4 +588,9 @@ spanfoot {
     display: grid;
     grid-template-columns: 150px 150px;
     padding-right: 200px;
+}
+
+.hr {
+    color: rgb(255, 255, 255);
+
 }
