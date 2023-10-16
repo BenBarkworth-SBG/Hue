@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Candal&family=Gabarito:wght@400;500;600;700;800;900&family=Paytone+One&display=swap');
 
 * {
-    background-color: #ffffff;
     font-family: 'Gabarito', cursive;
     font-family: 'Roboto', sans-serif;
+    background-color: #ffffff;
 }
 
 /* Add margin to container  */
@@ -165,7 +165,6 @@ span {
     font-size: 17px;
 }
 
-/* This looks at the nav bar buttons, when the user hovers over one of them the animation that is also used on the logo will be displayed */
 .navbar a:hover {
     background: linear-gradient(to right,
             #9AD0F8 20%,
@@ -260,8 +259,6 @@ span {
 
     }
 
-
-
     .gradient>a {
         font-family: 'Paytone One', sans-serif;
         font-weight: bold;
@@ -306,7 +303,6 @@ span {
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
     }
-
 }
 
 /* end of burger */
@@ -515,6 +511,7 @@ footer {
     padding-bottom: 50px;
     padding-left: 50px;
 }
+
 
 .footercontainer {
     display: flex;
