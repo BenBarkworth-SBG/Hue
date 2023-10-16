@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Palette</title>
     <link rel="stylesheet" href="/css/desktop.css">
 </head>
+
 <body>
 
     <div class="container">
@@ -24,12 +26,6 @@
                         <li><a href="/palette" class="nav-link">Palettes</a></li>
                         <li><a href="/about" class="nav-link">About</a></li>
                         <li><a href="/profile" class="nav-link">Profile</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="rightnav">
-                <nav>
-                    <ul class="nav-menu">
                         <li><a href="/login" class="nav-link">Login</a></li>
                         <li><a href="/register" class="nav-link">Sign Up</a></li>
                     </ul>
@@ -61,7 +57,7 @@
         <!-- colour code output-->
         <span id="output">rgb(0, 0, 0)</span>
         <span id="hexOutput">hex(#000000)</span>
-    
+
         <div class="checkbox-group">
             <label><input type="checkbox" id="monochromaticCheckbox" > Monochromatic</label>
             <label><input type="checkbox" id="complementaryCheckbox"> Complementary</label>
@@ -70,14 +66,14 @@
         <button onclick="colors()">Generate Palettes</button>
         <div class="palette-container" id="paletteContainer"></div>
     </div>
+    <script src="/js/colourPicker.js"></script>
+    <script src="/js/hamburger.js"></script>
 
-        <script src="/js/colourPicker.js"></script>
-        <script src="/js/hamburger.js"></script>
- 
-        <input type="color" id="colorPicker" value="#000000"; >
-        <div class="color-palette" id="colorPalette">
-            <!-- Dynamically generated color swatches will be placed here -->
-        </div>
+    <input type="color" id="colorPicker" value="#000000" ;>
+    <div class="color-palette" id="colorPalette">
+        <!-- Dynamically generated color swatches will be placed here -->
+    </div>
 
 </body>
+
 </html>
