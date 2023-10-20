@@ -5,9 +5,13 @@ require("./db");
 
 const express = require('express');
 const path = require("path");
+const mongodb = require('mongodb')
+const bodyParser = require('body-parser')
 const app = express();
+const PORT = process.env.MONGO_PORT || 27017
+const routes = require('./Routes/Routes');
 
-const routes = require("./routes/routes");
+//const routes = require("../routes/routes");
 
 // Middleware for parsing JSON bodies
 app.use(express.json());
@@ -24,6 +28,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Mount the routes
 app.use("/", routes);
+
+app.use('/api', routes);
 
 app.listen(3000, () => {
   console.log("Server listening on port 3000");
