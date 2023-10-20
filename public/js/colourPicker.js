@@ -49,8 +49,7 @@ function generatePalettes(hexInput) {
   // Clear previous palettes
   paletteContainer.style.backgroundColor = "";
 
-  // Generate and display selected color palettes inside the grey box
-  // this section should be part of update palette function
+  // Generate and display selected color palettes inside the div
   if (monochromatic.checked) {
     const palettes = generateMonochromePalette(value)
     paletteContainer.innerHTML = '';
