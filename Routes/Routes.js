@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const dataController = require('../controllers/controllers');
+const user = require('../Models/user')
+//const userController = require('../controllers/userController')
 
 router.get('/', async (req, res) => {    
     try {
@@ -27,5 +29,16 @@ router.get('/', async (req, res) => {
   router.post('/login', (req, res) => {    
     console.log(req.body);
   });
+
+  router.post('/users', async (req, res) => {    
+    console.log(req.body);
+    try {
+      res.status(201).json(req.body);
+    } catch (error) {
+      res.status(500).json({ error: error.message});
+    }
+  });
+
+ // router.post('/users', userController.createUser);
 
   module.exports = router;
