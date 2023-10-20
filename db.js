@@ -81,4 +81,5 @@ async function closeConnection() {
 module.exports = {
     client,
     db,
+    insertUser,
   };
