@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palette</title>
+    <title>Palette Picker</title>
     <link rel="stylesheet" href="/css/desktop.css">
 </head>
 
@@ -38,37 +38,55 @@
             </div>
         </div>
 
-        <div id="outputs"> </div>
+        <div class="colourContainer">
+            <div class="colourPicker">
+                <div id="outputs"> </div>
 
 
-        <!-- range slider -->
-        <div class="wrapper">
-            <label>Red</label><input type="range" min="0" max="255" value="0" id="red" oninput="colors()">
+                <!-- range slider -->
+                <div class="wrapper">
+                    <label class="wrapperLabel">Red</label><input type="range" min="0" max="255" value="0" id="red" oninput="colors()">
+                    <label class="wrapperLabel">Green</label><input type="range" min="0" max="255" value="0" id="green" oninput="colors()">
+                    <label class="wrapperLabel">Blue</label><input type="range" min="0" max="255" value="0" id="blue" oninput="colors()">
+                </div>
+
+                <!-- colour code output-->
+                <div class="colourOutput">
+                    <span id="output">rgb(0, 0, 0)</span>
+                    <span id="hexOutput">hex(#000000)</span>
+                </div>
+
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="monochromaticCheckbox" > Monochromatic</label>
+                    <label><input type="checkbox" id="complementaryCheckbox"> Complementary</label>
+                    <label><input type="checkbox" id="analogousCheckbox"> Analogous</label>
+                </div>
+                <button class="paletteGenBtn" onclick="colors()">Generate Palette</button>
+                <button class="resetBtn" onclick="">Reset</button>
+            </div>
+            <div class="divPaletteContainer">
+                <div class="monochromatic">
+                    <h2 class="paletteh2">Monochromatic</h2>
+                    <div class="palette-container" id="paletteContainer"></div>
+                    <button class="savePaletteBtn" onclick="">Save Palette</button> <!-- This should appear when palette is generated-->
+                </div>
+                <div class="complementary">
+                    <h2 class="paletteh2">Complementary</h2>
+                    <div class="complementaryContainer"></div>
+                </div>
+                <div class="analogous">
+                    <h2 class="paletteh2">Analogous</h2>
+                    <div class="analogousContainer"></div>
+                </div>
+                <div class="random">
+                    <h2 class="paletteh2">Random</h2>
+                    <div class="randomContainer"></div>
+                </div>
+            </div>
         </div>
-
-        <div class="wrapper">
-            <label>Green</label><input type="range" min="0" max="255" value="0" id="green" oninput="colors()">
-        </div>
-
-        <div class="wrapper">
-            <label>Blue</label><input type="range" min="0" max="255" value="0" id="blue" oninput="colors()">
-        </div>
-
-        <!-- colour code output-->
-        <span id="output">rgb(0, 0, 0)</span>
-        <span id="hexOutput">hex(#000000)</span>
-
-        <div class="checkbox-group">
-            <label><input type="checkbox" id="monochromaticCheckbox" > Monochromatic</label>
-            <label><input type="checkbox" id="complementaryCheckbox"> Complementary</label>
-            <label><input type="checkbox" id="analogousCheckbox"> Analogous</label>
-        </div>
-        <button onclick="colors()">Generate Palettes</button>
-        <div class="palette-container" id="paletteContainer"></div>
     </div>
     <script src="/js/colourPicker.js"></script>
     <script src="/js/hamburger.js"></script>
-    </div>
 
 </body>
 
