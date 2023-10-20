@@ -1,8 +1,15 @@
+let outputs = document.getElementById('outputs');
+// Get checkbox states
+const monochromatic = document.getElementById('monochromaticCheckbox');
+const complementary = document.getElementById('complementaryCheckbox');
+const analogous = document.getElementById('analogousCheckbox');
+// Container for displaying color palettes
+const paletteContainer = document.getElementById('paletteContainer');
+
+
 function componentToHex(c) {
     // converts number to a string using base 16
     let hex = c.toString(16);
-    //console.log(hex)
-
     // if hex length is 1 add 0 in front otherwise return hex
     return hex.length == 1 ? "0" + hex : hex;
   }
@@ -10,8 +17,6 @@ function componentToHex(c) {
 function rgbToHex(r, g, b) {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
   }
-
-let outputs = document.getElementById('outputs');
 
 function colors(){
     let red = document.getElementById('red').value;
@@ -25,17 +30,13 @@ function colors(){
     let test = rgbToHex(convRed, convGreen, convBlue);
     console.log(test)
     document.getElementById('hexOutput').innerHTML = 'hex(' + test + ')';
-    let generateTest = generatePalettes(test)
-
+    generatePalettes(test)
     outputs.style.backgroundColor = 'rgb(' + convRed + ',' + convGreen + ',' + convBlue + ')';
     return test
 }
 
 function generatePalettes(hexInput) {
-  // Get checkbox states
-  const monochromatic = document.getElementById('monochromaticCheckbox');
-  const complementary = document.getElementById('complementaryCheckbox');
-  const analogous = document.getElementById('analogousCheckbox');
+
   // button values
   const rgbValue = document.getElementById('output').value;
   const hexValue = document.getElementById('hexOutput').value;
@@ -45,18 +46,23 @@ function generatePalettes(hexInput) {
   console.log(value)
   console.log(monochromatic.checked)
 
-  // Container for displaying color palettes
-  const paletteContainer = document.getElementById('paletteContainer');
-
   // Clear previous palettes
   paletteContainer.style.backgroundColor = "";
 
-  // The generator button doesn't recognise checkbox is ticked
-
   // Generate and display selected color palettes inside the grey box
-  if (monochromatic.checked)
-    paletteContainer.style.backgroundColor = value;
-      // Generate and display monochromatic palette here
+  // this section should be part of update palette function
+  if (monochromatic.checked) {
+    const palettes = generateMonochromePalette(value)
+    paletteContainer.innerHTML = '';
+    palettes.forEach(color => {
+      const element = document.createElement('div');
+      element.style.backgroundColor = color;
+      element.style.width = "20%"
+      element.style.height = "100px"
+      element.className = 'swatch';
+      paletteContainer.appendChild(element);
+  });
+  }
   if (complementary.checked) {
     paletteContainer.style.backgroundColor = value;
       // Generate and display complementary palette here
@@ -67,25 +73,6 @@ function generatePalettes(hexInput) {
   }
 }
 
-// implement the following functions within generate palettes function above
-
-const colorPicker = document.getElementById('colorPicker');
-const colorPalette = document.getElementById('colorPalette');
-colorPicker.addEventListener('input', updatePalette);
-
-function updatePalette() {
-    const baseColor = colorPicker.value;
-    const palette = generateMonochromePalette(baseColor);
-    // Clear previous swatches
-    colorPalette.innerHTML = '';
-    // Create and append swatches to the palette
-    palette.forEach(color => {
-        const swatch = document.createElement('div');
-        swatch.style.backgroundColor = color;
-        swatch.className = 'swatch';
-        colorPalette.appendChild(swatch);
-    });
-}
 function generateMonochromePalette(baseColor) {
     const palette = [];
     // Generate 5 shades of the base color
@@ -106,5 +93,3 @@ function lightenColor(hex, percent) {
     const newHex = `#${Math.round(newR).toString(16).padStart(2, '0')}${Math.round(newG).toString(16).padStart(2, '0')}${Math.round(newB).toString(16).padStart(2, '0')}`;
     return newHex;
 }
-// Initialize the palette with the default color
-updatePalette();
