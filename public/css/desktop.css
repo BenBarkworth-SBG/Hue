@@ -566,17 +566,19 @@ img.avatar {
     margin-right: 20px;
 }
 
+/* start of footer css*/
 footer {
     background-color: #a9c3f634;
     color: #9AA8C4;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    padding-left: 50px;
+    height: auto;
+    width: 100vw;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
 }
 
 .footercontainer {
     display: flex;
-
 }
 
 .containerfoot {
@@ -655,5 +657,25 @@ spanfoot {
 
 .hr {
     color: rgb(255, 255, 255);
-
 }
+.copyright{
+    display:flex;
+    justify-content: space-between;
+}
+.privacy-policy {
+    text-align: right;
+    padding-right:190px;
+    font-size: 14px;
+}
+.Hue-rights {
+    font-size: 14px;
+    display: inline-block;
+}
+a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-decoration: inherit;
+    color: #9AA8C4;
+}
+
+/* end of footer css*/
