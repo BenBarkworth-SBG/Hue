@@ -679,3 +679,45 @@ a {
 }
 
 /* end of footer css*/
+
+/* Profile Page Css*/
+.profpage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0px 20px 0px 20px;
+}
+
+.userprofile {
+    display: flex;
+    flex-direction: column;
+}
+
+.userprofile>img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: solid;
+}
+
+.accname {
+    display: block;
+    gap: 5;
+}
+
+/* .usergradient {
+    background: linear-gradient(to right,
+                #9AD0F8 20%,
+                #8DB2f3 40%,
+                #7B86ED 60%,
+                #7577Ec 80%,
+                #6d62e9 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 500% auto;
+        animation: textShine 2s ease-in-out infinite alternate;
+
+} */
+
+
+/* End of Profile Page */
