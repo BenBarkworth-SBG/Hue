@@ -30,17 +30,17 @@ function colors(){
     let test = rgbToHex(convRed, convGreen, convBlue);
     console.log(test)
     document.getElementById('hexOutput').innerHTML = 'hex(' + test + ')';
-    generatePalettes(test)
+    // generatePalettes(test)
     outputs.style.backgroundColor = 'rgb(' + convRed + ',' + convGreen + ',' + convBlue + ')';
     return test
 }
 
-function generatePalettes(hexInput) {
-
+function generatePalettes() {
+  const value = colors()
   // button values
   const rgbValue = document.getElementById('output').value;
   const hexValue = document.getElementById('hexOutput').value;
-  const value = hexInput
+  // const value = hexInput
   console.log(rgbValue)
   console.log(hexValue)
   console.log(value)
@@ -51,6 +51,7 @@ function generatePalettes(hexInput) {
 
   // Generate and display selected color palettes inside the div
   if (monochromatic.checked) {
+    checkboxChecker()
     const palettes = generateMonochromePalette(value)
     paletteContainer.innerHTML = '';
     palettes.forEach(color => {
@@ -63,10 +64,12 @@ function generatePalettes(hexInput) {
   });
   }
   if (complementary.checked) {
+    checkboxChecker()
     paletteContainer.style.backgroundColor = value;
       // Generate and display complementary palette here
   }
   if (analogous.checked) {
+    checkboxChecker()
     paletteContainer.style.backgroundColor = value;
       // Generate and display analogous palette here
   }
@@ -91,4 +94,20 @@ function lightenColor(hex, percent) {
     const newB = Math.min(255, b + (percent * 2.55));
     const newHex = `#${Math.round(newR).toString(16).padStart(2, '0')}${Math.round(newG).toString(16).padStart(2, '0')}${Math.round(newB).toString(16).padStart(2, '0')}`;
     return newHex;
+}
+
+// function to disable checkboxes
+function checkboxChecker() {
+  if (monochromatic.checked) {
+    document.getElementById("complementaryCheckbox").disabled = true;
+    document.getElementById("analogousCheckbox").disabled = true;
+  }
+  if (complementary.checked) {
+    document.getElementById("monochromaticCheckbox").disabled = true;
+    document.getElementById("analogousCheckbox").disabled = true;
+  }
+  if (analogous.checked) {
+    document.getElementById("monochromaticCheckbox").disabled = true;
+    document.getElementById("complementaryCheckbox").disabled = true;
+  }
 }
