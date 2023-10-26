@@ -9,7 +9,7 @@ const mongodb = require('mongodb')
 const bodyParser = require('body-parser')
 const app = express();
 const PORT = process.env.MONGO_PORT || 27017
-const routes = require('./Routes/Routes');
+const routes = require('./routes/routes');
 
 //const routes = require("../routes/routes");
 
