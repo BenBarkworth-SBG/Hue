@@ -227,8 +227,6 @@ function checkboxChecker() {
 }
 
 function resetColors() {
-  // window.location.reload(); reset page one liner
-
   // rest the input and span element values
   document.getElementById('red').value = 0;
   document.getElementById('green').value = 0;
