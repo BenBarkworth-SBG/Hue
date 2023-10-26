@@ -23,7 +23,7 @@
                 <nav>
                     <ul class="nav-menu">
                         <li><a href="/" class="nav-link">Home</a></li>
-                        <li><a href="/palette" class="nav-link">Palettes</a></li>
+                        <li><a href="/palette" class="nav-link">Palette Picker</a></li>
                         <li><a href="/about" class="nav-link">About</a></li>
                         <li><a href="/profile" class="nav-link">Profile</a></li>
                         <li><a href="/login" class="nav-link">Login</a></li>
@@ -57,11 +57,11 @@
                 </div>
 
                 <div class="checkbox-group">
-                    <label><input type="checkbox" id="monochromaticCheckbox" > Monochromatic</label>
-                    <label><input type="checkbox" id="complementaryCheckbox"> Complementary</label>
-                    <label><input type="checkbox" id="analogousCheckbox"> Analogous</label>
+                    <label><input type="checkbox" id="monochromaticCheckbox" oninput="checkboxChecker()"> Monochromatic</label>
+                    <label><input type="checkbox" id="complementaryCheckbox" oninput="checkboxChecker()"> Complementary</label>
+                    <label><input type="checkbox" id="analogousCheckbox" oninput="checkboxChecker()"> Analogous</label>
                 </div>
-                <button class="paletteGenBtn" onclick="colors()">Generate Palette</button>
+                <button class="paletteGenBtn" onclick="generatePalettes()">Generate Palette</button>
                 <button class="resetBtn" onclick="">Reset</button>
             </div>
             <div class="divPaletteContainer">
@@ -72,15 +72,18 @@
                 </div>
                 <div class="complementary">
                     <h2 class="paletteh2">Complementary</h2>
-                    <div class="complementaryContainer"></div>
+                    <div class="complementaryContainer" id="complementary"></div>
+                    <button class="savePaletteBtn" onclick="">Save Palette</button> <!-- This should appear when palette is generated-->
                 </div>
                 <div class="analogous">
                     <h2 class="paletteh2">Analogous</h2>
-                    <div class="analogousContainer"></div>
+                    <div class="analogousContainer" id="analogous"></div>
+                    <button class="savePaletteBtn" onclick="">Save Palette</button> <!-- This should appear when palette is generated-->
                 </div>
                 <div class="random">
                     <h2 class="paletteh2">Random</h2>
-                    <div class="randomContainer"></div>
+                    <div class="randomContainer" id="random"></div>
+                    <button class="savePaletteBtn" onclick="">Save Palette</button> <!-- This should appear when palette is generated-->
                 </div>
             </div>
         </div>

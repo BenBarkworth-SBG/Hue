@@ -106,6 +106,7 @@ span {
 .palette-container, .complementaryContainer, .analogousContainer, .randomContainer {
     border: solid 20px #ebf1fd;
     border-radius: 20px;
+    display: flex;
 }
 
 .paletteh2 {
@@ -550,10 +551,6 @@ img.avatar {
     background-size: 500% auto;
     animation: textShine 2s ease-in-out infinite alternate;
     border: none;
-}
-
-.palette-container {
-    display: flex;
 }
 
 .checkbox-group {
