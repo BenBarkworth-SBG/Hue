@@ -61,8 +61,17 @@ function generatePalettes() {
   }
   if (complementary.checked) {
     checkboxChecker()
-    paletteContainer.style.backgroundColor = value;
-      // Generate and display complementary palette here
+    const complementaryColor = getComplementaryColor(value);
+    const palettes = generateComplementaryPalette(value, complementaryColor);
+    complementaryContainer.innerHTML = '';
+    palettes.forEach(color => {
+      const element = document.createElement('div');
+      element.style.backgroundColor = color;
+      element.style.width = "20%"
+      element.style.height = "100px"
+      element.className = 'swatch';
+      complementaryContainer.appendChild(element);
+    });
   }
   if (analogous.checked) {
     checkboxChecker()
@@ -101,23 +110,33 @@ function lightenColor(hex, percent) {
     return newHex;
 }
 
-function resetColors() {
-  document.getElementById('red').value = 0;
-  document.getElementById('green').value = 0;
-  document.getElementById('blue').value = 0;
-  document.getElementById('output').innerHTML = 'rgb(0, 0, 0)';
-  document.getElementById('hexOutput').innerHTML = 'hex(#000000)';
-  paletteContainer.innerHTML = ''; // Clear the palette container
-  paletteContainer.style.backgroundColor = ""; // Clear the background color of the palette container
-  outputs.style.backgroundColor = 'rgb(0, 0, 0)';
-  // Uncheck all checkboxes
-  monochromatic.checked = false;
-  complementary.checked = false;
-  analogous.checked = false;
+function generateComplementaryPalette(baseColor, complementaryColor) {
+  const palette = [];
+  // Generate shades of the base color
+  for (let i = 0; i < 3; i++) {
+      const shade = lightenColor(baseColor, i * 10);
+      palette.push(shade);
+  }
+  // Generate shades of the complementary color
+  for (let i = 0; i < 2; i++) {
+      const shade = lightenColor(complementaryColor, i * 10);
+      palette.push(shade);
+  }
+  return palette;
 }
 
+function getComplementaryColor(hex) {
+  hex = hex.replace(/^#/, '');
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+  const newR = 255 - r;
+  const newG = 255 - g;
+  const newB = 255 - b;
+  const newHex = `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
+  return newHex;
+}
 
-=======
 function generateAnalogousPalette(baseColor) {
   const palette = [];
   // Convert the base color to HSL
