@@ -8,6 +8,9 @@ const paletteContainer = document.getElementById('paletteContainer');
 const complementaryContainer = document.getElementById('complementary');
 const analogousContainer = document.getElementById('analogous');
 const randomContainer = document.getElementById('random');
+document.getElementById("monoBtn").style.display = "none";
+document.getElementById("compBtn").style.display = "none";
+document.getElementById("analogousBtn").style.display = "none";
 
 
 function componentToHex(c) {
@@ -57,6 +60,7 @@ function generatePalettes() {
       element.style.height = "100px"
       element.className = 'swatch';
       paletteContainer.appendChild(element);
+    document.getElementById("monoBtn").style.display = "inline-block";
     });
   }
   if (complementary.checked) {
@@ -71,6 +75,7 @@ function generatePalettes() {
       element.style.height = "100px"
       element.className = 'swatch';
       complementaryContainer.appendChild(element);
+    document.getElementById("compBtn").style.display = "inline-block";
     });
   }
   if (analogous.checked) {
@@ -84,6 +89,7 @@ function generatePalettes() {
       element.style.height = "100px"
       element.className = 'swatch';
       analogousContainer.appendChild(element);
+    document.getElementById("analogousBtn").style.display = "inline-block";
     });
   }
   checkboxChecker()
