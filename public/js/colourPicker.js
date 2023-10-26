@@ -92,3 +92,21 @@ function lightenColor(hex, percent) {
     const newHex = `#${Math.round(newR).toString(16).padStart(2, '0')}${Math.round(newG).toString(16).padStart(2, '0')}${Math.round(newB).toString(16).padStart(2, '0')}`;
     return newHex;
 }
+
+
+function resetColors() {
+  document.getElementById('red').value = 0;
+  document.getElementById('green').value = 0;
+  document.getElementById('blue').value = 0;
+  document.getElementById('output').innerHTML = 'rgb(0, 0, 0)';
+  document.getElementById('hexOutput').innerHTML = 'hex(#000000)';
+  paletteContainer.innerHTML = ''; // Clear the palette container
+  paletteContainer.style.backgroundColor = ""; // Clear the background color of the palette container
+  outputs.style.backgroundColor = 'rgb(0, 0, 0)';
+  // Uncheck all checkboxes
+  monochromatic.checked = false;
+  complementary.checked = false;
+  analogous.checked = false;
+}
+
+
