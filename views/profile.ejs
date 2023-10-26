@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Log-in Hue</title>
+    <title>Profile Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/desktop.css">
@@ -41,9 +41,32 @@
             </div>
         </div>
     </div>
+    <div class="profpage">
+        <div class="userprofile">
+            <img src="/../images/add-user.png" alt="profilepic" class="profilepic">
+            <div class="accname">
+                <h1 class="usergradient">User's</h1>
+                <h1>Account</h1>
+            </div>
+        </div>
+        <div class="savedpalette">
+            <h1>Saved Palettes</h1>
+            <!-- Drop down for palette selection -->
+            <select name="favselect" id="favselect">
+                <option value="audi">All</option>
+                <option value="volvo">Mono</option>
+                <option value="saab">Comp</option>
+                <option value="opel">Analogue</option>
+            </select>
+            <br><br>
+            <input type="submit" value="Submit">
+        </div>
+    </div>
+
 
     <script src="/js/hamburger.js"></script>
 
 </body>
+<%- include ('footer'); %>
 
 </html>

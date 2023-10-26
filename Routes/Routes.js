@@ -39,7 +39,14 @@ router.get('/', async (req, res) => {
   router.get('/palette', (req, res) => {    
     res.render("palette");
   });
+
+  //render the profile page
+  router.get('/profile', (req, res) => {    
+    res.render("profile");
+  });
   
+
+
   //render the palette page
   router.post('/login', (req, res) => {    
     console.log(req.body);
