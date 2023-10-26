@@ -101,6 +101,23 @@ function lightenColor(hex, percent) {
     return newHex;
 }
 
+function resetColors() {
+  document.getElementById('red').value = 0;
+  document.getElementById('green').value = 0;
+  document.getElementById('blue').value = 0;
+  document.getElementById('output').innerHTML = 'rgb(0, 0, 0)';
+  document.getElementById('hexOutput').innerHTML = 'hex(#000000)';
+  paletteContainer.innerHTML = ''; // Clear the palette container
+  paletteContainer.style.backgroundColor = ""; // Clear the background color of the palette container
+  outputs.style.backgroundColor = 'rgb(0, 0, 0)';
+  // Uncheck all checkboxes
+  monochromatic.checked = false;
+  complementary.checked = false;
+  analogous.checked = false;
+}
+
+
+=======
 function generateAnalogousPalette(baseColor) {
   const palette = [];
   // Convert the base color to HSL
@@ -188,4 +205,19 @@ function checkboxChecker() {
     document.getElementById("complementaryCheckbox").disabled = false;
     document.getElementById("analogousCheckbox").disabled = false;
   }
+}
+
+function resetColors() {
+  document.getElementById('red').value = 0;
+  document.getElementById('green').value = 0;
+  document.getElementById('blue').value = 0;
+  document.getElementById('output').innerHTML = 'rgb(0, 0, 0)';
+  document.getElementById('hexOutput').innerHTML = 'hex(#000000)';
+  paletteContainer.innerHTML = ''; // Clear the palette container
+  paletteContainer.style.backgroundColor = ""; // Clear the background color of the palette container
+  outputs.style.backgroundColor = 'rgb(0, 0, 0)';
+  // Uncheck all checkboxes
+  monochromatic.checked = false;
+  complementary.checked = false;
+  analogous.checked = false;
 }
