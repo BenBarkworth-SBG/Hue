@@ -8,6 +8,9 @@ const paletteContainer = document.getElementById('paletteContainer');
 const complementaryContainer = document.getElementById('complementary');
 const analogousContainer = document.getElementById('analogous');
 const randomContainer = document.getElementById('random');
+document.getElementById("monoBtn").style.display = "none";
+document.getElementById("compBtn").style.display = "none";
+document.getElementById("analogousBtn").style.display = "none";
 
 
 function componentToHex(c) {
@@ -57,6 +60,7 @@ function generatePalettes() {
       element.style.height = "100px"
       element.className = 'swatch';
       paletteContainer.appendChild(element);
+    document.getElementById("monoBtn").style.display = "inline-block";
     });
   }
   if (complementary.checked) {
@@ -71,6 +75,7 @@ function generatePalettes() {
       element.style.height = "100px"
       element.className = 'swatch';
       complementaryContainer.appendChild(element);
+    document.getElementById("compBtn").style.display = "inline-block";
     });
   }
   if (analogous.checked) {
@@ -84,6 +89,7 @@ function generatePalettes() {
       element.style.height = "100px"
       element.className = 'swatch';
       analogousContainer.appendChild(element);
+    document.getElementById("analogousBtn").style.display = "inline-block";
     });
   }
   checkboxChecker()
@@ -227,13 +233,23 @@ function checkboxChecker() {
 }
 
 function resetColors() {
+  // rest the input and span element values
   document.getElementById('red').value = 0;
   document.getElementById('green').value = 0;
   document.getElementById('blue').value = 0;
   document.getElementById('output').innerHTML = 'rgb(0, 0, 0)';
   document.getElementById('hexOutput').innerHTML = 'hex(#000000)';
-  paletteContainer.innerHTML = ''; // Clear the palette container
-  paletteContainer.style.backgroundColor = ""; // Clear the background color of the palette container
+  // Clear the palette containers
+  paletteContainer.innerHTML = ''; 
+  complementaryContainer.innerHTML = '';
+  analogousContainer.innerHTML = '';
+  randomContainer.innerHTML = '';
+  // Clear the background color of the palette containers
+  paletteContainer.style.backgroundColor = "";
+  complementaryContainer.style.backgroundColor = "";
+  analogousContainer.style.backgroundColor = "";
+  randomContainer.style.backgroundColor = "";
+  // reset colour output
   outputs.style.backgroundColor = 'rgb(0, 0, 0)';
   // Uncheck all checkboxes
   monochromatic.checked = false;
