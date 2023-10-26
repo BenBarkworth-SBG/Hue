@@ -227,13 +227,25 @@ function checkboxChecker() {
 }
 
 function resetColors() {
+  // window.location.reload(); reset page one liner
+
+  // rest the input and span element values
   document.getElementById('red').value = 0;
   document.getElementById('green').value = 0;
   document.getElementById('blue').value = 0;
   document.getElementById('output').innerHTML = 'rgb(0, 0, 0)';
   document.getElementById('hexOutput').innerHTML = 'hex(#000000)';
-  paletteContainer.innerHTML = ''; // Clear the palette container
-  paletteContainer.style.backgroundColor = ""; // Clear the background color of the palette container
+  // Clear the palette containers
+  paletteContainer.innerHTML = ''; 
+  complementaryContainer.innerHTML = '';
+  analogousContainer.innerHTML = '';
+  randomContainer.innerHTML = '';
+  // Clear the background color of the palette containers
+  paletteContainer.style.backgroundColor = "";
+  complementaryContainer.style.backgroundColor = "";
+  analogousContainer.style.backgroundColor = "";
+  randomContainer.style.backgroundColor = "";
+  // reset colour output
   outputs.style.backgroundColor = 'rgb(0, 0, 0)';
   // Uncheck all checkboxes
   monochromatic.checked = false;
