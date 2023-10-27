@@ -52,6 +52,19 @@ router.get('/', async (req, res) => {
     console.log(req.body);
   });
 
+  router.post('/palette', async (req, res) => {    
+    try {
+      console.log("HEREEEE", req.body)
+      const {hexCode, type} = req.body;
+      console.log(hexCode, type);
+      dataController.insertPalette({hexCode, type});
+      console.log("HERE")
+      res.status(201).json(req.body);
+    } catch (error) {
+      res.status(500).json({ error: error.message});
+    }
+  });
+
   //writes to DB after request from frontend
   router.post('/users', async (req, res) => {    
     try {

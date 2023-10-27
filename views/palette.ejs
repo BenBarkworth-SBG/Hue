@@ -90,6 +90,35 @@
         </div>
     </div>
     <script src="/js/colourPicker.js"></script>
+    <script> 
+        // add function in separate JS file to avoid repeating code for each button - type and name passed in already?
+        const button = document.getElementById("monoBtn")
+        button.addEventListener("click", async event => {
+            try {     
+                let red = document.getElementById('red').value;
+                let green = document.getElementById('green').value;
+                let blue = document.getElementById('blue').value;
+                let convRed = parseInt(red)
+                let convBlue = parseInt(blue)
+                let convGreen = parseInt(green)
+                let hexCode = rgbToHex(convRed,convGreen,convBlue)
+                console.log(hexCode)
+                const body = { hexCode: hexCode, type: "mono" }
+                const jsonBody = JSON.stringify(body);
+                console.log(jsonBody)
+                const response = await fetch('/palette', {
+                    method: 'POST',
+                    headers: {"Content-Type": "application/json"},
+                    body: `${jsonBody}`
+                });
+                console.log('Completed!', response);
+            } catch(err) {
+                console.error(`Error: ${err}`);
+            }
+            // event.preventDefault();
+            // return false;
+        }); 
+    </script>
     <script src="/js/hamburger.js"></script>
 
 </body>
