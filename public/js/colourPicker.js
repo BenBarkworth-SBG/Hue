@@ -30,7 +30,8 @@ function rgbToHex(r, g, b) {
 function colors(){
     let red = document.getElementById('red').value;
     let green = document.getElementById('green').value;
-    let blue = document.getElementById('blue').value;
+    let blue = document.getElementById('blue').value; // change this to pull value from input and take onclick out of ejs - rgb as params, generatePalette can call it with values using 
+    // variable declared from elementId values
 
     document.getElementById('output').innerHTML = 'rgb(' + red + ',' + green + ',' + blue + ')';
     let convRed = parseInt(red)
@@ -283,8 +284,6 @@ function resetColors() {
   complementary.checked = false;
   analogous.checked = false;
 }
-
-/////////////////////////
 
 function updatePalette() {
     const baseColor = colorPicker.value;
