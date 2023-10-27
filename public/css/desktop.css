@@ -103,7 +103,7 @@ span {
     transform: translateY(4px);
   }
 
-.palette-container, .complementaryContainer, .analogousContainer, .randomContainer {
+.palette-container, .complementaryContainer, .analogousContainer, .splitContainer {
     border: solid 20px #ebf1fd;
     border-radius: 20px;
     display: flex;
@@ -558,10 +558,15 @@ img.avatar {
     justify-content: space-evenly;
     margin-bottom: 5%;
 }
-
-.checkbox-group label {
-    margin-right: 20px;
+/* 
+.lbl {
+    align-items: center;
+    min-width: 10%;
 }
+
+/* .i {
+    align-items: center;
+} */ 
 
 /* start of footer css*/
 footer {
