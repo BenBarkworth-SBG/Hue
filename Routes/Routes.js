@@ -45,8 +45,6 @@ router.get('/', async (req, res) => {
     res.render("profile");
   });
   
-
-
   //render the palette page
   router.post('/login', (req, res) => {    
     console.log(req.body);
@@ -69,15 +67,12 @@ router.get('/', async (req, res) => {
   router.post('/users', async (req, res) => {    
     try {
       const {user, email, pass} = req.body;
-      console.log(user, email, pass);
-      // do database stuff
-      db.insertUser({user, email, pass});
+      console.log(req.body);
+      dataController.insertUser({user, email, pass});
       res.status(201).json(req.body);
     } catch (error) {
       res.status(500).json({ error: error.message});
     }
   });
-
- // router.post('/users', userController.createUser);
 
   module.exports = router;
