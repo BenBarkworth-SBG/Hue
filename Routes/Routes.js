@@ -52,13 +52,11 @@ router.get('/', async (req, res) => {
 
   router.post('/palette', async (req, res) => {    
     try {
-      console.log("HEREEEE", req.body)
-      const {hexCode, type} = req.body;
-      console.log(hexCode, type);
-      dataController.insertPalette({hexCode, type});
-      console.log("HERE")
-      res.status(201).json(req.body);
-    } catch (error) {
+      const {hexCode, type, name} = req.body;
+      dataController.insertPalette({hexCode, type, name});
+      res.status(201).json(req.body); // sends JSON data response back to client
+    } 
+    catch (error) {
       res.status(500).json({ error: error.message});
     }
   });
