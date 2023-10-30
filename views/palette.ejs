@@ -95,28 +95,35 @@
         const button = document.getElementById("monoBtn")
         button.addEventListener("click", async event => {
             try {     
-                let red = document.getElementById('red').value;
-                let green = document.getElementById('green').value;
-                let blue = document.getElementById('blue').value;
-                let convRed = parseInt(red)
-                let convBlue = parseInt(blue)
-                let convGreen = parseInt(green)
-                let hexCode = rgbToHex(convRed,convGreen,convBlue)
-                console.log(hexCode)
-                const body = { hexCode: hexCode, type: "mono" }
+                let namePrompt = prompt ("Please enter a name for your palette")
+                let hex = document.getElementById('hexOutput').innerHTML;
+                let hexSplit = hex.slice(4,11)
+                const body = { hexCode: hexSplit, type: "mono", name: namePrompt }
                 const jsonBody = JSON.stringify(body);
-                console.log(jsonBody)
                 const response = await fetch('/palette', {
                     method: 'POST',
                     headers: {"Content-Type": "application/json"},
                     body: `${jsonBody}`
-                });
-                console.log('Completed!', response);
-            } catch(err) {
-                console.error(`Error: ${err}`);
+                })
+                .then(response => {
+                    console.log(response)
+                    if (response.ok) {
+                        alert("Saved to database")
+                        return response.json();
+                    } 
+                })
+                .then(data => {
+                // logs data passed into database in console
+                    console.log(data)
+                    // delays page reload by 1.5 seconds
+                    setTimeout(function() {
+                        window.location.reload()
+                    }, 1500);
+                })
             }
-            // event.preventDefault();
-            // return false;
+            catch(err) {
+                console.error('Error:', err);
+            }
         }); 
     </script>
     <script src="/js/hamburger.js"></script>
