@@ -3,21 +3,10 @@ const router = express.Router();
 const dataController = require('../controllers/controllers');
 const user = require('../Models/user')
 const db = require('../db')
-//const userController = require('../controllers/userController')
-
-// needed for later
-// const bodyParser = require("body-parser");
-//const bcrypt = require("bcrypt");
-
-//connecting to MongoDB database
-//const MongoClient = require("mongodb").MongoClient;
-//const url =;
-
-//const client = new MongoClient(url);
 
 router.get('/', async (req, res) => {    
     try {
-      const data = await dataController.getAllData();
+      const data = await dataController.getAllColoursData();
       res.render("home", {colours: data});
     } catch (err) {
       console.error(err);

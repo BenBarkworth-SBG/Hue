@@ -1,20 +1,23 @@
 const { db } = require('../db');
-const collection = db.collection('Colours');
+const coloursCollection = db.collection('Colours');
 //const user = require('../Models/user')
 
-// Define the controller function
-async function getAllData() {
+// Function to get all colours data from DB
+async function getAllColoursData() {
   try {
-    // Query the collection to retrieve all documents
-    const colours = await collection.find().toArray();
+    const colours = await coloursCollection.find().toArray();
+    console.log(colours)
     return colours;
   } catch (error) {
     console.error('Error retrieving data:', error);
     return({ error: 'Failed to retrieve data' });
   }
+}
 
-}// Export the controller function
+//Function to get all 
 
+
+// Function to insert a palette into DB
 async function insertPalette(data) {
   const paletteCollection = db.collection('Palettes');
   try {
@@ -35,8 +38,10 @@ async function insertUser(data) {
     console.error('Error inserting document', err);
   }
 }
+
+// Export all functions below
 module.exports = {
-  getAllData,
+  getAllColoursData,
   insertPalette,
   insertUser
 };
