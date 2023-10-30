@@ -24,22 +24,21 @@ function componentToHex(c) {
   }
   
 function rgbToHex(r, g, b) {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    let red = parseInt(r)
+    let green = parseInt(g)
+    let blue = parseInt(b)
+    return "#" + componentToHex(red) + componentToHex(green) + componentToHex(blue);
   }
 
 function colors(){
     let red = document.getElementById('red').value;
     let green = document.getElementById('green').value;
-    let blue = document.getElementById('blue').value; // change this to pull value from input and take onclick out of ejs - rgb as params, generatePalette can call it with values using 
-    // variable declared from elementId values
+    let blue = document.getElementById('blue').value;
 
     document.getElementById('output').innerHTML = 'rgb(' + red + ',' + green + ',' + blue + ')';
-    let convRed = parseInt(red)
-    let convBlue = parseInt(blue)
-    let convGreen = parseInt(green)
-    let test = rgbToHex(convRed, convGreen, convBlue);
+    let test = rgbToHex(red, green, blue);
     document.getElementById('hexOutput').innerHTML = 'hex(' + test + ')';
-    outputs.style.backgroundColor = 'rgb(' + convRed + ',' + convGreen + ',' + convBlue + ')';
+    outputs.style.backgroundColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
     return test
 }
 
@@ -99,7 +98,7 @@ function generatePalettes() {
   if (split.checked) {
     checkboxChecker()
     const complementaryColor = getComplementaryColor(value);
-    const palettes = generateSplitComplementaryPalette(complementaryColor)
+    const palettes = generateSplitComplementaryPalette(value, complementaryColor)
     splitContainer.innerHTML = '';
     palettes.forEach(color => {
       const element = document.createElement('div');
@@ -285,31 +284,14 @@ function resetColors() {
   analogous.checked = false;
 }
 
-function updatePalette() {
-    const baseColor = colorPicker.value;
-    const complementaryColor = getComplementaryColor(baseColor);
-    const splitComplementaryColors = generateSplitComplementaryPalette(baseColor, complementaryColor);
-
-    // Clear previous swatches
-    colorPalette.innerHTML = '';
-
-    // Create and append swatches to the palette
-    splitComplementaryColors.forEach(color => {
-        const swatch = document.createElement('div');
-        swatch.style.backgroundColor = color;
-        swatch.className = 'swatch';
-        colorPalette.appendChild(swatch);
-    });
-}
-
-function generateSplitComplementaryPalette(complementaryColor) {
+function generateSplitComplementaryPalette(baseColour, complementaryColor) {
     const palette = [];
     // Calculate split complementary colors based on the complementary color
     const firstSplitColor = rotateColor(complementaryColor, 30); // Rotate by 30 degrees
     const secondSplitColor = rotateColor(complementaryColor, -30); // Rotate by -30 degrees
     
     // Include the complementary color and two split complementary colors
-    palette.push(firstSplitColor, complementaryColor, secondSplitColor);
+    palette.push(baseColour, firstSplitColor, secondSplitColor);
 
     // Calculate two more split complementary colors
     const thirdSplitColor = rotateColor(firstSplitColor, 30); // Rotate the first split color by 30 degrees
