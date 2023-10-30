@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const dataController = require('../controllers/controllers');
-const user = require('../Models/user')
-const db = require('../db')
+const db = require('../db');
 
 router.get('/', async (req, res) => {    
     try {
