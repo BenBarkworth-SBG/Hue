@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const dataController = require('../controllers/controllers');
 const db = require('../db');
+const bcrypt = require('bcrypt'); 
 
 //render the register page
 router.get('/register', (req, res) => {    
@@ -38,6 +39,7 @@ router.post('/login', (req, res) => {
   console.log(req.body);
 });
 
+//Handle palette creation
 router.post('/palette', async (req, res) => {    
   try {
     const {hexCode, type, name} = req.body;
@@ -50,15 +52,15 @@ router.post('/palette', async (req, res) => {
   });
 
   //writes to DB after request from frontend
-  router.post('/users', async (req, res) => {    
-    try {
-      const {user, email, pass} = req.body;
-      console.log(req.body);
-      dataController.insertUser({user, email, pass});
-      res.status(201).json(req.body);
-    } catch (error) {
-      res.status(500).json({ error: error.message});
-    }
-  });
+router.post('/users', async (req, res) => {    
+  try {
+    const {user, email, pass} = req.body;
+    const hashedPassword = await bcrypt.hash(pass, 10); // Hash the password
+    dataController.insertUser({user, email, pass: hashedPassword}); // Store the hashed password
+    res.status(201).json(req.body);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
   module.exports = router;
