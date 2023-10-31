@@ -29,18 +29,17 @@ async function getAllUserData() {
   }
 }
 
-// function to getuserbyid - needs editing slighlty
+// function to getuserbyid
 async function getUserById(id) {
   try {
-    const user = await usersCollection.findOne({_id: id});
-    console.log("matt")
+    const user = await userInfo.findById(id);
+    console.log(user)
     return user;
   } catch (error) {
     console.error("error retrieving user", error);
     return {error: "failed to retrieve user"};
   }
 }
-getUserById()
 
 // Function to insert a palette into DB
 async function insertPalette(data) {
@@ -53,7 +52,7 @@ async function insertPalette(data) {
   }
 }
 
-// function to add user into database
+// function to create user into database
 async function insertUser(data) {
   const usersCollection = db.collection('Users');
   try {
@@ -67,13 +66,26 @@ async function insertUser(data) {
 // function to update users - needs checking with a function call
 async function updateUser(id, data) {
   try {
-    const updatedUser = await usersCollection.findOneAndUpdate(id, data, {
+    const updatedUser = await userInfo.findByIdAndUpdate(id, data, {
       new: true,
     });
+    console.log("updated user")
     return updatedUser;
   } catch (error) {
     console.error("error updating data", error);
     return {error: "failed to update data"}
+  }
+}
+
+// function to delete a user
+async function deleteUser(id) {
+  try {
+    const deletedUser = await userInfo.findByIdAndDelete(id);
+    console.log("deleted user", deletedUser)
+    return deletedUser
+  } catch (error) {
+    console.error("Error deleting data:", error);
+    return { error: "Failed to delete data" };
   }
 }
 
@@ -84,5 +96,6 @@ module.exports = {
   insertUser,
   getAllUserData,
   updateUser,
-  getUserById
+  getUserById,
+  deleteUser
 };

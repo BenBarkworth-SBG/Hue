@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
   });
-
+  
 //render the palette page
 router.post('/login', (req, res) => {    
   console.log(req.body);
