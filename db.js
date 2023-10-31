@@ -1,5 +1,6 @@
 // imports MongoClient from the MongoDB module
 const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 
 // environment variables for the MongoDB connection
 const {
@@ -22,6 +23,16 @@ const client = new MongoClient(MONGO_URI);
 // database retrieval
 const db = client.db();
 
+const conn = mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('Connected to MongoDB');
+
+}).catch(err => {
+  console.error('Error connecting to MongoDB:', err);
+});
+
 // function to close connection to mongodb
 async function closeConnection() {
   await client.close();
@@ -33,4 +44,5 @@ async function closeConnection() {
 module.exports = {
     client,
     db,
+    conn,
   };
