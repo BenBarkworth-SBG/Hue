@@ -3,6 +3,26 @@ const router = express.Router();
 const dataController = require('../controllers/controllers');
 const db = require('../db');
 
+//render the register page
+router.get('/register', (req, res) => {    
+  res.render("register");
+});
+
+//render the login page
+router.get('/login', (req, res) => {    
+  res.render("login");
+});
+
+//render the palette page
+router.get('/palette', (req, res) => {    
+  res.render("palette");
+});
+
+//render the profile page
+router.get('/profile', (req, res) => {    
+  res.render("profile");
+});
+
 router.get('/', async (req, res) => {    
     try {
       const data = await dataController.getAllColoursData();
@@ -12,37 +32,17 @@ router.get('/', async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
   });
-  
-  //render the register page
-  router.get('/register', (req, res) => {    
-    res.render("register");
-  });
-  
-  //render the login page
-  router.get('/login', (req, res) => {    
-    res.render("login");
-  });
-  
-  //render the palette page
-  router.get('/palette', (req, res) => {    
-    res.render("palette");
-  });
 
-  //render the profile page
-  router.get('/profile', (req, res) => {    
-    res.render("profile");
-  });
-  
-  //render the palette page
-  router.post('/login', (req, res) => {    
-    console.log(req.body);
-  });
+//render the palette page
+router.post('/login', (req, res) => {    
+  console.log(req.body);
+});
 
-  router.post('/palette', async (req, res) => {    
-    try {
-      const {hexCode, type, name} = req.body;
-      dataController.insertPalette({hexCode, type, name});
-      res.status(201).json(req.body); // sends JSON data response back to client
+router.post('/palette', async (req, res) => {    
+  try {
+    const {hexCode, type, name} = req.body;
+    dataController.insertPalette({hexCode, type, name});
+    res.status(201).json(req.body); // sends JSON data response back to client
     } 
     catch (error) {
       res.status(500).json({ error: error.message});
