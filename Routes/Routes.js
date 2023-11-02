@@ -16,7 +16,8 @@ router.get('/login', (req, res) => {
 });
 
 //render the palette page
-router.get('/palette', (req, res) => {    
+router.get('/palette', async (req, res) => {    
+  // const data = await dataController.getAllPalettesData();
   res.render("palette");
 });
 
@@ -44,7 +45,13 @@ router.post('/login', (req, res) => {
 router.post('/palette', async (req, res) => {    
   try {
     const {hexCode, type, name} = req.body;
-    await dataController.insertPalette({hexCode, type, name});
+    const data = await dataController.getAllPalettesData();
+    console.log(hexCode, type)
+    const check = data.filter((d) => d.type == type && d.hexCode == hexCode);
+    if (check.length == 0) {
+      await dataController.insertPalette({hexCode, type, name});
+    }
+    // add else conditional for adding to users
     res.send(req.body)
   } 
   catch (error) {
