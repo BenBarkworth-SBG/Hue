@@ -4,6 +4,10 @@ const userSchema = new mongoose.Schema({
     user: String,
     email: String,
     pass: String,
+    favourites: {
+        type: [String],
+        required: true
+    }
 },
 {collection: "Users"}
 );
