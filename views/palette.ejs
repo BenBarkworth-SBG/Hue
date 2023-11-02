@@ -96,9 +96,25 @@
         button.addEventListener("click", async event => {
             try {     
                 let namePrompt = prompt ("Please enter a name for your palette")
+                if (namePrompt == null) {
+                    return; // breaks out of the function if they click cancel
+                }
                 let hex = document.getElementById('hexOutput').innerHTML;
                 let hexSplit = hex.slice(4,11)
                 const body = { hexCode: hexSplit, type: "mono", name: namePrompt }
+                if (!body.type || !body.hexCode || body.hexCode.length > 7) {
+                    alert("Internal server error.")
+                    return;
+                }
+                if (!body.name.trim()) {
+                    alert("Please ensure you provide a name.")
+                    return;
+                }
+                const namePattern = /[^A-Za-z0-9\s]/;
+                if (namePattern.test(body.name) || body.name.length > 20) {
+                    alert("Please ensure you provide a name that contains only letters and numbers amd is less than 20 characters long.")
+                    return;
+                }
                 const jsonBody = JSON.stringify(body);
                 const response = await fetch('/palette', {
                     method: 'POST',
@@ -106,19 +122,19 @@
                     body: `${jsonBody}`
                 })
                 .then(response => {
-                    console.log(response)
+                    // console.log(response)
                     if (response.ok) {
                         alert("Saved to database")
+                        setTimeout(function() {
+                            window.location.reload()
+                        }, 1500);
                         return response.json();
                     } 
                 })
                 .then(data => {
                 // logs data passed into database in console
-                    console.log(data)
+                    // console.log(data)
                     // delays page reload by 1.5 seconds
-                    setTimeout(function() {
-                        window.location.reload()
-                    }, 1500);
                 })
             }
             catch(err) {
