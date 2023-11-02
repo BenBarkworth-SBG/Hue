@@ -3,13 +3,13 @@ const { db } = require('../db');
 const coloursCollection = db.collection('Colours');
 const usersCollection = db.collection('Users');
 const userInfo = require('../models/user');
-//const user = require('../Models/user')
+const palette = require('../models/palette');
 
 // Function to get all colours data from DB
 async function getAllColoursData() {
   try {
     const colours = await coloursCollection.find().toArray();
-    console.log(colours);
+    // console.log(colours)
     return colours;
   } catch (error) {
     console.error('Error retrieving data:', error);
@@ -43,12 +43,14 @@ async function getUserById(id) {
 
 // Function to insert a palette into DB
 async function insertPalette(data) {
-  const paletteCollection = db.collection('Palettes');
   try {
-    const result = await paletteCollection.insertOne(data);
-    console.log(`Inserted a document with ID: ${result.insertedId}`);
-  } catch (err) {
-    console.error('Error inserting document', err);
+    const paletteDocument = await palette.create(data);
+    console.log(paletteDocument)
+    // console.log(`Inserted a document with ID: ${paletteDocument._id}`);
+  } 
+  catch (error) {
+    console.error('Error inserting document', error);
+    return { error: "Failed to insert palette" };
   }
 }
 
