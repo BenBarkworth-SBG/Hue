@@ -3,6 +3,7 @@ const router = express.Router();
 const dataController = require('../controllers/controllers');
 const db = require('../db');
 const bcrypt = require('bcrypt'); 
+const { error } = require('console');
 
 //render the register page
 router.get('/register', (req, res) => {    
@@ -43,13 +44,14 @@ router.post('/login', (req, res) => {
 router.post('/palette', async (req, res) => {    
   try {
     const {hexCode, type, name} = req.body;
-    dataController.insertPalette({hexCode, type, name});
-    res.status(201).json(req.body); // sends JSON data response back to client
-    } 
-    catch (error) {
-      res.status(500).json({ error: error.message});
-    }
-  });
+    await dataController.insertPalette({hexCode, type, name});
+    res.send(req.body)
+  } 
+  catch (error) {
+    // console.error(error)
+    return res.status(500).json({ error: error.message});
+  }
+});
 
   //writes to DB after request from frontend
 router.post('/users', async (req, res) => {    
