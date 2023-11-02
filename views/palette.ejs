@@ -101,7 +101,7 @@
                 }
                 let hex = document.getElementById('hexOutput').innerHTML;
                 let hexSplit = hex.slice(4,11)
-                const body = { hexCode: hexSplit, type: "mono", name: namePrompt }
+                const body = { hexCode: hexSplit, type: "monochromatic", name: namePrompt }
                 if (!body.type || !body.hexCode || body.hexCode.length > 7) {
                     alert("Internal server error.")
                     return;
@@ -112,7 +112,7 @@
                 }
                 const namePattern = /[^A-Za-z0-9\s]/;
                 if (namePattern.test(body.name) || body.name.length > 20) {
-                    alert("Please ensure you provide a name that contains only letters and numbers amd is less than 20 characters long.")
+                    alert("Please ensure you provide a name that contains only letters and numbers and is less than 20 characters long.")
                     return;
                 }
                 const jsonBody = JSON.stringify(body);

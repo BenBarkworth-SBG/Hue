@@ -54,6 +54,17 @@ async function insertPalette(data) {
   }
 }
 
+async function getAllPalettesData() {
+  try {
+    const allPalettes = await palette.find();
+    // console.log(allPalettes)
+    return allPalettes
+  } catch (error) {
+    console.error('Error retrieving data:', error);
+    return({ error: 'Failed to retrieve data' });
+  }
+}
+
 // function to create user into database
 async function insertUser(data) {
   const usersCollection = db.collection('Users');
@@ -95,6 +106,7 @@ async function deleteUser(id) {
 module.exports = {
   getAllColoursData,
   insertPalette,
+  getAllPalettesData,
   insertUser,
   getAllUserData,
   updateUser,
