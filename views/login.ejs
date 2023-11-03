@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <script src="/js/cookie.js"></script>
   <title>Log-in Hue</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,7 +60,7 @@
         </div>
 
         <div class="accountbtns">
-          <button type="submit" class="loginbtn" id = "login">Login</button>
+          <button type="submit" class="loginbtn" id = "login" onclick="putCookie(document.getElementsByTagName('form'))">Login</button>
           <a href="/register" type="submit" class="signupbtn">Sign-up</a>
         </div>
 
