@@ -35,11 +35,6 @@ router.get('/', async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
   });
-  
-//render the palette page
-router.post('/login', (req, res) => {    
-  console.log(req.body);
-});
 
 //Handle palette creation
 router.post('/palette', async (req, res) => {    
@@ -71,5 +66,26 @@ router.post('/users', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// get username and compare with db
+router.post('/login', async (req,res) => {
+  try {
+    const {user, pass} = req.body
+    const checkUser = await dataController.getUserByUsername({user: req.body.user});
+    console.log(checkUser)
+    const hashInDb = checkUser.pass;
+    bcrypt.compare(req.body.pass, hashInDb, function (err, result) {
+    if (result) {
+      userID = checkUser._id;
+      res.redirect("/");
+    } else {
+      res.send("error: invalid username or password");
+    }
+  });
+  } catch (error) {
+    res.status(500).json({error: error.message});
+  }
+  
+})
 
   module.exports = router;

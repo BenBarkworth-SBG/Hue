@@ -21,7 +21,7 @@ async function getAllColoursData() {
 async function getAllUserData() {
   try {
     const users = await usersCollection.find().toArray();
-    console.log(users);
+    //console.log(users);
     return users;
   } catch (error) {
     console.error('error retrieving data', error);
@@ -33,7 +33,7 @@ async function getAllUserData() {
 async function getUserById(id) {
   try {
     const user = await userInfo.findById(id);
-    console.log(user)
+    //console.log(user)
     return user;
   } catch (error) {
     console.error("error retrieving user", error);
@@ -102,6 +102,17 @@ async function deleteUser(id) {
   }
 }
 
+//function to get user by username
+async function getUserByUsername(user) {
+  try {
+    const getUser = await userInfo.findOne(user);
+    return getUser
+  } catch (error) {
+    console.error("error finding user", error);
+    return {error: "failed to retrieve user"};
+  }
+}
+
 // Export all functions below
 module.exports = {
   getAllColoursData,
@@ -111,5 +122,6 @@ module.exports = {
   getAllUserData,
   updateUser,
   getUserById,
-  deleteUser
+  deleteUser,
+  getUserByUsername
 };
