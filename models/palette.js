@@ -6,7 +6,7 @@ const paletteSchema = new mongoose.Schema({
         required: true,
         maxLength: 7
     },    
-    type: {
+    paletteType: {
         type: String,
         required: true,
         enum: ['monochromatic', 'analogous', 'complementary', 'split complementary']
