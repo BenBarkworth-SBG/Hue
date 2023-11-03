@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const palette = require("../models/palette");
 
 const userSchema = new mongoose.Schema({
     user: String,
@@ -8,7 +7,9 @@ const userSchema = new mongoose.Schema({
     favourites: [{
         hexCode: String,
         paletteType: String,
-        name: String
+        name: String,
+        paletteId: mongoose.Schema.Types.ObjectId,
+        _id: false
     }],
 },
 {collection: "Users"}
