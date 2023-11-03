@@ -9,7 +9,6 @@ const palette = require('../models/palette');
 async function getAllColoursData() {
   try {
     const colours = await coloursCollection.find().toArray();
-    // console.log(colours)
     return colours;
   } catch (error) {
     console.error('Error retrieving data:', error);
@@ -21,7 +20,6 @@ async function getAllColoursData() {
 async function getAllUserData() {
   try {
     const users = await usersCollection.find().toArray();
-    //console.log(users);
     return users;
   } catch (error) {
     console.error('error retrieving data', error);
@@ -33,7 +31,6 @@ async function getAllUserData() {
 async function getUserById(id) {
   try {
     const user = await userInfo.findById(id);
-    //console.log(user)
     return user;
   } catch (error) {
     console.error("error retrieving user", error);
@@ -45,8 +42,8 @@ async function getUserById(id) {
 async function insertPalette(data) {
   try {
     const paletteDocument = await palette.create(data);
-    console.log(paletteDocument)
-    // console.log(`Inserted a document with ID: ${paletteDocument._id}`);
+    console.log(paletteDocument._id)
+    return paletteDocument;
   } 
   catch (error) {
     console.error('Error inserting document', error);
@@ -57,7 +54,6 @@ async function insertPalette(data) {
 async function getAllPalettesData() {
   try {
     const allPalettes = await palette.find();
-    // console.log(allPalettes)
     return allPalettes
   } catch (error) {
     console.error('Error retrieving data:', error);
@@ -75,13 +71,12 @@ async function insertUser(data) {
   }
 }
 
-// function to update users - needs checking with a function call
+// function to update users
 async function updateUser(id, data) {
   try {
     const updatedUser = await userInfo.findByIdAndUpdate(id, data, {
       new: true,
     });
-    console.log("updated user")
     return updatedUser;
   } catch (error) {
     console.error("error updating data", error);
