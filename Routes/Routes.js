@@ -38,23 +38,31 @@ router.get('/', async (req, res) => {
 
 //Handle palette creation
 router.post('/palette', async (req, res) => {    
+
   try {
+    // has to be declared here to be accessed later in the try block
+    let paletteDbInsertion;
     const {hexCode, paletteType, name} = req.body;
     const data = await dataController.getAllPalettesData();
-    console.log(hexCode, paletteType, name)
-    console.log(typeof hexCode, typeof paletteType, typeof name)
     const check = data.filter((d) => d.paletteType == paletteType && d.hexCode == hexCode);
     if (check.length == 0) {
-      await dataController.insertPalette({hexCode, paletteType, name});
+       paletteDbInsertion = await dataController.insertPalette({hexCode, paletteType, name});
     }
-    const userID = await dataController.getUserById('6544d7e0d9512299dfdac083')
-    const updateUser = await dataController.updateUser('6544d7e0d9512299dfdac083', {$push: {favourites: {hexCode: hexCode, paletteType: paletteType, name: name}}})
-    // add duplication check for users
+    else {
+      paletteDbInsertion = check[0]
+    }
+    const userID = await dataController.getUserById('654542c07b23bc38145bcfb2') // mock ID data
+    const userPaletteCheck = userID.favourites.filter((id) => id.paletteType == paletteType && id.hexCode == hexCode);
+    if (userPaletteCheck.length == 0) {
+      await dataController.updateUser('654542c07b23bc38145bcfb2', {$push: {favourites: {hexCode: hexCode, paletteType: paletteType, name: name, paletteId: paletteDbInsertion._id}}}); // mock ID data
+    }
+    else {
+      throw error.message("Database already contains that palette")
+    }
     res.send(req.body)
   } 
   catch (error) {
-    // console.error(error)
-    return res.status(500).json({ error: error.message});
+    return res.status(400).json({error: error.message});
   }
 });
 
