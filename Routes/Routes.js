@@ -39,14 +39,17 @@ router.get('/', async (req, res) => {
 //Handle palette creation
 router.post('/palette', async (req, res) => {    
   try {
-    const {hexCode, type, name} = req.body;
+    const {hexCode, paletteType, name} = req.body;
     const data = await dataController.getAllPalettesData();
-    console.log(hexCode, type)
-    const check = data.filter((d) => d.type == type && d.hexCode == hexCode);
+    console.log(hexCode, paletteType, name)
+    console.log(typeof hexCode, typeof paletteType, typeof name)
+    const check = data.filter((d) => d.paletteType == paletteType && d.hexCode == hexCode);
     if (check.length == 0) {
-      await dataController.insertPalette({hexCode, type, name});
+      await dataController.insertPalette({hexCode, paletteType, name});
     }
-    // add else conditional for adding to users
+    const userID = await dataController.getUserById('6544d7e0d9512299dfdac083')
+    const updateUser = await dataController.updateUser('6544d7e0d9512299dfdac083', {$push: {favourites: {hexCode: hexCode, paletteType: paletteType, name: name}}})
+    // add duplication check for users
     res.send(req.body)
   } 
   catch (error) {
@@ -58,9 +61,9 @@ router.post('/palette', async (req, res) => {
   //writes to DB after request from frontend
 router.post('/users', async (req, res) => {    
   try {
-    const {user, email, pass} = req.body;
+    const {user, email, pass, favourites} = req.body;
     const hashedPassword = await bcrypt.hash(pass, 10); // Hash the password
-    dataController.insertUser({user, email, pass: hashedPassword}); // Store the hashed password
+    dataController.insertUser({user, email, pass: hashedPassword, favourites}); // Store the hashed password
     res.status(201).json(req.body);
   } catch (error) {
     res.status(500).json({ error: error.message });
