@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
+const palette = require("../models/palette");
 
 const userSchema = new mongoose.Schema({
     user: String,
     email: String,
     pass: String,
-    favourites: {
-        type: [String],
-        required: true
-    }
+    favourites: [{
+        hexCode: String,
+        paletteType: String,
+        name: String
+    }],
 },
 {collection: "Users"}
 );
