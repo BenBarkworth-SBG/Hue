@@ -67,10 +67,9 @@ async function getAllPalettesData() {
 
 // function to create user into database
 async function insertUser(data) {
-  const usersCollection = db.collection('Users');
   try {
-    const result = await usersCollection.insertOne(data);
-    console.log(`Inserted a document with ID: ${result.insertedId}`);
+    const userDocument = await userInfo.create(data);
+    console.log(`Inserted a document with ID: ${userDocument._id}`);
   } catch (err) {
     console.error('Error inserting document', err);
   }
