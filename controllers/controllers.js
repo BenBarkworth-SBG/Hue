@@ -42,7 +42,7 @@ async function getUserById(id) {
 async function insertPalette(data) {
   try {
     const paletteDocument = await palette.create(data);
-    console.log(paletteDocument._id)
+    // console.log(paletteDocument._id)
     return paletteDocument;
   } 
   catch (error) {
