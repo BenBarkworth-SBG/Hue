@@ -4,7 +4,8 @@ const paletteSchema = new mongoose.Schema({
     hexCode: {
         type: String,
         required: true,
-        maxLength: 7
+        maxLength: 7,
+        match: /^[a-f0-9#]+$/,
     },    
     paletteType: {
         type: String,
