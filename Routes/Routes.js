@@ -46,15 +46,18 @@ router.post('/palette', async (req, res) => {
     const data = await dataController.getAllPalettesData();
     const check = data.filter((d) => d.paletteType == paletteType && d.hexCode == hexCode);
     if (check.length == 0) {
-       paletteDbInsertion = await dataController.insertPalette({hexCode, paletteType, name});
+       paletteDbInsertion = await dataController.insertPalette({hexCode, paletteType});
     }
     else {
       paletteDbInsertion = check[0]
     }
-    const userID = await dataController.getUserById('654542c07b23bc38145bcfb2') // mock ID data
-    const userPaletteCheck = userID.favourites.filter((id) => id.paletteType == paletteType && id.hexCode == hexCode);
+    
+    const userID = await dataController.getUserById('65480d54a7776b7a47bc625f') // mock ID data
+    // conversion to string needed to ensure comparison can be made as they are complex object types
+    const userPaletteCheck = userID.favourites.filter((favourite) => favourite.paletteId.toString() === paletteDbInsertion._id.toString());
+    console.log(userPaletteCheck,"<<<HERE")
     if (userPaletteCheck.length == 0) {
-      await dataController.updateUser('654542c07b23bc38145bcfb2', {$push: {favourites: {hexCode: hexCode, paletteType: paletteType, name: name, paletteId: paletteDbInsertion._id}}}); // mock ID data
+      await dataController.updateUser('65480d54a7776b7a47bc625f', {$push: {favourites: {paletteName: name, paletteId: paletteDbInsertion._id}}}); // mock ID data
     }
     else {
       throw error.message("Database already contains that palette")
@@ -100,3 +103,4 @@ router.post('/login', async (req,res) => {
 })
 
   module.exports = router;
+
