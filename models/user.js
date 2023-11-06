@@ -5,9 +5,12 @@ const userSchema = new mongoose.Schema({
     email: String,
     pass: String,
     favourites: [{
-        hexCode: String,
-        paletteType: String,
-        name: String,
+        paletteName: {
+            type: String,
+            unique: true,
+            match: /^(?! )[A-Za-z0-9\s]+$/,
+            maxLength: 20
+        },
         paletteId: mongoose.Schema.Types.ObjectId,
         _id: false
     }],
@@ -17,4 +20,6 @@ const userSchema = new mongoose.Schema({
 
 const userInfo = mongoose.model("userInfo", userSchema);
 
+userInfo.createIndexes();
 module.exports = userInfo;
+// field names can't be the same in any collection to enforce unique
