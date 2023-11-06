@@ -13,32 +13,9 @@
 <body>
 
     <div class="container">
-        <div class="navbar">
-            <div class="leftnav">
-                <nav>
-                    <div class="gradient">
-                        <a href="/">Hue</a>
-                    </div>
-                </nav>
-            </div>
-            <div class="midnav">
-                <nav>
-                    <ul class="nav-menu">
-                        <li><a href="/" class="nav-link">Home</a></li>
-                        <li><a href="/palette" class="nav-link">Palette Picker</a></li>
-                        <li><a href="/profile" class="nav-link">Profile</a></li>
-                        <li><a href="/login" class="nav-link">Login</a></li>
-                        <li><a href="/register" class="nav-link">Sign Up</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-
+<!-- nav bar -->
+<%- include ('navbar'); %>
+<!-- palette picker -->
         <div class="colourContainer">
             <div class="colourPicker">
                 <div id="outputs"> </div>
@@ -95,5 +72,5 @@
     <script src="/js/hamburger.js"></script>
 
 </body>
-
+<%- include ('footer'); %>
 </html>
