@@ -6,14 +6,14 @@ const analogous = document.getElementById('analogousCheckbox');
 const split = document.getElementById('splitCheckbox');
 // Container for displaying color palettes
 const paletteContainer = document.getElementById('paletteContainer');
-const complementaryContainer = document.getElementById('complementary');
-const analogousContainer = document.getElementById('analogous');
+const complementaryContainer = document.getElementById('complementaryContainer');
+const analogousContainer = document.getElementById('analogousContainer');
 const splitContainer = document.getElementById('split');
 // Hides save palette buttons
-document.getElementById("monoBtn").style.display = "none";
-document.getElementById("compBtn").style.display = "none";
-document.getElementById("analogousBtn").style.display = "none";
-document.getElementById("splitBtn").style.display = "none";
+document.getElementById("monochromatic").style.display = "none";
+document.getElementById("complementary").style.display = "none";
+document.getElementById("analogous").style.display = "none";
+document.getElementById("splitComplementary").style.display = "none";
 
 
 function componentToHex(c) {
@@ -63,7 +63,7 @@ function generatePalettes() {
       element.style.height = "100px"
       element.className = 'swatch';
       paletteContainer.appendChild(element);
-    document.getElementById("monoBtn").style.display = "inline-block";
+    document.getElementById("monochromatic").style.display = "inline-block";
     });
   }
   if (complementary.checked) {
@@ -78,7 +78,7 @@ function generatePalettes() {
       element.style.height = "100px"
       element.className = 'swatch';
       complementaryContainer.appendChild(element);
-    document.getElementById("compBtn").style.display = "inline-block";
+    document.getElementById("complementary").style.display = "inline-block";
     });
   }
   if (analogous.checked) {
@@ -92,7 +92,7 @@ function generatePalettes() {
       element.style.height = "100px"
       element.className = 'swatch';
       analogousContainer.appendChild(element);
-    document.getElementById("analogousBtn").style.display = "inline-block";
+    document.getElementById("analogous").style.display = "inline-block";
     });
   }
   if (split.checked) {
@@ -107,7 +107,7 @@ function generatePalettes() {
       element.style.height = "100px"
       element.className = 'swatch';
       splitContainer.appendChild(element);
-    document.getElementById("splitBtn").style.display = "inline-block";
+    document.getElementById("splitComplementary").style.display = "inline-block";
     });
   }
   checkboxChecker()
