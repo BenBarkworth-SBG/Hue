@@ -574,6 +574,7 @@ footer {
     color: #9AA8C4;
     height: auto;
     width: 100vw;
+    position: fixed;
     padding-top: 30px;
     padding-bottom: 30px;
     padding-left: 30px;
