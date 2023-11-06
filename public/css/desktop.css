@@ -570,11 +570,12 @@ img.avatar {
 
 /* start of footer css*/
 footer {
-    background-color: #a9c3f634;
+    background-color: #e6ebf5;
     color: #9AA8C4;
     height: auto;
-    width: 100vw;
+    width: auto;
     position: fixed;
+    overflow: hidden;
     bottom: 0;
     left: 0;
     right: 0;
