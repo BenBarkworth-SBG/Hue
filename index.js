@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt'); // Import bcrypt
 const app = express();
 const PORT = process.env.MONGO_PORT || 27017;
 const routes = require('./Routes/Routes');
+const Session = require('express-session');
 
 // Middleware for parsing JSON bodies
 app.use(express.json());
@@ -25,6 +26,15 @@ require("./db");
 
 // Define the salt rounds for bcrypt from the .env file
 const BCRYPT_SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS) || 10;
+
+app.use(
+  Session({
+    secret: 'your-secret-key', // Replace with a secure random string
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 3600000 }, // Session duration in milliseconds (e.g., 1 hour)
+  })
+)
 
 // Mount the routes
 app.use("/", routes);

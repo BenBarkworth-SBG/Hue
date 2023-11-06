@@ -90,7 +90,8 @@ router.post('/login', async (req,res) => {
     bcrypt.compare(req.body.pass, hashInDb, function (err, result) {
     if (result) {
       userID = checkUser._id;
-      res.redirect("/");
+      req.session.user = { id: 1, user: user };
+      res.render("profile", {user});
     } else {
       res.send("error: invalid username or password");
     }
@@ -98,7 +99,6 @@ router.post('/login', async (req,res) => {
   } catch (error) {
     res.status(500).json({error: error.message});
   }
-  
 })
 
   module.exports = router;
