@@ -91,7 +91,7 @@ router.post('/login', async (req,res) => {
     if (result) {
       userID = checkUser._id;
       req.session.user = { id: 1, user: user };
-      res.redirect("/profile");
+      res.render("profile", {user});
     } else {
       res.send("error: invalid username or password");
     }
