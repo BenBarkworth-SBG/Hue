@@ -9,14 +9,8 @@ const paletteSchema = new mongoose.Schema({
     paletteType: {
         type: String,
         required: true,
-        enum: ['monochromatic', 'analogous', 'complementary', 'split complementary']
-    },    
-    name: {
-        type: String,
-        required: true,
-        match: /^(?! )[A-Za-z0-9\s]+$/,
-        maxLength: 20
-    }    
+        enum: ['monochromatic', 'analogous', 'complementary', 'splitComplementary']
+    }
 },
 {collection: "Palettes"}
 );
