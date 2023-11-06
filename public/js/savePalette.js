@@ -27,12 +27,11 @@ async function savePalette(elem) {
                 body: `${jsonBody}`
             })
             .then(response => {
-                // console.log(response)
                 if (response.ok) {
-                    alert("Saved to database.")
+                    alert("Saved to database")
                 } 
                 else {
-                    alert("The palette is already in the database or the name has been used previously.")
+                    alert("The palette is already in the database or the name has been used previously")
                 }
                 setTimeout(function() {
                         window.location.reload()
