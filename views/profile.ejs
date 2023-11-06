@@ -16,55 +16,31 @@
     <!--top nav bar-->
 
     <div class="container">
-        <div class="navbar">
-            <div class="leftnav">
-                <nav>
-                    <div class="gradient">
-                        <a href="/">Hue</a>
-                    </div>
-                </nav>
+        <!-- nav bar -->
+        <%- include ('navbar'); %>
+        <div class="profpage">
+            <div class="userprofile">
+                <img src="/../images/Leeds_United_Fc_Black.png" alt="profilepic" class="profilepic">
+                <div class="accname">
+                    <h1 class="usergradient">User's</h1>
+                    <h1>Account</h1>
+                </div>
             </div>
-            <div class="midnav">
-                <nav>
-                    <ul class="nav-menu">
-                        <li><a href="/" class="nav-link">Home</a></li>
-                        <li><a href="/palette" class="nav-link">Palette Picker</a></li>
-                        <li><a href="/profile" class="nav-link">Profile</a></li>
-                        <li><a href="/login" class="nav-link">Login</a></li>
-                        <li><a href="/register" class="nav-link">Sign Up</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <div class="savedpalette">
+                <h1>Saved Palettes</h1>
+                <!-- Drop down for palette selection -->
+                <select name="favselect" id="favselect">
+                    <option value="all">All</option>
+                    <option value="monochromatic">Monochromatic</option>
+                    <option value="complementary">Complementary</option>
+                    <option value="analogous">Analogous</option>
+                </select>
+                <br><br>
+                <input type="submit" value="Submit">
             </div>
         </div>
     </div>
-    <div class="profpage">
-        <div class="userprofile">
-            <img src="/../images/Leeds_United_Fc_Black.png" alt="profilepic" class="profilepic">
-            <div class="accname">
-                <h1 class="usergradient">User's</h1>
-                <h1>Account</h1>
-            </div>
-        </div>
-        <div class="savedpalette">
-            <h1>Saved Palettes</h1>
-            <!-- Drop down for palette selection -->
-            <select name="favselect" id="favselect">
-                <option value="all">All</option>
-                <option value="monochromatic">Monochromatic</option>
-                <option value="complementary">Complementary</option>
-                <option value="analogous">Analogous</option>
-            </select>
-            <br><br>
-            <input type="submit" value="Submit">
-        </div>
-    </div>
-
-
+    
     <script src="/js/hamburger.js"></script>
 
 </body>
