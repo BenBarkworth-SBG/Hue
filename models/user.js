@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
     favourites: [{
         paletteName: {
             type: String,
-            unique: true,
             match: /^(?! )[A-Za-z0-9\s]+$/,
             maxLength: 20
         },
@@ -22,4 +21,3 @@ const userInfo = mongoose.model("userInfo", userSchema);
 
 userInfo.createIndexes();
 module.exports = userInfo;
-// field names can't be the same in any collection to enforce unique
