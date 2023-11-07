@@ -103,7 +103,7 @@ span {
     transform: translateY(4px);
   }
 
-.palette-container, .complementaryContainer, .analogousContainer, .splitContainer {
+.monochromaticContainer, .complementaryContainer, .analogousContainer, .splitContainer {
     border: solid 20px #ebf1fd;
     border-radius: 20px;
     display: flex;

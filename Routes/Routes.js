@@ -52,11 +52,11 @@ router.post('/palette', async (req, res) => {
       paletteDbInsertion = check[0]
     }
     
-    const userID = await dataController.getUserById('6548b9f3a038e0967bbd590d') // mock ID data
+    const userID = await dataController.getUserById('6548e82cd9e7dba1663f8ca2') // mock ID data
     // conversion to string needed to ensure comparison can be made as they are complex object types
     const userPaletteCheck = userID.favourites.filter((favourite) => favourite.paletteId.toString() === paletteDbInsertion._id.toString() || favourite.paletteName === name);
     if (userPaletteCheck.length == 0) {
-      await dataController.updateUser('6548b9f3a038e0967bbd590d', {$push: {favourites: {paletteName: name, paletteId: paletteDbInsertion._id}}}); // mock ID data
+      await dataController.updateUser('6548e82cd9e7dba1663f8ca2', {$push: {favourites: {paletteName: name, paletteId: paletteDbInsertion._id}}}); // mock ID data
     }
     else {
       throw error.message("Database already contains that palette")
