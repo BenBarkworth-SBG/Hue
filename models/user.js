@@ -19,5 +19,7 @@ const userSchema = new mongoose.Schema({
 
 const userInfo = mongoose.model("userInfo", userSchema);
 
+
+
 userInfo.createIndexes();
 module.exports = userInfo;
