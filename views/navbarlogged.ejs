@@ -13,7 +13,16 @@
                     <li><a href="/" class="nav-link">Home</a></li>
                     <li><a href="/palette" class="nav-link">Palette Picker</a></li>
                     <li><a href="/profile" class="nav-link">Profile</a></li>
-                    <li><a href="/logout" class="nav-link">Logout</a></li>
+                    <li><a href="/logout" class="nav-link">Logout</a>
+                    <% if (user) { %>
+                        <p>Welcome, <%= user %>!</p>
+                        <form method="GET" action="logout">
+                            
+                        </form>
+                    <% } else { %>
+                        <p>You are not logged in.</p>
+                        <a href="/login">Login</a>
+                    <% } %></li>
                 </ul>
             </nav>
         </div>
