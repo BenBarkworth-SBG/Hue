@@ -7,9 +7,11 @@ const app = express();
 const PORT = process.env.MONGO_PORT || 27017;
 const routes = require('./Routes/Routes');
 const Session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 // Middleware for parsing JSON bodies
 app.use(express.json());
+app.use(cookieParser());
 
 // Set view engine
 app.set("views", path.join(__dirname, "views"));
