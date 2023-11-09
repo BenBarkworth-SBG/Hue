@@ -22,9 +22,9 @@ router.get('/palette', async (req, res) => {
 });
 
 //render the profile page
-router.get('/profile', (req, res) => {    
-  res.render("profile");
-});
+// router.get('/profile', (req, res) => {    
+//   res.render("profile");
+//});
 
 router.get('/', async (req, res) => {    
     try {
@@ -91,7 +91,7 @@ router.post('/login', async (req,res) => {
     if (result) {
       userID = checkUser._id;
       req.session.user = { id: 1, user: user };
-      res.render("profile", {user});
+      res.redirect('/profile');
     } else {
       res.send("error: invalid username or password");
     }
@@ -100,6 +100,23 @@ router.post('/login', async (req,res) => {
     res.status(500).json({error: error.message});
   }
 })
+
+router.get('/profile', (req, res) => {
+  if (req.session.user) {
+    res.render('profile', {user: req.session.user});
+  } else {
+    res.redirect('login');
+  }
+})
+
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error(err);
+    }
+    res.redirect('login');
+  });
+});
 
   module.exports = router;
 
