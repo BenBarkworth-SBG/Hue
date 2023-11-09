@@ -4,6 +4,8 @@
 <head>
     <script src="/js/cookie.js"></script>
     <script> checkCookie()</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Profile Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,11 +22,69 @@
         <%- include ('navbarlogged'); %>
     <div class="profpage">
         <div class="userprofile">
-            <img src="/../images/Leeds_United_Fc_Black.png" alt="profilepic" class="profilepic">
+            
             <div class="accname">
-                <h1 class="usergradient"><%= user %>'s</h1>
-                <h1><p>Profile</p></h1>
+                <h1 class="usergradient"><%= user %>'s Profile</h1>
+
             </div>
+            
+
+       <!-- Contenedor -->
+       <!-- account drop down -->
+        <ul id="accordion" class="accordion">
+    <li>
+        <div class="link"><i class="fa fa-person"></i> Profile Picture <i class="fa fa-chevron-down"></i></div>
+        <ul class="submenu">
+            <li>
+                <input type="file" onchange="previewProfilePicture(event)">
+                
+            
+            </ul>
+        </li>
+        <li>
+        <div class="link"><i class="fa fa-database"></i>Account Details <i class="fa fa-chevron-down"></i></div>
+      <ul class="submenu">
+        <li><a href="#">Username:</a></li>
+        <li><a href="#">Email:</a></li>
+        <li><a href="#">Password:</a></li>
+      </ul>
+    </li>
+    <li>
+    <div class="link"><i class="fa fa-globe"></i>Settings<i class="fa fa-chevron-down"></i></div>
+    <ul class="submenu">
+      <li><a href="#" id="deleteAccountBtn">Delete my Account</a></li>
+      </li>
+    <!-- Add more menu items if needed -->
+  </ul>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#deleteAccountBtn').on('click', function() {
+        // Show a confirmation dialog
+        var confirmDelete = confirm("Are you sure you want to delete your account?");
+        
+        // If the user confirms, proceed with the deletion
+        if (confirmDelete) {
+          // Make an AJAX request to delete the user's account
+          $.ajax({
+            url: '/users/your-user-id', // Replace 'your-user-id' with the actual user ID
+            type: 'DELETE',
+            success: function(response) {
+              alert('You have successfully deleted your account.'); // Show a confirmation message
+              // Optionally, redirect the user to a different page or perform other actions after deletion
+            },
+            error: function(error) {
+              console.error(error);
+              alert('Error deleting account. Please try again later.');
+            }
+          });
+        }
+      });
+    });
+  </script>
+
+  
         </div>
         <div class="savedpalette">
             <h1>Saved Palettes</h1>
@@ -36,13 +96,65 @@
                 <option value="analogous">Analogous</option>
             </select>
             <br><br>
-            <input type="submit" value="Submit">
-            <button onclick="deleteUserPalettes()">Delete</button>
-            <button onclick="updateUserPalettes()">Update</button> 
+            <input type="submit" value="View Palettes">
+            <button onclick="deleteUserPalettes()">Delete all palettes</button>
+        
             
         </div>
+
     </div>
     <script src="/js/hamburger.js"></script>
+    <script> 
+    function showFileInput() {
+        var fileInput = document.getElementById('profilePictureInput');
+        fileInput.click(); // Simulate a click on the file input element
+}
+
+function previewProfilePicture(event) {
+  var input = event.target;
+  var reader = new FileReader();
+  
+  reader.onload = function(){
+    var dataURL = reader.result;
+    var preview = document.getElementById('preview');
+    var image = new Image();
+    image.src = dataURL;
+    preview.innerHTML = ''; // Clear previous preview, if any
+    preview.appendChild(image);
+  };
+  
+  reader.readAsDataURL(input.files[0]);
+}
+    </script>
+    <!-- User account dropdown -->
+    <script>
+$(document).ready(function() {
+    var Accordion = function(el, multiple) {
+      this.el = el || {};
+      this.multiple = multiple || false;
+
+      var links = this.el.find('.link');
+      
+      links.on('click', { el: this.el, multiple: this.multiple }, this.dropdown);
+    };
+
+    Accordion.prototype.dropdown = function(e) {
+      var $el = e.data.el;
+      var $this = $(this);
+      var $next = $this.next();
+
+      $next.slideToggle();
+      $this.parent().toggleClass('open');
+
+      if (!e.data.multiple) {
+        $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+      }
+    };
+
+    var accordion = new Accordion($('#accordion'), false);
+  });
+
+  </script>
 
 </body>
 <%- include ('footer'); %>
