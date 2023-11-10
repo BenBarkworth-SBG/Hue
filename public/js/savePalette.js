@@ -8,7 +8,7 @@ async function savePalette(elem) {
         }
         let hex = document.getElementById('hexOutput').innerHTML;
         let hexSplit = hex.slice(4,11)
-        const body = {hexCode: hexSplit, paletteType: buttonId, name: namePrompt}
+        const body = {hexCode: hexSplit, paletteType: buttonId, name: namePrompt, username: document.cookie}
         const namePattern = /[^A-Za-z0-9\s]/;
         if (!body.paletteType || !body.hexCode || body.hexCode.length > 7) {
             alert("Internal server error.")
