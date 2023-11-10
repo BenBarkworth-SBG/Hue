@@ -2,7 +2,7 @@ const { ObjectId } = require('mongodb');
 const { db } = require('../db');
 const coloursCollection = db.collection('Colours');
 const usersCollection = db.collection('Users');
-const userInfo = require('../models/user');
+const userInfo = require('../models/User');
 const palette = require('../models/palette');
 
 // Function to get all colours data from DB
@@ -117,5 +117,6 @@ module.exports = {
   updateUser,
   getUserById,
   deleteUser,
-  getUserByUsername
+  getUserByUsername,
+  deleteUserByUsername
 };

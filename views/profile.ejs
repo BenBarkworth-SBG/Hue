@@ -22,12 +22,10 @@
         <%- include ('navbarlogged'); %>
     <div class="profpage">
         <div class="userprofile">
-            
             <div class="accname">
+                <h1 class="usergradient"><%= user.user %>'s Profile</h1>
 
-                <h1 class="usergradient"><%= user %>'s Profile</h1>
-
-
+                <div id="preview"></div></li>
             </div>
             
 
@@ -37,10 +35,9 @@
     <li>
         <div class="link"><i class="fa fa-person"></i> Profile Picture <i class="fa fa-chevron-down"></i></div>
         <ul class="submenu">
-            <li>
-                <input type="file" onchange="previewProfilePicture(event)">
-                
-            
+            <li></li>
+                <input type="file" id="profilePictureInput" onchange="previewProfilePicture(event)">
+            <li><a href="#">Delete profile picture</a></li>
             </ul>
         </li>
         <li>
@@ -54,12 +51,12 @@
     <li>
     <div class="link"><i class="fa fa-globe"></i>Settings<i class="fa fa-chevron-down"></i></div>
     <ul class="submenu">
-      <li><a href="#" id="deleteAccountBtn">Delete my Account</a></li>
+      <li><a href="#" onclick="deleteUserData('<%= user.id%> ')" id="deleteAccountBtn">Delete my Account</a></li>
       </li>
     <!-- Add more menu items if needed -->
   </ul>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
   <script>
     $(document).ready(function() {
       $('#deleteAccountBtn').on('click', function() {
@@ -70,7 +67,7 @@
         if (confirmDelete) {
           // Make an AJAX request to delete the user's account
           $.ajax({
-            url: '/users/your-user-id', // Replace 'your-user-id' with the actual user ID
+            url: 'http://mongodb://localhost:27017/Hue ', // Replace 'your-user-id' with the actual user ID
             type: 'DELETE',
             success: function(response) {
               alert('You have successfully deleted your account.'); // Show a confirmation message
@@ -98,12 +95,10 @@
                 <option value="analogous">Analogous</option>
             </select>
             <br><br>
-
             <input type="submit" value="View Palettes">
             <button onclick="deleteUserPalettes()">Delete all palettes</button>
         
             
-
         </div>
 
     </div>
@@ -159,6 +154,25 @@ $(document).ready(function() {
   });
 
   </script>
+  <script>
+    async function deleteUserData(userId) {
+        try {
+            const response = await fetch(`/deleteUser/${userId}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert(result.message);
+            } else {
+                alert('Failed to delete user data.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to delete user data.');
+        }
+    }
+</script>
 
 </body>
 <%- include ('footer'); %>
