@@ -25,7 +25,9 @@
             <div class="accname">
                 <h1 class="usergradient"><%= user.user %>'s Profile</h1>
 
-                <div id="preview"></div></li>
+                <h1 class="usergradient"><%= user.user%>'s Profile </h1>
+
+
             </div>
             
 
@@ -43,9 +45,9 @@
         <li>
         <div class="link"><i class="fa fa-database"></i>Account Details <i class="fa fa-chevron-down"></i></div>
       <ul class="submenu">
-        <li><a href="#">Username:</a></li>
-        <li><a href="#">Email:</a></li>
-        <li><a href="#">Password:</a></li>
+        <li><a href="#">Username: <%= user.user %></a></li>
+        <li><a href="#">Email: <%= userEmail %></a></li>
+        <li><a href="/register">Change Password</a></li>
       </ul>
     </li>
     <li>

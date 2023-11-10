@@ -83,14 +83,15 @@ router.post('/users', async (req, res) => {
 // get username and compare with db
 router.post('/login', async (req,res) => {
   try {
-    const {user, pass} = req.body
+    const {user, pass, email} = req.body
     const checkUser = await dataController.getUserByUsername({user: req.body.user});
     console.log(checkUser)
     const hashInDb = checkUser.pass;
     bcrypt.compare(req.body.pass, hashInDb, function (err, result) {
     if (result) {
       userID = checkUser._id;
-      req.session.user = { id: 1, user: user };
+      userEmail = checkUser.email;
+      req.session.user = { id: 1, user: user, userEmail};
       res.redirect('/profile');
     } else {
       res.send("error: invalid username or password");
@@ -103,7 +104,7 @@ router.post('/login', async (req,res) => {
 
 router.get('/profile', (req, res) => {
   if (req.session.user) {
-    res.render('profile', {user: req.session.user});
+    res.render('profile', {user: req.session.user, userEmail});
   } else {
     res.redirect('login');
   }
