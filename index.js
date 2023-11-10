@@ -29,6 +29,7 @@ require("./db");
 // Define the salt rounds for bcrypt from the .env file
 const BCRYPT_SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS) || 10;
 
+// this creates a 1 hour cookie session - connect.sid
 app.use(
   Session({
     secret: 'your-secret-key', // Replace with a secure random string
