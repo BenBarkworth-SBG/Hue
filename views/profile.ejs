@@ -67,23 +67,40 @@
         var confirmDelete = confirm("Are you sure you want to delete your account?");
         
         // If the user confirms, proceed with the deletion
-        if (confirmDelete) {
-          // Make an AJAX request to delete the user's account
-          $.ajax({
-            url: '/users/your-user-id', // Replace 'your-user-id' with the actual user ID
-            type: 'DELETE',
-            success: function(response) {
-              alert('You have successfully deleted your account.'); // Show a confirmation message
-              // Optionally, redirect the user to a different page or perform other actions after deletion
-            },
-            error: function(error) {
-              console.error(error);
-              alert('Error deleting account. Please try again later.');
-            }
-          });
-        }
-      });
+            
+          if (confirmDelete) {
+        // Make an AJAX request to delete the user's account
+        $.ajax({
+          url: '/profile/delete', // Update the URL to the appropriate endpoint
+          type: 'POST',
+          success: function (response) {
+            alert('You have successfully deleted your account.'); // Show a confirmation message
+            // Optionally, redirect the user to a different page or perform other actions after deletion
+          },
+          error: function (error) {
+            console.error(error);
+            alert('Error deleting account. Please try again later.');
+          }
+        });
+      }
     });
+  });
+          // Make an AJAX request to delete the user's account
+        //   $.ajax({
+        //     url: '/users/your-user-id', // Replace 'your-user-id' with the actual user ID
+        //     type: 'DELETE',
+        //     success: function(response) {
+        //       alert('You have successfully deleted your account.'); // Show a confirmation message
+        //       // Optionally, redirect the user to a different page or perform other actions after deletion
+        //     },
+        //     error: function(error) {
+        //       console.error(error);
+        //       alert('Error deleting account. Please try again later.');
+        //     }
+        //  });
+    //     }
+    //   });
+    // });
   </script>
 
   

@@ -95,7 +95,7 @@ router.post('/login', async (req,res) => {
     if (result) {
       userID = checkUser._id;
       userEmail = checkUser.email;
-      req.session.user = { id: 1, user: user, userEmail};
+      req.session.user = { id: 1, user: user, userEmail, userID};
       res.redirect('/profile');
     } else {
       res.send("error: invalid username or password");
@@ -113,6 +113,16 @@ router.get('/profile', (req, res) => {
     res.redirect('login');
   }
 })
+
+router.post("/profile/delete", async (req, res) => {
+  try {
+    const deletedUser = await dataController.deleteUser("654e556df9cd68b8473b175f");
+    res.redirect("/login");
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 router.get('/logout', (req, res) => {
   req.session.destroy((err) => {
