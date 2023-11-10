@@ -31,6 +31,7 @@ async function getAllUserData() {
 async function getUserById(id) {
   try {
     const user = await userInfo.findById(id);
+    // console.log(user)
     return user;
   } catch (error) {
     console.error("error retrieving user", error);
