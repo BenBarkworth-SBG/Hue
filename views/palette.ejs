@@ -4,41 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/cookie.js"></script>
+    <script> checkCookie()</script>
     <title>Palette Picker</title>
     <link rel="stylesheet" href="/css/desktop.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon_logo.png">
 </head>
 
 <body>
+<!-- nav bar -->
+<%- include ('navbarlogged'); %>
 
-    <div class="container">
-        <div class="navbar">
-            <div class="leftnav">
-                <nav>
-                    <div class="gradient">
-                        <a href="/">Hue</a>
-                    </div>
-                </nav>
-            </div>
-            <div class="midnav">
-                <nav>
-                    <ul class="nav-menu">
-                        <li><a href="/" class="nav-link">Home</a></li>
-                        <li><a href="/palette" class="nav-link">Palette Picker</a></li>
-                        <li><a href="/about" class="nav-link">About</a></li>
-                        <li><a href="/profile" class="nav-link">Profile</a></li>
-                        <li><a href="/login" class="nav-link">Login</a></li>
-                        <li><a href="/register" class="nav-link">Sign Up</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
+<div class="container">
 
+<!-- palette picker -->
         <div class="colourContainer">
             <div class="colourPicker">
                 <div id="outputs"> </div>
@@ -55,44 +34,56 @@
                 <div class="colourOutput">
                     <span id="output">rgb(0, 0, 0)</span>
                     <span id="hexOutput">hex(#000000)</span>
+                    <span id ="hslOutput">hsl(0, 0%, 0%)</span>
+                    <span id ="cwykOutput">cmyk(0,0,0,1)</span>
                 </div>
 
+                <!-- checkboxes -->
                 <div class="checkbox-group">
-                    <label class="lbl"><input class="i" type="checkbox" id="monochromaticCheckbox" oninput="checkboxChecker()"> Monochromatic</label>
-                    <label class="lbl"><input class="i" type="checkbox" id="complementaryCheckbox" oninput="checkboxChecker()"> Complementary</label>
-                    <label class="lbl"><input class="i" type="checkbox" id="analogousCheckbox" oninput="checkboxChecker()"> Analogous</label>
-                    <label class="lbl"><input class="i" type="checkbox" id="splitCheckbox" oninput="checkboxChecker()"> Split</label>
+                    <label class="lbl"><input class="i" type="checkbox" id="monochromaticCheckbox" value="monochromatic" oninput="checkboxChecker(this)"> Monochromatic</label>
+                    <label class="lbl"><input class="i" type="checkbox" id="complementaryCheckbox" value="complementary" oninput="checkboxChecker(this)"> Complementary</label>
+                    <label class="lbl"><input class="i" type="checkbox" id="analogousCheckbox" value="analogous" oninput="checkboxChecker(this)"> Analogous</label>
+                    <label class="lbl"><input class="i" type="checkbox" id="splitCheckbox" value="split" oninput="checkboxChecker(this)"> Split</label>
                 </div>
-               <button class="paletteGenBtn" onclick="generatePalettes()">Generate Palette</button>
-                <button class="resetBtn" onclick="resetColors()">Reset</button>
+                <!-- Buttons for the palette generator -->
+
+                <button class="paletteGenBtn" id="paletteGenBtn" disabled onclick="generatePalettes()">Generate Palette</button>
+                <button class="generateRandomBtn" onclick="generateRandomPalette()">Randomise</button>
+                <button class="resetBtn" onclick= "window.location.reload()" >Reset</button>
+
             </div>
             <div class="divPaletteContainer">
                 <div class="monochromatic">
                     <h2 class="paletteh2">Monochromatic</h2>
-                    <div class="palette-container" id="paletteContainer"></div>
-                    <button class="savePaletteBtn" id="monoBtn" onclick="">Save Palette</button> 
+                    <div class="monochromaticContainer" id="monochromaticContainer">
+                    </div>
+                    <button class="savePaletteBtn" id="monochromatic" onclick="savePalette(this)" >Save Palette</button> 
                 </div>
                 <div class="complementary">
                     <h2 class="paletteh2">Complementary</h2>
-                    <div class="complementaryContainer" id="complementary"></div>
-                    <button class="savePaletteBtn" id="compBtn" onclick="">Save Palette</button>
+                    <div class="complementaryContainer" id="complementaryContainer">
+                    </div>
+                    <button class="savePaletteBtn" id="complementary" onclick="savePalette(this)" >Save Palette</button>
                 </div>
                 <div class="analogous">
                     <h2 class="paletteh2">Analogous</h2>
-                    <div class="analogousContainer" id="analogous"></div>
-                    <button class="savePaletteBtn" id="analogousBtn" onclick="">Save Palette</button> 
+                    <div class="analogousContainer" id="analogousContainer">
+                    </div>
+                    <button class="savePaletteBtn" id="analogous" onclick="savePalette(this)" >Save Palette</button> 
                 </div>
                 <div class="random">
                     <h2 class="paletteh2">Split</h2>
-                    <div class="splitContainer" id="split"></div>
-                    <button class="savePaletteBtn" id="splitBtn" onclick=""n>Save Palette</button> 
+                    <div class="splitContainer" id="splitContainer">
+                    </div>
+                    <button class="savePaletteBtn" id="split" onclick="savePalette(this)" >Save Palette</button> 
                 </div>
             </div>
         </div>
     </div>
     <script src="/js/colourPicker.js"></script>
+    <script src="/js/savePalette.js"></script>
     <script src="/js/hamburger.js"></script>
 
 </body>
-
+<%- include ('footer'); %>
 </html>
