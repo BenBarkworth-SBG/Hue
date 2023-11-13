@@ -1,8 +1,0 @@
-// const mongodb = require('mongodb');
-
-// const userSchema = mongodb.Schema({
-//     email: String,
-//     password: String,
-// });
-
-// module.exports = mongodb.model('user', userSchema );

@@ -1,5 +1,6 @@
 // imports MongoClient from the MongoDB module
 const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 
 // environment variables for the MongoDB connection
 const {
@@ -22,53 +23,13 @@ const client = new MongoClient(MONGO_URI);
 // database retrieval
 const db = client.db();
 
+const conn = mongoose.connect(MONGO_URI, {
+}).then(() => {
+  console.log('Connected to MongoDB');
 
-// function to connect to database
-async function connectToMongo() {
-  try {
-    await client.connect();
-    console.log('Connected to MongoDB');
-  } catch (err) {
-    console.error('Error connecting to MongoDB', err);
-  }
-}
-
-connectToMongo();
-
-// let user1 = {
-//   name: "Matt",
-//   email: "blabla@bla.com",
-//   password: "password",
-// };
-
-// let user2 = {
-//   name: "Ben",
-//   email: "bla1bla@bla1.com",
-//   password: "password",
-// };
-
-// let user3 = {
-//   name: "Josh",
-//   email: "bla2bla@bla2.com",
-//   password: "password",
-
-// }
-
-// function to add user into database
-async function insertUser(data) {
-  const collection = client.db().collection('Users');
-
-  try {
-    const result = await collection.insertOne(data);
-    console.log(`Inserted a document with ID: ${result.insertedId}`);
-  } catch (err) {
-    console.error('Error inserting document', err);
-  }
-}
-
-// insertUser(user1);
-// insertUser(user2);
-//insertUser(user3)
+}).catch(err => {
+  console.error('Error connecting to MongoDB:', err);
+});
 
 // function to close connection to mongodb
 async function closeConnection() {
@@ -81,5 +42,5 @@ async function closeConnection() {
 module.exports = {
     client,
     db,
-    insertUser,
+    conn,
   };
