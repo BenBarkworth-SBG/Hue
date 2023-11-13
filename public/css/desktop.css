@@ -130,6 +130,13 @@ span {
     animation: textShine 2s ease-in-out infinite alternate;
 }
 
+/* .swatch {
+    width: 20%;
+    height: 100px;
+    border-left: solid #ebf1fd 5px;
+    border-right: solid #ebf1fd 5px;
+} */
+
 
 .pbody {
     display: flex;
