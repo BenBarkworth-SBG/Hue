@@ -341,3 +341,18 @@ function splitHslToHex(hsl) {
 
     return `#${Math.round(r * 255).toString(16).padStart(2, '0')}${Math.round(g * 255).toString(16).padStart(2, '0')}${Math.round(b * 255).toString(16).padStart(2, '0')}`;
 }
+// random colour generator
+    function generateRandomPalette() {
+        // Generate random RGB values for the base colour
+        const randomRed = Math.floor(Math.random() * 256);
+        const randomGreen = Math.floor(Math.random() * 256);
+        const randomBlue = Math.floor(Math.random() * 256);
+
+        // Set the random RGB values to the input fields
+        document.getElementById('red').value = randomRed;
+        document.getElementById('green').value = randomGreen;
+        document.getElementById('blue').value = randomBlue;
+
+        colors();
+        generatePalettes();
+    }

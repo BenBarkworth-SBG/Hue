@@ -24,6 +24,15 @@ router.get('/palette', async (req, res) => {
   // }
 });
 
+//render the palette page
+router.get('/random', async (req, res) => {    
+  // if (req.session.user) {
+    res.render('random');
+  // } else {
+  //   res.redirect('login');
+  // }
+});
+
 //render the profile page
 // router.get('/profile', (req, res) => {    
 //   res.render("profile");
