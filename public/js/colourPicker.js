@@ -33,16 +33,69 @@ function rgbToHex(r, g, b) {
     return "#" + componentToHex(red) + componentToHex(green) + componentToHex(blue);
   }
 
+function rgbToCmyk (r,g,b) {
+  let c = 0;
+  let m = 0;
+  let y = 0;
+  let k = 0;
+  
+  //remove spaces from input RGB values, convert to int
+  let redNum = parseInt( (''+r).replace(/\s/g,''),10 ); 
+  let greenNum = parseInt( (''+g).replace(/\s/g,''),10 ); 
+  let blueNum = parseInt( (''+b).replace(/\s/g,''),10 ); 
+  
+  // if ( redNum==null || greenNum==null || blueNum==null ||
+  //     isNaN(redNum) || isNaN(greenNum)|| isNaN(blueNum) )
+  // {
+  //   alert ('Please enter numeric RGB values!');
+  //   return;
+  // }
+  // if (redNum<0 || greenNum<0 || blueNum<0 || redNum>255 || greenNum>255 || blueNum>255) {
+  //   alert ('RGB values must be in the range 0 to 255.');
+  //   return;
+  // }
+  
+  // BLACK
+  if (redNum==0 && greenNum==0 && blueNum==0) {
+    k = 1;
+    return [0,0,0,1];
+  }
+  
+  c = 1 - (redNum/255);
+  m = 1 - (greenNum/255);
+  y = 1 - (blueNum/255);
+  
+  let minCMY = Math.min(c,
+                Math.min(m,y));
+  c = (c - minCMY) / (1 - minCMY) ;
+  m = (m - minCMY) / (1 - minCMY) ;
+  y = (y - minCMY) / (1 - minCMY) ;
+  k = minCMY;
+
+  cmykList = [c,m,y,k]
+
+  for (let i = 0; i < cmykList.length; i++) {
+    cmykList[i] = cmykList[i].toFixed(1)
+    if (cmykList[i] == "0.0") {
+      cmykList[i] = "0"
+    }
+  }
+  return cmykList;
+}
+
 function colors(){
     let red = document.getElementById('red').value;
     let green = document.getElementById('green').value;
     let blue = document.getElementById('blue').value;
-
     document.getElementById('output').innerHTML = 'rgb(' + red + ',' + green + ',' + blue + ')';
-    let test = rgbToHex(red, green, blue);
-    document.getElementById('hexOutput').innerHTML = 'hex(' + test + ')';
+    let rgbConversion = rgbToHex(red, green, blue);
+    document.getElementById('hexOutput').innerHTML = 'hex(' + rgbConversion + ')';
+    let HexConversion = hexToHsl(rgbConversion)
+    document.getElementById('hslOutput').innerHTML = `hsl(${Math.floor(HexConversion.h)}, ${Math.floor(HexConversion.s)}%, ${Math.floor(HexConversion.l)}%)`;
+    let cwykConversion = rgbToCmyk(red, green, blue)
+    document.getElementById('cwykOutput').innerHTML = 'cwyk(' + cwykConversion + ')';
     outputs.style.backgroundColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
-    return test
+    return rgbConversion
 }
 
 function generatePalettes() {
@@ -113,32 +166,32 @@ function checkboxChecker(paletteType) {
   return checkboxSet;
 }
 
-function resetColors() {
-  // reset the input and span element values
-  document.getElementById('red').value = 0;
-  document.getElementById('green').value = 0;
-  document.getElementById('blue').value = 0;
-  document.getElementById('output').innerHTML = 'rgb(0, 0, 0)';
-  document.getElementById('hexOutput').innerHTML = 'hex(#000000)';
-  // Clear the palette containers
-  monochromaticContainer.innerHTML = ''; 
-  complementaryContainer.innerHTML = '';
-  analogousContainer.innerHTML = '';
-  splitContainer.innerHTML = '';
-  // Clear the background color of the palette containers
-  monochromaticContainer.style.backgroundColor = "";
-  complementaryContainer.style.backgroundColor = "";
-  analogousContainer.style.backgroundColor = "";
-  splitContainer.style.backgroundColor = "";
-  // reset colour output
-  outputs.style.backgroundColor = 'rgb(0, 0, 0)';
-  // Uncheck all checkboxes
-  monochromatic.checked = false;
-  complementary.checked = false;
-  analogous.checked = false;
-  split.checked = false;
-  paletteGeneratorBtn.disabled = true;
-}
+// function resetColors() {
+//   // reset the input and span element values
+//   document.getElementById('red').value = 0;
+//   document.getElementById('green').value = 0;
+//   document.getElementById('blue').value = 0;
+//   document.getElementById('output').innerHTML = 'rgb(0, 0, 0)';
+//   document.getElementById('hexOutput').innerHTML = 'hex(#000000)';
+//   // Clear the palette containers
+//   monochromaticContainer.innerHTML = ''; 
+//   complementaryContainer.innerHTML = '';
+//   analogousContainer.innerHTML = '';
+//   splitContainer.innerHTML = '';
+//   // Clear the background color of the palette containers
+//   monochromaticContainer.style.backgroundColor = "";
+//   complementaryContainer.style.backgroundColor = "";
+//   analogousContainer.style.backgroundColor = "";
+//   splitContainer.style.backgroundColor = "";
+//   // reset colour output
+//   outputs.style.backgroundColor = 'rgb(0, 0, 0)';
+//   // Uncheck all checkboxes
+//   monochromatic.checked = false;
+//   complementary.checked = false;
+//   analogous.checked = false;
+//   split.checked = false;
+//   paletteGeneratorBtn.disabled = true;
+// }
 
 function generateMonochromePalette(baseColor) {
     const palette = [];
@@ -202,34 +255,64 @@ function generateAnalogousPalette(baseColor) {
   return palette;
 }
 
+// DUPLICATION
+// function hexToHsl(hex) {
+//   hex = hex.replace(/^#/, '');
+//   const r = parseInt(hex.slice(0, 2), 16) / 255;
+//   const g = parseInt(hex.slice(2, 4), 16) / 255;
+//   const b = parseInt(hex.slice(4, 6), 16) / 255;
+//   const max = Math.max(r, g, b);
+//   const min = Math.min(r, g, b);
+//   const l = (max + min) / 2;
+//   let h, s;
+//   if (max === min) {
+//       h = s = 0; // achromatic
+//   } else {
+//       const d = max - min;
+//       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+//       switch (max) {
+//           case r:
+//               h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+//               break;
+//           case g:
+//               h = ((b - r) / d + 2) / 6;
+//               break;
+//           case b:
+//               h = ((r - g) / d + 4) / 6;
+//               break;
+//       }
+//   }
+//   return { h: h * 360, s: s * 100, l: l * 100 };
+// }
+
 function hexToHsl(hex) {
   hex = hex.replace(/^#/, '');
-  const r = parseInt(hex.slice(0, 2), 16) / 255;
-  const g = parseInt(hex.slice(2, 4), 16) / 255;
-  const b = parseInt(hex.slice(4, 6), 16) / 255;
-
-  const max = Math.max(r, g, b);
-  const min = Math.min(r, g, b);
-  const l = (max + min) / 2;
-
-  let h, s;
-
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+  const rNormalized = r / 255;
+  const gNormalized = g / 255;
+  const bNormalized = b / 255;
+  const max = Math.max(rNormalized, gNormalized, bNormalized);
+  const min = Math.min(rNormalized, gNormalized, bNormalized);
+  let h, s, l = (max + min) / 2;
   if (max === min) {
       h = s = 0; // achromatic
   } else {
       const d = max - min;
       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
       switch (max) {
-          case r:
-              h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+          case rNormalized:
+              h = (gNormalized - bNormalized) / d + (gNormalized < bNormalized ? 6 : 0);
               break;
-          case g:
-              h = ((b - r) / d + 2) / 6;
+          case gNormalized:
+              h = (bNormalized - rNormalized) / d + 2;
               break;
-          case b:
-              h = ((r - g) / d + 4) / 6;
+          case bNormalized:
+              h = (rNormalized - gNormalized) / d + 4;
               break;
       }
+      h /= 6;
   }
   return { h: h * 360, s: s * 100, l: l * 100 };
 }
@@ -279,40 +362,6 @@ function rotateColor(hex, degrees) {
     return splitHslToHex(hslColor);
 }
 
-function hexToHsl(hex) {
-    hex = hex.replace(/^#/, '');
-    const r = parseInt(hex.slice(0, 2), 16);
-    const g = parseInt(hex.slice(2, 4), 16);
-    const b = parseInt(hex.slice(4, 6), 16);
-    const rNormalized = r / 255;
-    const gNormalized = g / 255;
-    const bNormalized = b / 255;
-    const max = Math.max(rNormalized, gNormalized, bNormalized);
-    const min = Math.min(rNormalized, gNormalized, bNormalized);
-    let h, s, l = (max + min) / 2;
-
-    if (max === min) {
-        h = s = 0; // achromatic
-    } else {
-        const d = max - min;
-        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-        switch (max) {
-            case rNormalized:
-                h = (gNormalized - bNormalized) / d + (gNormalized < bNormalized ? 6 : 0);
-                break;
-            case gNormalized:
-                h = (bNormalized - rNormalized) / d + 2;
-                break;
-            case bNormalized:
-                h = (rNormalized - gNormalized) / d + 4;
-                break;
-        }
-        h /= 6;
-    }
-
-    return { h: h * 360, s: s * 100, l: l * 100 };
-}
-
 function splitHslToHex(hsl) {
     const h = hsl.h / 360;
     const s = hsl.s / 100;
@@ -342,17 +391,17 @@ function splitHslToHex(hsl) {
     return `#${Math.round(r * 255).toString(16).padStart(2, '0')}${Math.round(g * 255).toString(16).padStart(2, '0')}${Math.round(b * 255).toString(16).padStart(2, '0')}`;
 }
 // random colour generator
-    function generateRandomPalette() {
-        // Generate random RGB values for the base colour
-        const randomRed = Math.floor(Math.random() * 256);
-        const randomGreen = Math.floor(Math.random() * 256);
-        const randomBlue = Math.floor(Math.random() * 256);
+function generateRandomPalette() {
+    // Generate random RGB values for the base colour
+    const randomRed = Math.floor(Math.random() * 256);
+    const randomGreen = Math.floor(Math.random() * 256);
+    const randomBlue = Math.floor(Math.random() * 256);
 
-        // Set the random RGB values to the input fields
-        document.getElementById('red').value = randomRed;
-        document.getElementById('green').value = randomGreen;
-        document.getElementById('blue').value = randomBlue;
+    // Set the random RGB values to the input fields
+    document.getElementById('red').value = randomRed;
+    document.getElementById('green').value = randomGreen;
+    document.getElementById('blue').value = randomBlue;
 
-        colors();
-        generatePalettes();
-    }
+    // colors();
+    generatePalettes();
+}

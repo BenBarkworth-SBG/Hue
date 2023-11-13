@@ -1,3 +1,5 @@
+paletteGeneratorBtn = document.getElementById("paletteGenBtn")
+
 // elem represents the button clicked
 async function savePalette(elem) {
     try {    
@@ -6,7 +8,7 @@ async function savePalette(elem) {
         if (namePrompt == null) {
             return; // breaks out of the function if the user clicks cancel on prompt
         }
-        let hex = document.getElementById('hexOutput').innerHTML;
+        // let hex = document.getElementById('hexOutput').innerHTML;
         const className = buttonId + "Container"
         const divContainer = document.getElementById(className)
         const divChildren = divContainer.children
@@ -40,10 +42,18 @@ async function savePalette(elem) {
                 else {
                     alert("The palette is already in the database or the name has been used previously")
                 }
-                setTimeout(function() {
-                        window.location.reload()
-                    }, 1500);
-                    // delays page reload by 1.5 seconds
+                checkboxSet.delete(buttonId)        
+                let combined = elem.id + "Container"
+                const identifier = document.getElementById(combined)
+                identifier.innerHTML = '';
+                elem.style.display = "none";
+                const checkboxName = String(buttonId + "Checkbox")
+                const checkbox = document.getElementById(checkboxName)
+                checkbox.checked = false
+                if (checkboxSet.size === 0) {
+                    paletteGeneratorBtn.disabled = true;
+                    // window.location.reload()
+                }
                 return response.json();
             })
             .then(data => {
