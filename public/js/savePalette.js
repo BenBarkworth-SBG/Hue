@@ -7,10 +7,17 @@ async function savePalette(elem) {
             return; // breaks out of the function if the user clicks cancel on prompt
         }
         let hex = document.getElementById('hexOutput').innerHTML;
-        let hexSplit = hex.slice(4,11)
-        const body = {hexCode: hexSplit, paletteType: buttonId, name: namePrompt, username: document.cookie}
+        const className = buttonId + "Container"
+        const divContainer = document.getElementById(className)
+        const divChildren = divContainer.children
+        let hexCodes = []
+        for (let index = 0; index < divChildren.length; index++) {
+            hexCodes.push(divChildren[index].value)
+        }
+        // let hexSplit = hex.slice(4,11)
+        const body = {hexCodes: hexCodes, paletteType: buttonId, name: namePrompt, username: document.cookie}
         const namePattern = /[^A-Za-z0-9\s]/;
-        if (!body.paletteType || !body.hexCode || body.hexCode.length > 7) {
+        if (!body.paletteType || !body.hexCodes) {
             alert("Internal server error.")
             return;
         } else if (!body.name.trim()) {
