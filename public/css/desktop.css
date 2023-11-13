@@ -406,38 +406,6 @@ span {
     }
 }
 
-/* Dictionary homepage element */
-/* add media queries for different screen widths */
-/* might not be needed due to height being fixed? */
-.dictionary {
-    height: 300px;
-    width: 60%;
-    background-color: #bebebe;
-    margin-left: 5%;
-}
-
-.dictionaryWords,
-.dictionaryPro,
-.dictionaryTitle {
-    background-color: #bebebe;
-    padding-left: 10%;
-    padding-right: 10%;
-}
-
-.dictionaryTitle {
-    font-size: 48px;
-    padding-top: 5%;
-    font-weight: 500;
-}
-
-.dictionaryPro {
-    font-size: 30px;
-}
-
-.dictionaryWords {
-    font-size: 20px;
-}
-
 /* Bordered form */
 form {
     border: 3px solid white;
@@ -568,12 +536,81 @@ img.avatar {
     align-items: center;
 } */ 
 
+
+/* start of main home page css */
+.main_page {
+    background-image:linear-gradient(to top, transparent 0%, #ffffff 80%), url("../images/adjusted_dots.png");
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: white;
+    overflow: auto;
+    width: 100vw;
+}
+
+.strapline, .strapline_colour{
+    color: #a9bbf9;
+    font-family: 'Paytone One', sans-serif;
+    font-size: 80px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 17%;
+}
+
+.strapline_colour {
+    width: max-content;
+    background: linear-gradient(to right, 
+    #F56363 10%, 
+    #F2AF4A 20%, 
+    #F2F467 30%, 
+    #35AD41 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: absolute;
+    right: 0;
+    font-size: 130px;
+}
+    
+.dictionary {
+    height: 400px;
+    width: 700px;
+    margin-left: 10%;
+    margin-bottom: 5%;
+    border-radius: 40px;
+    background: linear-gradient(to top right,
+            #f1f6ffc2 40%,
+            #fdfeff00 60%);
+    box-shadow: 2px 5px #bbbaba81;
+}
+
+.dictionary_def,
+.dictionary_noun,
+.dictionary_title {
+    padding-left: 40px;
+    font-family: 'Paytone One', sans-serif;
+    color: #a9bbf9;
+}
+
+.dictionary_title {
+    font-size: 80px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.dictionary_noun {
+    font-size: 50px;
+    padding-bottom: 30px;
+}
+
+.dictionary_def {
+    font-size: 35px;
+}
 /* start of footer css*/
 footer {
     background-color: #a9c3f634;
-    color: #9AA8C4;
-    height: auto;
-    width: 100vw;
+    color: #2a2a32;
+    height: 110px;
     padding-top: 30px;
     padding-bottom: 30px;
     padding-left: 30px;
@@ -609,7 +646,7 @@ footer {
     margin-bottom: 10px;
 }
 
-.strapline {
+.strapline_foot {
     color: #000000;
     font-family: 'Paytone One', sans-serif;
     font-size: 16px;
@@ -677,7 +714,7 @@ a {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     text-decoration: inherit;
-    color: #9AA8C4;
+    color: #000000;
 }
 
 /* end of footer css*/
