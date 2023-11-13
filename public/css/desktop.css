@@ -622,9 +622,9 @@ img.avatar {
 /* start of footer css*/
 footer {
 
-    background-color: #a9c3f634;
+    background-color: #e6ebf5;
     color: #2a2a32;
-    height: 110px;
+    height: auto;
     width: auto;
     position: fixed;
     overflow: hidden;
