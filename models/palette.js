@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const paletteSchema = new mongoose.Schema({
-    hexCode: {
-        type: String,
+    hexCodes: {
+        type: [String],
         required: true,
         maxLength: 7,
         match: /^[a-f0-9#]+$/,
@@ -10,7 +10,7 @@ const paletteSchema = new mongoose.Schema({
     paletteType: {
         type: String,
         required: true,
-        enum: ['monochromatic', 'analogous', 'complementary', 'splitComplementary']
+        enum: ['monochromatic', 'analogous', 'complementary', 'split']
     }
 },
 {collection: "Palettes"}
