@@ -17,8 +17,11 @@ router.get('/login', (req, res) => {
 
 //render the palette page
 router.get('/palette', async (req, res) => {    
-  // const data = await dataController.getAllPalettesData();
-  res.render("palette");
+  // if (req.session.user) {
+    res.render('palette');
+  // } else {
+  //   res.redirect('login');
+  // }
 });
 
 //render the profile page
@@ -40,13 +43,14 @@ router.get('/', async (req, res) => {
 router.post('/palette', async (req, res) => {    
 
   try {
+    // console.log(req.session.user)
     // has to be declared here to be accessed later in the try block
     let paletteDbInsertion;
-    const {hexCode, paletteType, name, username} = req.body;
+    const {hexCodes, paletteType, name, username} = req.body;
     const data = await dataController.getAllPalettesData(); 
-    const check = data.filter((d) => d.paletteType == paletteType && d.hexCode == hexCode);
+    const check = data.filter((d) => d.paletteType == paletteType && d.hexCodes == hexCodes);
     if (check.length == 0) {
-       paletteDbInsertion = await dataController.insertPalette({hexCode, paletteType});
+       paletteDbInsertion = await dataController.insertPalette({hexCodes, paletteType});
     }
     else {
       paletteDbInsertion = check[0]
@@ -62,7 +66,6 @@ router.post('/palette', async (req, res) => {
       await dataController.updateUser(pullUser._id.toString(), {$push: {favourites: {paletteName: name, paletteId: paletteDbInsertion._id}}});
     }
     else {
-      console.log(userPaletteCheck)
       throw error.message("Database already contains that palette")
     }
     res.send(req.body)
@@ -89,7 +92,7 @@ router.post('/login', async (req,res) => {
   try {
     const {user, pass, email} = req.body
     const checkUser = await dataController.getUserByUsername({user: req.body.user});
-    console.log(checkUser)
+    // console.log(checkUser)
     const hashInDb = checkUser.pass;
     bcrypt.compare(req.body.pass, hashInDb, function (err, result) {
     if (result) {
