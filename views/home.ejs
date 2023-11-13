@@ -15,32 +15,34 @@
 
 <body>
     <div class="container">
-<!-- nav bar -->
+        <!-- nav bar -->
         <!-- checks wether user is logged in to determine which navbar to use -->
         <% if (userLoggedIn) { %>
-        <!-- Navbar for logged-in users-->
-        <%- include('navbarlogged'); %>
-        <% } else { %>
-        <!-- Default navbar when users arent logged in -->
-        <%- include('navbar'); %>
-        <% } %>
-<!-- home page -->
+            <!-- Navbar for logged-in users-->
+            <%- include('navbarlogged'); %>
+                <% } else { %>
+                    <!-- Default navbar when users arent logged in -->
+                    <%- include('navbar'); %>
+                        <% } %>
+                            <!-- home page -->
 
-        <div class="pbody">
-        <div class="strapline_colour">
-        Colour
-
-        </div>
-
-        <div class="dictionary">
-            <div class="dictionary_title">Hue</div>
-            <div class="dictionary_noun">[hju] noun</div>
-            <div class="dictionary_def">The degree of lightness, darkness, and strength of a colour.</div>
-        </div> 
-
-
-    </div>
+                            <div class="main_page">
+                                <div class="strapline">
+                                    Live your life in
+                                </div>
+                                <div class="strapline_colour">
+                                    Colour
+                                </div>
+                                <div class="dictionary">
+                                    <div class="dictionary_title">Hue</div>
+                                    <div class="dictionary_noun">[hju] noun</div>
+                                    <div class="dictionary_def">The degree of lightness, darkness, and strength of a
+                                        colour.</div>
+                                </div>
+                            </div>
+                            <script src="/js/hamburger.js"></script>
 
 </body>
 <%- include ('footer'); %>
+
 </html>
