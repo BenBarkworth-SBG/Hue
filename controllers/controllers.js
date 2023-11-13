@@ -108,6 +108,18 @@ async function getUserByUsername(user) {
   }
 }
 
+async function logout(userID) {
+  {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error(err);
+      }
+      res.redirect('login');
+    });
+  }
+};
+
+
 // Export all functions below
 module.exports = {
   getAllColoursData,
@@ -118,5 +130,6 @@ module.exports = {
   updateUser,
   getUserById,
   deleteUser,
-  getUserByUsername
+  getUserByUsername,
+  logout
 };

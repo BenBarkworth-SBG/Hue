@@ -84,18 +84,6 @@ router.post('/palette', async (req, res) => {
   }
 });
 
-  //writes to DB after request from frontend
-router.post('/users', async (req, res) => {    
-  try {
-    const {user, email, pass, favourites} = req.body;
-    const hashedPassword = await bcrypt.hash(pass, 10); // Hash the password
-    dataController.insertUser({user, email, pass: hashedPassword, favourites}); // Store the hashed password
-    res.status(201).json(req.body);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
 // get username and compare with db
 router.post('/login', async (req,res) => {
   try {
@@ -117,19 +105,34 @@ router.post('/login', async (req,res) => {
     res.status(500).json({error: error.message});
   }
 })
+  //writes to DB after request from frontend
+router.post('/users', async (req, res) => {    
+  try {
+    const {user, email, pass, favourites} = req.body;
+    const hashedPassword = await bcrypt.hash(pass, 10); // Hash the password
+    dataController.insertUser({user, email, pass: hashedPassword, favourites}); // Store the hashed password
+    res.render('profile', { user : req.session.user, userEmail, userId});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 router.get('/profile', (req, res) => {
   if (req.session.user) {
-    res.render('profile', {user: req.session.user, userEmail});
+    const userId = req.session.user.id; // Assuming user ID is stored in the 'id' property
+    const userEmail = req.session.user.email; // Assuming user email is stored in the 'email' property
+    const user = req.session.user.user;
+    res.render('profile', { user : req.session.user, userEmail, userId});
   } else {
     res.redirect('login');
   }
-})
+});
 
 router.post("/profile/delete", async (req, res) => {
   try {
-    const deletedUser = await dataController.deleteUser("654e556df9cd68b8473b175f");
-    res.redirect("/login");
+    const deletedUser = await dataController.deleteUser(req.session.user.userID);
+     return res.redirect("/login");
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
@@ -141,9 +144,8 @@ router.get('/logout', (req, res) => {
     if (err) {
       console.error(err);
     }
-    res.redirect('login');
+    return res.redirect('login');
   });
 });
 
   module.exports = router;
-
