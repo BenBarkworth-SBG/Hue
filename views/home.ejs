@@ -15,7 +15,14 @@
 <body>
     <div class="container">
 <!-- nav bar -->
-<%- include ('navbar'); %>
+        <!-- checks wether user is logged in to determine which navbar to use -->
+        <% if (userLoggedIn) { %>
+        <!-- Navbar for logged-in users-->
+        <%- include('navbarlogged'); %>
+        <% } else { %>
+        <!-- Default navbar when users arent logged in -->
+        <%- include('navbar'); %>
+        <% } %>
 <!-- home page -->
 
         <div class="pbody">

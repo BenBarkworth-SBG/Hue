@@ -39,6 +39,11 @@ app.use(
   })
 )
 
+app.use((req, res, next) => {
+  res.locals.userLoggedIn = req.session.user ? true : false;
+  next();
+});
+
 // Mount the routes
 app.use("/", routes);
 app.use('/api', routes);
