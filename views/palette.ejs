@@ -8,6 +8,7 @@
     <script> checkCookie()</script>
     <title>Palette Picker</title>
     <link rel="stylesheet" href="/css/desktop.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon_logo.png">
 </head>
 
 <body>
@@ -41,8 +42,12 @@
                     <label class="lbl"><input class="i" type="checkbox" id="analogousCheckbox" value="analogous" oninput="checkboxChecker(this)"> Analogous</label>
                     <label class="lbl"><input class="i" type="checkbox" id="splitCheckbox" value="split" oninput="checkboxChecker(this)"> Split</label>
                 </div>
-               <button class="paletteGenBtn" id="paletteGenBtn" disabled onclick="generatePalettes()">Generate Palette</button>
+                <!-- Buttons for the palette generator -->
+
+                <button class="paletteGenBtn" id="paletteGenBtn" disabled onclick="generatePalettes()">Generate Palette</button>
+                <button class="generateRandomBtn" onclick="generateRandomPalette()">Randomise</button>
                 <button class="resetBtn" onclick="resetColors()">Reset</button>
+
             </div>
             <div class="divPaletteContainer">
                 <div class="monochromatic">
