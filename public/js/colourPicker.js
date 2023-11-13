@@ -13,7 +13,7 @@ const splitContainer = document.getElementById('splitContainer');
 document.getElementById("monochromatic").style.display = "none";
 document.getElementById("complementary").style.display = "none";
 document.getElementById("analogous").style.display = "none";
-document.getElementById("splitComplementary").style.display = "none";
+document.getElementById("split").style.display = "none";
 // generate palette button
 paletteGeneratorBtn = document.getElementById("paletteGenBtn")
 checkboxSet = new Set();
@@ -49,27 +49,15 @@ function generatePalettes() {
   const value = colors()
   let checkboxArray = Array.from(checkboxSet)
   let palettes;
+  // let element = document.getElementsByClassName("swatch")
+
   for (let i = 0; i < checkboxArray.length; i++) {
-    // Clear previous palettes
     if (checkboxArray[i] == "monochromatic") {
-      // Generate and display selected color palettes inside the div
-        monochromaticContainer.style.backgroundColor = "";
-        palettes = generateMonochromePalette(value)
-        monochromaticContainer.innerHTML = '';
-        // let element = document.getElementsByClassName("swatch")
-        // console.log(element)
-      // for (let index = 0; index < palettes.length; index++) {
-      //   // console.log(element.length)
-      //   console.log("monochromatic" + index)
-      //   combine = String("monochromatic" + index)
-      //   console.log(typeof combine, combine)
-      //   element = document.getElementById("combine");
-      //   console.log(element)
-      //   element[index].style.backgroundColor = palettes[index]
-      //   // loop through palettes and apply to each monochromatic div
-      //   // then refactor checkbox and apply this to each palette
-      // }
-        document.getElementById("monochromatic").style.display = "inline-block";
+      // monochromaticContainer.style.backgroundColor = "";
+      palettes = generateMonochromePalette(value)
+      monochromaticContainer.innerHTML = '';
+    
+      document.getElementById("monochromatic").style.display = "inline-block";
     }
     if (checkboxArray[i] == "complementary") {
       const complementaryColor = getComplementaryColor(value);
@@ -86,11 +74,18 @@ function generatePalettes() {
       const complementaryColor = getComplementaryColor(value);
       palettes = generateSplitComplementaryPalette(value, complementaryColor)
       splitContainer.innerHTML = '';
-      document.getElementById("splitComplementary").style.display = "inline-block";
+      document.getElementById("split").style.display = "inline-block";
     }
+  //   for (let i = 0; i < palettes.length; i++) {
+  //     console.log(element)
+  //     console.log(palettes[i])
+  //     element[i].style.backgroundColor = palettes[i]
+  // }
+
     palettes.forEach(color => {
       const element = document.createElement('div');
       element.style.backgroundColor = color;
+      element.value = color
       element.style.width = "20%"
       element.style.height = "100px"
       element.className = 'swatch';
@@ -116,6 +111,33 @@ function checkboxChecker(paletteType) {
     paletteGeneratorBtn.disabled = true;
   }
   return checkboxSet;
+}
+
+function resetColors() {
+  // reset the input and span element values
+  document.getElementById('red').value = 0;
+  document.getElementById('green').value = 0;
+  document.getElementById('blue').value = 0;
+  document.getElementById('output').innerHTML = 'rgb(0, 0, 0)';
+  document.getElementById('hexOutput').innerHTML = 'hex(#000000)';
+  // Clear the palette containers
+  monochromaticContainer.innerHTML = ''; 
+  complementaryContainer.innerHTML = '';
+  analogousContainer.innerHTML = '';
+  splitContainer.innerHTML = '';
+  // Clear the background color of the palette containers
+  monochromaticContainer.style.backgroundColor = "";
+  complementaryContainer.style.backgroundColor = "";
+  analogousContainer.style.backgroundColor = "";
+  splitContainer.style.backgroundColor = "";
+  // reset colour output
+  outputs.style.backgroundColor = 'rgb(0, 0, 0)';
+  // Uncheck all checkboxes
+  monochromatic.checked = false;
+  complementary.checked = false;
+  analogous.checked = false;
+  split.checked = false;
+  paletteGeneratorBtn.disabled = true;
 }
 
 function generateMonochromePalette(baseColor) {
@@ -232,33 +254,6 @@ function hslToHex(hsl) {
   const green = Math.round(calcHue(p, q, h) * 255);
   const blue = Math.round(calcHue(p, q, h - 1 / 3) * 255);
   return `#${(1 << 24 | red << 16 | green << 8 | blue).toString(16).slice(1).toUpperCase()}`;
-}
-
-function resetColors() {
-  // reset the input and span element values
-  document.getElementById('red').value = 0;
-  document.getElementById('green').value = 0;
-  document.getElementById('blue').value = 0;
-  document.getElementById('output').innerHTML = 'rgb(0, 0, 0)';
-  document.getElementById('hexOutput').innerHTML = 'hex(#000000)';
-  // Clear the palette containers
-  monochromaticContainer.innerHTML = ''; 
-  complementaryContainer.innerHTML = '';
-  analogousContainer.innerHTML = '';
-  splitContainer.innerHTML = '';
-  // Clear the background color of the palette containers
-  monochromaticContainer.style.backgroundColor = "";
-  complementaryContainer.style.backgroundColor = "";
-  analogousContainer.style.backgroundColor = "";
-  splitContainer.style.backgroundColor = "";
-  // reset colour output
-  outputs.style.backgroundColor = 'rgb(0, 0, 0)';
-  // Uncheck all checkboxes
-  monochromatic.checked = false;
-  complementary.checked = false;
-  analogous.checked = false;
-  split.checked = false;
-  paletteGeneratorBtn.disabled = true;
 }
 
 function generateSplitComplementaryPalette(baseColour, complementaryColor) {
