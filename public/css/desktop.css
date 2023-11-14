@@ -552,12 +552,11 @@ img.avatar {
 
 /* start of main home page css */
 .main_page {
-    background-image:linear-gradient(to top, transparent 0%, #ffffff 80%), url("../images/adjusted_dots.png");
+    background-image:linear-gradient(to top , transparent 0%, #ffffff 90%), url("../images/Rainbow_dots.png");
     background-size: cover;
     background-position: center bottom;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    position: fixed;
     background-color: white;
     overflow: auto;
     width: 100vw;
