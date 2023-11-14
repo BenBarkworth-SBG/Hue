@@ -4,7 +4,6 @@ const dataController = require('../controllers/controllers');
 const db = require('../db');
 const bcrypt = require('bcrypt'); 
 const { error } = require('console');
-const cookie = require('../public/js/cookie');
 
 //render the register page
 router.get('/register', (req, res) => {    
@@ -97,7 +96,6 @@ router.post('/login', async (req,res) => {
     if (result) {
       userID = checkUser._id;
       userEmail = checkUser.email;
-      cookie.setCookie(res, 'username', user, 30); //sets the cookie to have an expiration of 30 days
       req.session.user = { id: 1, user: user, userEmail, userID};
       res.redirect('/profile');
     } else {
@@ -158,7 +156,6 @@ router.post("/profile/delete", async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-  cookie.deleteCookie(res, 'username');
   req.session.destroy((err) => {
     if (err) {
       console.error(err);
