@@ -8,6 +8,7 @@ const PORT = process.env.MONGO_PORT || 27017;
 const routes = require('./Routes/Routes');
 const Session = require('express-session');
 const cookieParser = require('cookie-parser');
+const crypto = require('crypto');
 
 // Middleware for parsing JSON bodies
 app.use(express.json());
@@ -29,10 +30,19 @@ require("./db");
 // Define the salt rounds for bcrypt from the .env file
 const BCRYPT_SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS) || 10;
 
+//function to generate a random key
+function generateRandomKey(length) {
+  return crypto.randomBytes(Math.ceil(length / 2))
+  .toString('hex') // convert to hexadecimal format
+  .slice(0, length); // return required number of characters
+}
+
+const secretKey = generateRandomKey(32); // Generate a 32-character key
+console.log(secretKey)
 // this creates a 1 hour cookie session - connect.sid
 app.use(
   Session({
-    secret: 'your-secret-key', // Replace with a secure random string
+    secret: new Date().toISOString(), // Replace with a secure random string
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 3600000 }, // Session duration in milliseconds (e.g., 1 hour)
@@ -40,7 +50,7 @@ app.use(
 )
 
 app.use((req, res, next) => {
-  res.locals.userLoggedIn = req.session.user ? true : false;
+  res.locals.userLoggedIn = req.session.user !== "";
   next();
 });
 

@@ -1,6 +1,12 @@
-// Date is the time in milliseconds
-let today = new Date();
-let expiry = new Date(today.getTime() + 30 * 24 * 3600 * 1000); // plus 30 days - days, hours, seconds/minutes, milliseconds
+
+function setCookie(res, cookieName, cookieValue, expiryDays) {
+  const expiryDate = new Date(Date.now() + expiryDays * 24 * 60 * 60 * 1000);
+  res.cookie(cookieName, cookieValue, {
+    expires: expiryDate,
+    path: '/',
+  });
+}
+
 
 function setCookie(cookieName, cookieValue, expiryDays) {
   today.setTime(today.getTime() + (expiryDays * 24 * 60 * 60 * 1000));
