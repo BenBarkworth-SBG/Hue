@@ -47,15 +47,24 @@
 
             const jsonBody = JSON.stringify(body);
             
-            fetch("/users", {method: "POST",
-                             headers: {"Content-Type": "application/json"},
-                             body: `${jsonBody}`
-                            }).then(res => console.log(res))
-            // prevent routing to other page or refresh
+            fetch("/users", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: `${jsonBody}`,
+            })
+            .then((res) => {
+                if (res.ok) {
+                    // redirect to profile page
+                    window.location.href = res.url;
+                } else {
+                    console.log("Registration failed");
+                }
+            })
+            .catch((err) => console.error(err));
             e.preventDefault();
             return false;
         }
-    </script>
+        </script>
     <script src="/js/hamburger.js"></script>
 
 </body>

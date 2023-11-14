@@ -2,7 +2,6 @@ function setCookie(res, cookieName, cookieValue, expiryDays) {
   const expiryDate = new Date(Date.now() + expiryDays * 24 * 60 * 60 * 1000);
   res.cookie(cookieName, cookieValue, {
     expires: expiryDate,
-    httpOnly: true,
     path: '/',
   });
 }

@@ -81,6 +81,7 @@ router.post('/palette', async (req, res) => {
     res.send(req.body)
   } 
   catch (error) {
+    console.log(error)
     return res.status(400).json({error: error.message});
   }
 });
@@ -112,9 +113,23 @@ router.post('/users', async (req, res) => {
   try {
     const {user, email, pass, favourites} = req.body;
     const hashedPassword = await bcrypt.hash(pass, 10); // Hash the password
-    dataController.insertUser({user, email, pass: hashedPassword, favourites}); // Store the hashed password
-    res.render('profile', { user : req.session.user, userEmail, userId});
+    let userID = await dataController.insertUser({user, email, pass: hashedPassword, favourites}); // Store the hashed password
+    console.log(req.body)
+
+    let username;
+    if (typeof user == 'string') {
+      username = user;
+    } else {
+      username = req.session.user;
+    }
+    console.log(username)
+    //let userID = userDocument._id
+    cookie.setCookie(res, 'username', username, 30); //sets the cookie to have an expiration of 30 days
+    req.session.user = { id: 1, user: username, email, userID};
+    //res.render('profile', { user : username, email, userID});
+    res.redirect('/profile')
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -134,7 +149,8 @@ router.get('/profile', (req, res) => {
 router.post("/profile/delete", async (req, res) => {
   try {
     const deletedUser = await dataController.deleteUser(req.session.user.userID);
-     return res.redirect("/login");
+    cookie.deleteCookie(res, 'username');
+    res.redirect("login");
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
