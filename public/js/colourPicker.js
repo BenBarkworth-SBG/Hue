@@ -33,6 +33,21 @@ function rgbToHex(r, g, b) {
     return "#" + componentToHex(red) + componentToHex(green) + componentToHex(blue);
   }
 
+function hexToRgb(hex) {
+  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+  // let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  // hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+  //   return r + r + g + g + b + b;
+  // });
+
+  let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  let r = parseInt(result[1], 16)
+  let g = parseInt(result[2], 16)
+  let b = parseInt(result[3], 16)
+  rgbList= [r,g,b]
+  return rgbList
+}
+
 function rgbToCmyk (r,g,b) {
   let c = 0;
   let m = 0;
@@ -57,8 +72,8 @@ function rgbToCmyk (r,g,b) {
   
   // BLACK
   if (redNum==0 && greenNum==0 && blueNum==0) {
-    k = 1;
-    return [0,0,0,1];
+    k = 100;
+    return [0,0,0,100];
   }
   
   c = 1 - (redNum/255);
@@ -75,10 +90,8 @@ function rgbToCmyk (r,g,b) {
   cmykList = [c,m,y,k]
 
   for (let i = 0; i < cmykList.length; i++) {
-    cmykList[i] = cmykList[i].toFixed(1)
-    if (cmykList[i] == "0.0") {
-      cmykList[i] = "0"
-    }
+    cmykList[i] = cmykList[i] * 100
+    cmykList[i] = Math.round(cmykList[i])
   }
   return cmykList;
 }
@@ -142,11 +155,27 @@ function generatePalettes() {
       element.style.width = "20%"
       element.style.height = "100px"
       element.className = 'swatch';
+      let hexConversion = hexToRgb(color);
+      let rgbConversion = rgbToCmyk(hexConversion[0], hexConversion[1], hexConversion[2])
+      let blackValue = rgbConversion[3]
+      element.addEventListener("mouseenter", function(){
+        // this applies CSS class to div innerHTML
+        if (blackValue > 80) {
+          element.innerHTML = `<p class="lightColours"> ${element.value}</p>`
+        }
+        else {
+          element.innerHTML = `<p class="darkColours"> ${element.value}</p>`
+        }
+      })
+      element.addEventListener("mouseleave", function(){
+        element.innerHTML = ''
+      })
       containerChosen = String(checkboxArray[i] + "Container")
       // applies append child method to the palette container specified by the user
       window[containerChosen].appendChild(element);
     });
   }
+  alert("Hover over the colours to see the corresponding hex code.")
 }
 
 // function to disable or enable checkboxes
@@ -402,6 +431,20 @@ function generateRandomPalette() {
     document.getElementById('green').value = randomGreen;
     document.getElementById('blue').value = randomBlue;
 
-    // colors();
+    let paletteChosen;
+    if (checkboxSet.size < 1) {
+      // list of palettes
+      const paletteList = ["monochromatic", "complementary", "analogous", "split"]
+      // random num to iterate through list
+      let randomNum = Math.floor(Math.random() * 4)
+      paletteChosen = paletteList[randomNum]
+      // add to checkbox set to be consistent
+      checkboxSet.add(paletteChosen)
+      let randomCheckbox = String(paletteChosen + "Checkbox")
+      // applies checked method to the palette checkbox
+      window[randomCheckbox].checked = true;
+      // enables palette generator button
+      paletteGeneratorBtn.disabled = false;
+    }
     generatePalettes();
 }
