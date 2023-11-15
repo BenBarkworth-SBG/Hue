@@ -4,6 +4,7 @@ const dataController = require('../controllers/controllers');
 const db = require('../db');
 const bcrypt = require('bcrypt'); 
 const { error } = require('console');
+const cookie = require('../public/js/cookie');
 
 //render the register page
 router.get('/register', (req, res) => {    
