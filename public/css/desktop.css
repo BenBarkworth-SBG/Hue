@@ -135,6 +135,14 @@ span {
     border-right: solid #ebf1fd 5px;
 } */
 
+.darkColours {
+    line-height: 60px;
+}
+
+.lightColours {
+    line-height: 60px;
+    color: white;
+}
 
 .pbody {
     display: flex;
