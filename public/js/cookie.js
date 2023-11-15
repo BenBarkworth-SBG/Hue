@@ -7,19 +7,6 @@ function setCookie(res, cookieName, cookieValue, expiryDays) {
   });
 }
 
-
-function setCookie(cookieName, cookieValue, expiryDays) {
-  today.setTime(today.getTime() + (expiryDays * 24 * 60 * 60 * 1000));
-  let expires = "expires="+today.toUTCString();
-  document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
-}
-
-// this should set the Username cookie to the username value from the form
-function createCookie(form){          
- console.log("cookies working")
- setCookie("username", form[0].user.value, expiry);
-  return true;
-}
 // combine the two above together?
 
 function deleteCookie(){
@@ -52,3 +39,5 @@ function checkCookie() {
   }
   return user
 }
+
+module.exports = {setCookie, deleteCookie, getCookie, checkCookie}
