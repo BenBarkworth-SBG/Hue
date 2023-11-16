@@ -15,8 +15,9 @@ document.getElementById("complementary").style.display = "none";
 document.getElementById("analogous").style.display = "none";
 document.getElementById("split").style.display = "none";
 // generate palette button
-paletteGeneratorBtn = document.getElementById("paletteGenBtn")
-checkboxSet = new Set();
+let paletteGeneratorBtn = document.getElementById("paletteGenBtn")
+let checkboxSet = new Set();
+let hoverAlertNum = 0
 
 
 function componentToHex(c) {
@@ -41,6 +42,7 @@ function hexToRgb(hex) {
   // });
 
   let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  console.log(result)
   let r = parseInt(result[1], 16)
   let g = parseInt(result[2], 16)
   let b = parseInt(result[3], 16)
@@ -175,7 +177,10 @@ function generatePalettes() {
       window[containerChosen].appendChild(element);
     });
   }
-  alert("Hover over the colours to see the corresponding hex code.")
+  if (hoverAlertNum < 1) {
+    alert("Hover over the colours to see the corresponding hex code.")
+  }
+  hoverAlertNum += 1
 }
 
 // function to disable or enable checkboxes
