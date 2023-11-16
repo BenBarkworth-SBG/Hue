@@ -134,16 +134,28 @@ router.post('/users', async (req, res) => {
 });
 
 
-router.get('/profile', (req, res) => {
+// router.get('/profile', (req, res) => {
+//   if (req.session.user) {
+//     const userId = req.session.user.id; // Assuming user ID is stored in the 'id' property
+//     const userEmail = req.session.user.email; // Assuming user email is stored in the 'email' property
+//     const user = req.session.user.user;
+//     res.render('profile', { user : req.session.user, userEmail, userId});
+//   } else {
+//     res.redirect('login');
+//   }
+// });
+
+router.get('/profile', async (req, res) => {
   if (req.session.user) {
     const userId = req.session.user.id; // Assuming user ID is stored in the 'id' property
     const userEmail = req.session.user.email; // Assuming user email is stored in the 'email' property
     const user = req.session.user.user;
-    res.render('profile', { user : req.session.user, userEmail, userId});
+    const favouritePalettes = await dataController.getUserFavourites({user: user})
+    res.render('profile', { user : req.session.user, userEmail, userId, favouritePalettes});
   } else {
     res.redirect('login');
   }
-});
+})
 
 router.post("/profile/delete", async (req, res) => {
   try {
