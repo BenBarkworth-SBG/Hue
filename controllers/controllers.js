@@ -62,6 +62,31 @@ async function getAllPalettesData() {
   }
 }
 
+// function to get palette by paletteId
+async function getPaletteById(paletteId) {
+  try {
+    const getPalette = await palette.findById(paletteId);
+    return getPalette
+  } catch (error) {
+    console.error('Error retrieving data:', error);
+    return({ error: 'Failed to retrieve data' });
+  }
+}
+
+//function to retrieve userFavourites
+async function getUserFavourites(user) {
+  try {
+    const userFavourites = await userInfo.findOne(user);
+    const getFavouritePalettes = await getPaletteById(userFavourites.favourites[0].paletteId)
+    console.log(getFavouritePalettes)
+    return getFavouritePalettes
+  } catch (error) {
+    console.error('Error retrieving data:', error);
+    return({ error: 'Failed to retrieve data' });
+  }
+}
+
+getUserFavourites({user: "matt"})
 // function to create user into database
 async function insertUser(data) {
   try {
@@ -132,5 +157,6 @@ module.exports = {
   getUserById,
   deleteUser,
   getUserByUsername,
-  logout
+  logout,
+  getUserFavourites
 };
