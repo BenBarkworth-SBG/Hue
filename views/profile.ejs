@@ -117,6 +117,7 @@
             <br><br>
 
             <input type="submit" value="View Palettes">
+            <% if (favouritePalettes && favouritePalettes.hexCodes && favouritePalettes.hexCodes.length > 0) { %>
             <div class="testcontainer">
                     <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test1" style= 'background-color: <%= favouritePalettes.hexCodes[0] %>;'></div>
                     <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test2" style= 'background-color: <%= favouritePalettes.hexCodes[1] %>;'></div>
@@ -124,6 +125,9 @@
                     <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test4" style= 'background-color: <%= favouritePalettes.hexCodes[3] %>;'></div>
                     <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test5" style= 'background-color: <%= favouritePalettes.hexCodes[4] %>;'></div>
             </div>
+            <% } else { %>
+                <p>You have no saved palettes.</p>
+            <% } %>
             <button onclick="deleteUserPalettes()">Delete all palettes</button>
         
             
@@ -133,11 +137,6 @@
     </div>
     <script src="/js/hamburger.js"></script>
     <script> 
-    let hexCode1 = '<%= favouritePalettes.hexCodes[0] %>';
-    let hexCode2 = '<%= favouritePalettes.hexCodes[1] %>';
-    let hexCode3 = '<%= favouritePalettes.hexCodes[2] %>';
-    let hexCode4 = '<%= favouritePalettes.hexCodes[3] %>';
-    let hexCode5 = '<%= favouritePalettes.hexCodes[4] %>';
 
     function showFileInput() {
         var fileInput = document.getElementById('profilePictureInput');
