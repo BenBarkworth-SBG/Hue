@@ -38,6 +38,16 @@
                     <span id ="cwykOutput">cmyk(0,0,0,1)</span>
                 </div>
 
+                <!-- user input-->
+                <div class="userInputContainer">
+                    <label for="hex"><b>Hex Code</b></label>
+                    <input type="text" id="userHexCode" placeholder="Enter Hex Code: #009aFF" name="hex">
+            
+                    <label for="rgb"><b>RGB</b></label>
+                    <input type="text" id="userRgb" placeholder="Enter RGB: (0,125,255)" name="rgb">
+                    <button type="submit" class="userInput" id= "userInput" onclick="userInput()">Submit</button>
+                </div>
+
                 <!-- checkboxes -->
                 <div class="checkbox-group">
                     <label class="lbl"><input class="i" type="checkbox" id="monochromaticCheckbox" value="monochromatic" oninput="checkboxChecker(this)"> Monochromatic</label>
@@ -82,6 +92,7 @@
     </div>
     <script src="/js/colourPicker.js"></script>
     <script src="/js/savePalette.js"></script>
+    <script src="/js/userInput.js"></script>
     <script src="/js/hamburger.js"></script>
 
 </body>
