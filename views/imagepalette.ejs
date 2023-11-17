@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/cookie.js"></script>
+    <script> checkCookie()</script>
+    <title>Palette Picker</title>
+    <link rel="stylesheet" href="/css/desktop.css">
+    <link rel="icon" type="image/x-icon" href="/images/favicon_logo.png">
+</head>
+
+<body>
+    <!-- nav bar -->
+    <%- include ('navbarlogged'); %>
+
+<div class="container2">
+    <div class="imagepage">
+
+        <input type="file" id="upload" accept="image/*">
+        <div id="image-container">
+            <img id="preview" alt="Preview Image" onclick="handleImageClick()">
+            <div id="color-preview">
+                <div id="color-box"></div>
+                <div id="hex-code"></div>
+            </div>
+            <div id="outside-preview">
+                <div id="img-color-preview"></div>
+                <div id="hex-code2"></div>
+            </div>
+            <div>
+                <label class="lbl"><input class="i" type="checkbox" id="monochromaticCheckbox" value="monochromatic"
+                        oninput="checkboxChecker(this)"> Monochromatic</label>
+                <label class="lbl"><input class="i" type="checkbox" id="complementaryCheckbox" value="complementary"
+                        oninput="checkboxChecker(this)"> Complementary</label>
+                <label class="lbl"><input class="i" type="checkbox" id="analogousCheckbox" value="analogous"
+                        oninput="checkboxChecker(this)"> Analogous</label>
+                <label class="lbl"><input class="i" type="checkbox" id="splitCheckbox" value="split" oninput="checkboxChecker(this)">
+                    Split</label>
+            </div>
+                <button class="paletteGenBtn" id="paletteGenBtn" disabled onclick="generatePalettes2()">Generate Palette</button>
+
+            <div id="color-palette"></div>
+            <div id="analogous-palette"></div>
+            <div id="complimentary-palette"></div>
+            <div id="split-complimentary-palette"></div>
+        </div> 
+    </div>
+        <div class="divPaletteContainer2">
+            <div class="monochromatic">
+                <h2 class="paletteh2">Monochromatic</h2>
+                <div class="monochromaticContainer2" id="monochromaticContainer">
+                </div>
+                <button class="savePaletteBtn" id="monochromatic" onclick="savePalette(this)">Save
+                    Palette</button>
+            </div>
+            <div class="complementary">
+                <h2 class="paletteh2">Complementary</h2>
+                <div class="complementaryContainer2" id="complementaryContainer">
+                </div>
+                <button class="savePaletteBtn" id="complementary" onclick="savePalette(this)">Save
+                    Palette</button>
+            </div>
+            <div class="analogous">
+                <h2 class="paletteh2">Analogous</h2>
+                <div class="analogousContainer2" id="analogousContainer">
+                </div>
+                <button class="savePaletteBtn" id="analogous" onclick="savePalette(this)">Save Palette</button>
+            </div>
+            <div class="random">
+                <h2 class="paletteh2">Split</h2>
+                <div class="splitContainer2" id="splitContainer">
+                </div>
+                <button class="savePaletteBtn" id="split" onclick="savePalette(this)">Save Palette</button>
+            </div>
+        </div>
+</div>
+        
+        <!-- <script src="/js/imagepicker.js"></script>  -->
+        <script src="/js/colourPicker.js"></script>
+        <script src="/js/savePalette.js"></script>
+        <script src="/js/hamburger.js"></script>
+
+</body>
+<%- include ('footer'); %>
+
+</html>

@@ -1006,6 +1006,94 @@ a {
     padding: 0;
     margin: 0; }
 
+
+    /* image page */
+    .container2{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        text-align: center;
+        margin: 0px 20px 0px 20px;
+    }
+
+        .monochromaticContainer2,
+        .complementaryContainer2,
+        .analogousContainer2,
+        .splitContainer2 {
+            border: solid 20px #ebf1fd;
+            border-radius: 20px;
+            display: flex;
+        }
+
+        .monochromaticContainer2,
+        .complementaryContainer2,
+        .analogousContainer2,
+        .splitContainer2 > h2{
+            text-align: center;
+        }
+
+        .divPaletteContainer {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+    .imagepage {
+        border: solid 20px #ebf1fd;
+        border-radius: 20px;
+        padding: 2.5% 0 0 0;
+        margin-right: 5%;
+    }
+
+    #preview{
+        margin-top: 20px;
+    }
+
+         #image-container {
+             position: relative;
+             display: inline-block;
+         }
+    
+         #color-preview {
+             position: absolute;
+             bottom: 0;
+             left: 0;
+             padding: 10px;
+             background-color: rgba(255, 255, 255, 0.8);
+             border-radius: 8px;
+             display: none;
+             width: 60px;
+             height: 60px;
+             /* Fixed height */
+         }
+    
+         #img-color-preview {
+             display: inline-block;
+             margin-left: 10px;
+             width: 40px;
+             height: 40px;
+             border-radius: 10px;
+         }
+    
+         .imagepage > img {
+             border-radius: 8px;
+             cursor: pointer;
+
+         }
+    
+         #color-box {
+             width: 40px;
+             height: 40px;
+             border-radius: 10px;
+             margin-right: 10px;
+         }
+    
+         #hex-code {
+             font-family: monospace;
+             min-width: 70px;
+         }
+
 #test1, #test2, #test3, #test4, #test5 {
     height: 200px;
     width: 20%;
@@ -1014,3 +1102,4 @@ a {
 .testcontainer {
     display: flex;
 }
+
