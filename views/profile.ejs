@@ -117,6 +117,17 @@
             <br><br>
 
             <input type="submit" value="View Palettes">
+            <% if (favouritePalettes && favouritePalettes.hexCodes && favouritePalettes.hexCodes.length > 0) { %>
+            <div class="testcontainer">
+                    <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test1" style= 'background-color: <%= favouritePalettes.hexCodes[0] %>;'></div>
+                    <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test2" style= 'background-color: <%= favouritePalettes.hexCodes[1] %>;'></div>
+                    <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test3" style= 'background-color: <%= favouritePalettes.hexCodes[2] %>;'></div>
+                    <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test4" style= 'background-color: <%= favouritePalettes.hexCodes[3] %>;'></div>
+                    <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test5" style= 'background-color: <%= favouritePalettes.hexCodes[4] %>;'></div>
+            </div>
+            <% } else { %>
+                <p>You have no saved palettes.</p>
+            <% } %>
             <button onclick="deleteUserPalettes()">Delete all palettes</button>
         
             
@@ -126,6 +137,7 @@
     </div>
     <script src="/js/hamburger.js"></script>
     <script> 
+
     function showFileInput() {
         var fileInput = document.getElementById('profilePictureInput');
         fileInput.click(); // Simulate a click on the file input element
