@@ -148,7 +148,7 @@ router.post('/users', async (req, res) => {
 router.get('/profile', async (req, res) => {
   if (req.session.user) {
     const userId = req.session.user.id; // Assuming user ID is stored in the 'id' property
-    const userEmail = req.session.user.email; // Assuming user email is stored in the 'email' property
+    const userEmail = req.session.user.userEmail; // Assuming user email is stored in the 'email' property
     const user = req.session.user.user;
     const favouritePalettes = await dataController.getUserFavourites({user: user})
     res.render('profile', { user : req.session.user, userEmail, userId, favouritePalettes});
