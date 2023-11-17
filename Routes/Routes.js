@@ -16,6 +16,11 @@ router.get('/login', (req, res) => {
   res.render("login");
 });
 
+//render the image page
+router.get('/imagepalette', (req, res) => {    
+  res.render("imagepalette");
+});
+
 //render the palette page
 router.get('/palette', async (req, res) => {    
   // if (req.session.user) {

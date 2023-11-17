@@ -19,6 +19,164 @@ let paletteGeneratorBtn = document.getElementById("paletteGenBtn")
 let checkboxSet = new Set();
 let hoverAlertNum = 0
 
+//image page changes 
+  const uploadInput = document.getElementById('upload');
+    const previewImage = document.getElementById('preview');
+    const colorPreview = document.getElementById('color-preview');
+    const imgColorPreview = document.getElementById('img-color-preview');
+    const colorBox = document.getElementById('color-box');
+    const hexCode = document.getElementById('hex-code');
+    const hexCode2 = document.getElementById('hex-code2');  
+
+    uploadInput.addEventListener('change', handleImageUpload);
+    previewImage.addEventListener('mousemove', handleImageHover);
+    previewImage.addEventListener('mouseleave', hideColorPreview);
+
+    function handleImageUpload(event) {
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                previewImage.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+
+    let clickedColor = null;
+
+    function handleImageClick() {
+        const baseColor = colorBox.style.backgroundColor;
+        imgColorPreview.style.backgroundColor = baseColor;
+        imgColorPreview.style.display = 'inline-block';
+
+        // Store the clicked color and hex value
+        clickedColor = {
+            color: baseColor,
+            hex: rgbToHex(
+                parseInt(baseColor.slice(4, 7)),
+                parseInt(baseColor.slice(9, 12)),
+                parseInt(baseColor.slice(14, 17))
+            )
+        };
+
+        // Display the hex code outside the image for the clicked color
+        const hexCodeElement2 = document.getElementById('hex-code2');
+        hexCodeElement2.innerText = clickedColor.hex;
+        hexCodeElement2.style.left = '70px';
+    }
+
+    function handleImageHover(event) {
+        // Check if the user has clicked, if yes, do not update hex code outside the image
+        if (!clickedColor) {
+            const x = event.layerX;
+            const y = event.layerY;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = previewImage.width;
+            canvas.height = previewImage.height;
+
+            const context = canvas.getContext('2d');
+            context.drawImage(previewImage, 0, 0, previewImage.width, previewImage.height);
+
+            const pixel = context.getImageData(x, y, 1, 1).data;
+            const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+            const hex = rgbToHex(pixel[0], pixel[1], pixel[2]);
+
+            colorBox.style.backgroundColor = color;
+
+            // Display the hex code inside the color preview
+            const hexCodeElement = document.getElementById('hex-code');
+            hexCodeElement.innerText = hex;
+
+            colorPreview.style.display = 'block';
+            colorPreview.style.left = x + 'px';
+            colorPreview.style.top = y + 'px';
+            return clickedColor;
+        }
+    }
+  
+    function hideColorPreview() {
+        colorPreview.style.display = 'none';
+    }
+
+    function generatePalettes2() {
+  let value = clickedColor.hex;
+  let checkboxArray = Array.from(checkboxSet)
+  let palettes;
+  // let element = document.getElementsByClassName("swatch")
+
+  for (let i = 0; i < checkboxArray.length; i++) {
+    if (checkboxArray[i] == "monochromatic") {
+      // monochromaticContainer.style.backgroundColor = "";
+      palettes = generateMonochromePalette(value)
+      monochromaticContainer.innerHTML = '';
+    
+      document.getElementById("monochromatic").style.display = "inline-block";
+    }
+    if (checkboxArray[i] == "complementary") {
+      const complementaryColor = getComplementaryColor(value);
+      palettes = generateComplementaryPalette(value, complementaryColor);
+      complementaryContainer.innerHTML = '';
+      document.getElementById("complementary").style.display = "inline-block";
+    }
+    if (checkboxArray[i] == "analogous") {
+      palettes = generateAnalogousPalette(value)
+      analogousContainer.innerHTML = '';
+      document.getElementById("analogous").style.display = "inline-block";
+    }
+    if (checkboxArray[i] == "split") {
+      const complementaryColor = getComplementaryColor(value);
+      palettes = generateSplitComplementaryPalette(value, complementaryColor)
+      splitContainer.innerHTML = '';
+      document.getElementById("split").style.display = "inline-block";
+    }
+  //   for (let i = 0; i < palettes.length; i++) {
+  //     console.log(element)
+  //     console.log(palettes[i])
+  //     element[i].style.backgroundColor = palettes[i]
+  // }
+
+    palettes.forEach(color => {
+      const element = document.createElement('div');
+      element.style.backgroundColor = color;
+      element.value = color
+      element.style.width = "20%"
+      element.style.height = "100px"
+      element.className = 'swatch';
+      let hexConversion = hexToRgb(color);
+      let rgbConversion = rgbToCmyk(hexConversion[0], hexConversion[1], hexConversion[2])
+      let blackValue = rgbConversion[3]
+      element.addEventListener("mouseenter", function(){
+        // this applies CSS class to div innerHTML
+        if (blackValue > 80) {
+          element.innerHTML = `<p class="lightColours"> ${element.value}</p>`
+        }
+        else {
+          element.innerHTML = `<p class="darkColours"> ${element.value}</p>`
+        }
+      })
+      element.addEventListener("mouseleave", function(){
+        element.innerHTML = ''
+      })
+      containerChosen = String(checkboxArray[i] + "Container")
+      // applies append child method to the palette container specified by the user
+      window[containerChosen].appendChild(element);
+    });
+  }
+  if (hoverAlertNum < 1) {
+    alert("Hover over the colours to see the corresponding hex code.")
+  }
+  hoverAlertNum += 1
+}
+
+
+
+// end of image page changes
+
 
 function componentToHex(c) {
     // converts number to a string using base 16
@@ -114,7 +272,7 @@ function colors(){
 }
 
 function generatePalettes() {
-  const value = colors()
+  let value = colors();
   let checkboxArray = Array.from(checkboxSet)
   let palettes;
   // let element = document.getElementsByClassName("swatch")
