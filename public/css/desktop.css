@@ -159,10 +159,11 @@ span {
     box-shadow: 0 2.5px 2.5px rgba(37,37,37,0.95);
 }
 
-.paletteGenBtn, .resetBtn, .generateRandomBtn, .userInput, input::-webkit-file-upload-button {
+.paletteGenBtn, .resetBtn, .generateRandomBtn, .userInput, .dltpalette, input::-webkit-file-upload-button, input[type=submit] {
     background-color: #ebf1fd;
     border: 10px #ebf1fd;
     border-radius: 8px;
+    
     margin: 0 1% 5% 0;
     padding: 1.5%;
     box-shadow: 0 2.5px 2.5px rgba(37,37,37,0.95);
@@ -173,7 +174,7 @@ span {
     transform: translateY(4px);
   }
 
-.monochromaticContainer, .complementaryContainer, .analogousContainer, .splitContainer {
+.monochromaticContainer, .complementaryContainer, .analogousContainer, .splitContainer, .testcontainer {
     border: solid 20px #ebf1fd;
     border-radius: 20px;
     display: flex;
