@@ -26,11 +26,11 @@ let hoverAlertNum = 0
     const imgColorPreview = document.getElementById('img-color-preview');
     const colorBox = document.getElementById('color-box');
     const hexCode = document.getElementById('hex-code');
-    const hexCode2 = document.getElementById('hex-code2');  
-
+    const hexCodeOutside = document.getElementById('hex-code-outside');
     uploadInput.addEventListener('change', handleImageUpload);
     previewImage.addEventListener('mousemove', handleImageHover);
     previewImage.addEventListener('mouseleave', hideColorPreview);
+    imgColorPreview.addEventListener('click', handleImageClick);
 
     function handleImageUpload(event) {
         const file = event.target.files[0];
@@ -46,65 +46,71 @@ let hoverAlertNum = 0
         }
     }
 
-    let clickedColor = null;
+function handleImageHover(event) {
+    const x = event.layerX;
+    const y = event.layerY;
 
-    function handleImageClick() {
-        const baseColor = colorBox.style.backgroundColor;
-        imgColorPreview.style.backgroundColor = baseColor;
-        imgColorPreview.style.display = 'inline-block';
+    const canvas = document.createElement('canvas');
+    canvas.width = previewImage.width;
+    canvas.height = previewImage.height;
 
-        // Store the clicked color and hex value
-        clickedColor = {
-            color: baseColor,
-            hex: rgbToHex(
-                parseInt(baseColor.slice(4, 7)),
-                parseInt(baseColor.slice(9, 12)),
-                parseInt(baseColor.slice(14, 17))
-            )
-        };
+    const context = canvas.getContext('2d');
+    context.drawImage(previewImage, 0, 0, previewImage.width, previewImage.height);
 
-        // Display the hex code outside the image for the clicked color
-        const hexCodeElement2 = document.getElementById('hex-code2');
-        hexCodeElement2.innerText = clickedColor.hex;
-        hexCodeElement2.style.left = '70px';
-    }
+    const pixel = context.getImageData(x, y, 1, 1).data;
+    const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+    const hex = rgbToHex(pixel[0], pixel[1], pixel[2]);
 
-    function handleImageHover(event) {
-        // Check if the user has clicked, if yes, do not update hex code outside the image
-        if (!clickedColor) {
-            const x = event.layerX;
-            const y = event.layerY;
+    colorBox.style.backgroundColor = color;
 
-            const canvas = document.createElement('canvas');
-            canvas.width = previewImage.width;
-            canvas.height = previewImage.height;
+    // Display the hex code inside the color preview
+    hexCode.innerText = hex;
 
-            const context = canvas.getContext('2d');
-            context.drawImage(previewImage, 0, 0, previewImage.width, previewImage.height);
+    colorPreview.style.display = 'block';
+    colorPreview.style.left = x + 'px';
+    colorPreview.style.top = y + 'px';
+}
 
-            const pixel = context.getImageData(x, y, 1, 1).data;
-            const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
-            const hex = rgbToHex(pixel[0], pixel[1], pixel[2]);
 
-            colorBox.style.backgroundColor = color;
-
-            // Display the hex code inside the color preview
-            const hexCodeElement = document.getElementById('hex-code');
-            hexCodeElement.innerText = hex;
-
-            colorPreview.style.display = 'block';
-            colorPreview.style.left = x + 'px';
-            colorPreview.style.top = y + 'px';
-            return clickedColor;
-        }
-    }
-  
     function hideColorPreview() {
         colorPreview.style.display = 'none';
     }
 
+function handleImageClick() {
+    const baseColor = colorBox.style.backgroundColor;
+    imgColorPreview.style.backgroundColor = baseColor;
+    imgColorPreview.style.display = 'inline-block';
+
+    // Set the hex code outside to the same value as hex code
+    hexCodeOutside.innerText = hexCode.innerText;
+    hexCodeOutside.style.display = 'inline-block';
+}
+
+
+    // function rgbToHexOutside(rgb) {
+    //     const invertedColor = invertColor(rgb);
+    //     return rgbToHex(
+    //         parseInt(invertedColor.slice(4, 7)),
+    //         parseInt(invertedColor.slice(9, 12)),
+    //         parseInt(invertedColor.slice(14, 17))
+    //     );
+    // }
+
+    // function invertColor(color) {
+    //     return `rgb(${255 - parseInt(color.slice(4, 7))}, ${255 - parseInt(color.slice(9, 12))}, ${255 - parseInt(color.slice(14, 17))})`;
+    // }
+
+    // function rgbToHex(r, g, b) {
+    //     return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    // }
+
+    // function componentToHex(c) {
+    //     const hex = c.toString(16);
+    //     return hex.length === 1 ? '0' + hex : hex;
+    // }
+
     function generatePalettes2() {
-  let value = clickedColor.hex;
+  let value = hexCodeOutside.innerText;
   let checkboxArray = Array.from(checkboxSet)
   let palettes;
   // let element = document.getElementsByClassName("swatch")
