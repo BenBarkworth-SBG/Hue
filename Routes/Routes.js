@@ -4,6 +4,7 @@ const dataController = require('../controllers/controllers');
 const db = require('../db');
 const bcrypt = require('bcrypt'); 
 const { error } = require('console');
+const loginController = require('../controllers/loginController');
 
 //render the register page
 router.get('/register', (req, res) => {    
@@ -92,30 +93,8 @@ router.post('/palette', async (req, res) => {
   }
 });
 
-// get username and compare with db
-router.post('/login', async (req,res) => {
-  try {
-    const {user, pass} = req.body
-    const checkUser = await dataController.getUserByUsername({user: user});
-    const hashInDb = checkUser.pass;
-    bcrypt.compare(pass, hashInDb, function (err, result) {
-    if (result) {
-      let userID = checkUser._id;
-      let userEmail = checkUser.email;
-      req.session.user = user;
-      req.session.authorised = true;
-      req.session.email = userEmail
-      req.session.userid = userID
-      res.redirect('/profile');
-    } else {
-      res.send("error: invalid username or password");
-      res.redirect('/login')
-    }
-  });
-  } catch (error) {
-    res.status(500).json({error: error.message});
-  }
-})
+router.post ('/login', loginController);
+
   //writes to DB after request from frontend
 router.post('/users', async (req, res) => {    
   try {
