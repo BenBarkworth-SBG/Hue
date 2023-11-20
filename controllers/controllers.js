@@ -1,11 +1,10 @@
-const { ObjectId } = require('mongodb');
 const { db } = require('../db');
 const coloursCollection = db.collection('Colours');
 const usersCollection = db.collection('Users');
 const userInfo = require('../models/user');
 const palette = require('../models/palette');
 
-// Function to get all colours data from DB
+// get all colours data from DB
 async function getAllColoursData() {
   try {
     const colours = await coloursCollection.find().toArray();
@@ -16,7 +15,7 @@ async function getAllColoursData() {
   }
 }
 
-//Function to get all user data
+// get all user data
 async function getAllUserData() {
   try {
     const users = await usersCollection.find().toArray();
@@ -27,7 +26,7 @@ async function getAllUserData() {
   }
 }
 
-// function to getuserbyid
+// get user from objectId
 async function getUserById(id) {
   try {
     const user = await userInfo.findById(id);
@@ -39,11 +38,10 @@ async function getUserById(id) {
   }
 }
 
-// Function to insert a palette into DB
+// insert palette into DB
 async function insertPalette(data) {
   try {
     const paletteDocument = await palette.create(data);
-    // console.log(paletteDocument._id)
     return paletteDocument;
   } 
   catch (error) {
@@ -52,6 +50,7 @@ async function insertPalette(data) {
   }
 }
 
+// get all palettes
 async function getAllPalettesData() {
   try {
     const allPalettes = await palette.find();
@@ -62,7 +61,7 @@ async function getAllPalettesData() {
   }
 }
 
-// function to get palette by paletteId
+// get palette by paletteId
 async function getPaletteById(paletteId) {
   try {
     const getPalette = await palette.findById(paletteId);
@@ -73,12 +72,11 @@ async function getPaletteById(paletteId) {
   }
 }
 
-//function to retrieve userFavourites
+// get user favourites
 async function getUserFavourites(user) {
   try {
     const userFavourites = await userInfo.findOne(user);
     const getFavouritePalettes = await getPaletteById(userFavourites.favourites[0].paletteId)
-    // console.log(getFavouritePalettes)
     return getFavouritePalettes
   } catch (error) {
     console.error('Error retrieving data:', error);
@@ -86,7 +84,7 @@ async function getUserFavourites(user) {
   }
 }
 
-// function to create user into database
+// create a user
 async function insertUser(data) {
   try {
     const userDocument = await userInfo.create(data);
@@ -97,7 +95,7 @@ async function insertUser(data) {
   }
 }
 
-// function to update users
+// update a user
 async function updateUser(id, data) {
   try {
     const updatedUser = await userInfo.findByIdAndUpdate(id, data, {
@@ -110,7 +108,7 @@ async function updateUser(id, data) {
   }
 }
 
-// function to delete a user
+// delete a user
 async function deleteUser(id) {
   try {
     const deletedUser = await userInfo.findByIdAndDelete(id);
@@ -122,7 +120,7 @@ async function deleteUser(id) {
   }
 }
 
-//function to get user by username
+// get user by username
 async function getUserByUsername(user) {
   try {
     const getUser = await userInfo.findOne(user);
@@ -133,19 +131,6 @@ async function getUserByUsername(user) {
   }
 }
 
-async function logout(userID) {
-  {
-    req.session.destroy((err) => {
-      if (err) {
-        console.error(err);
-      }
-      res.redirect('login');
-    });
-  }
-};
-
-
-// Export all functions below
 module.exports = {
   getAllColoursData,
   insertPalette,
@@ -156,6 +141,5 @@ module.exports = {
   getUserById,
   deleteUser,
   getUserByUsername,
-  logout,
   getUserFavourites
 };
