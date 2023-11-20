@@ -139,7 +139,7 @@ span {
     background: #84c4e1;
     color: #fff;
     padding: 2px 20px;
-    box-shadow: 0 0 20px rgba(0, 139, 253, 0.25);
+    /* box-shadow: 0 0 20px rgba(0, 139, 253, 0.25); */
     font-size: 18px;
     letter-spacing: 0.5px;
     border-radius: 2px;
@@ -159,7 +159,7 @@ span {
     box-shadow: 0 2.5px 2.5px rgba(37,37,37,0.95);
 }
 
-.paletteGenBtn, .resetBtn, .generateRandomBtn, .userInput {
+.paletteGenBtn, .resetBtn, .generateRandomBtn, .userInput, input::-webkit-file-upload-button {
     background-color: #ebf1fd;
     border: 10px #ebf1fd;
     border-radius: 8px;
@@ -1008,91 +1008,104 @@ a {
 
 
     /* image page */
-    .container2{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-        text-align: center;
-        margin: 0px 20px 0px 20px;
-    }
+.container2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    margin: 0px 20px 0px 20px;
+}
 
-        .monochromaticContainer2,
-        .complementaryContainer2,
-        .analogousContainer2,
-        .splitContainer2 {
-            border: solid 20px #ebf1fd;
-            border-radius: 20px;
-            display: flex;
-        }
 
-        .monochromaticContainer2,
-        .complementaryContainer2,
-        .analogousContainer2,
-        .splitContainer2 > h2{
-            text-align: center;
-        }
+.monochromaticContainer2,
+.complementaryContainer2,
+.analogousContainer2,
+.splitContainer2 {
+    border: solid 20px #ebf1fd;
+    border-radius: 20px;
+    display: flex;
+}
 
-        .divPaletteContainer {
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+.monochromaticContainer2,
+.complementaryContainer2,
+.analogousContainer2,
+.splitContainer2 > h2{
+    text-align: center;
+}
 
-    .imagepage {
-        border: solid 20px #ebf1fd;
-        border-radius: 20px;
-        padding: 2.5% 0 0 0;
-        margin-right: 5%;
-    }
+.divPaletteContainer {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-    #preview{
-        margin-top: 20px;
-    }
+.imagepage {
+    border: solid 20px #ebf1fd;
+    border-radius: 20px;
+    padding: 2.5% 0 0 0;
+    margin-right: 5%;
+}
 
-         #image-container {
-             position: relative;
-             display: inline-block;
-         }
-    
-         #color-preview {
-             position: absolute;
-             bottom: 0;
-             left: 0;
-             padding: 10px;
-             background-color: rgba(255, 255, 255, 0.8);
-             border-radius: 8px;
-             display: none;
-             width: 60px;
-             height: 60px;
-             /* Fixed height */
-         }
-    
-         #img-color-preview {
-             display: inline-block;
-             margin-left: 10px;
-             width: 40px;
-             height: 40px;
-             border-radius: 10px;
-         }
-    
-         .imagepage > img {
-             border-radius: 8px;
-             cursor: pointer;
+#preview{
+    margin-top: 20px;
+}
 
-         }
-    
-         #color-box {
-             width: 40px;
-             height: 40px;
-             border-radius: 10px;
-             margin-right: 10px;
-         }
-    
-         #hex-code {
-             font-family: monospace;
-             min-width: 70px;
-         }
+#image-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#color-preview {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    display: none;
+    width: 60px;
+    height: 60px;
+    /* Fixed height */
+}
+
+#img-color-preview {
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+#preview > img {
+    border-radius: 20px;
+    cursor: pointer;
+
+
+}
+
+#color-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+#hex-code {
+    font-family: monospace;
+    min-width: 70px;
+}
+
+#hex-code-outside {
+font-family: monospace;
+min-width: 70px;
+padding: 10px;
+background-color: rgba(255, 255, 255, 0.8);
+border-radius: 8px;
+display: none;
+}
 
 #test1, #test2, #test3, #test4, #test5 {
     height: 200px;
