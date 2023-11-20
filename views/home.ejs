@@ -2,12 +2,11 @@
 <html lang="en">
 
 <head>
-    <script src="/js/cookie.js"></script>
-    <script> checkCookie()</script>
+    <!-- <script src="/js/cookie.js"></script> -->
+    <!-- <script> checkCookie()</script> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hue</title>
-    <!-- <link rel="stylesheet" href="/css/mobile.css"> -->
     <link rel="stylesheet" href="/css/desktop.css">
     <!-- link to fonts -->
     <link rel="icon" type="image/x-icon" href="/images/favicon_logo.png">
@@ -15,32 +14,23 @@
 
 <body>
     <div class="container">
-        <!-- nav bar -->
-        <!-- checks wether user is logged in to determine which navbar to use -->
-        <% if (userLoggedIn) { %>
-            <!-- Navbar for logged-in users-->
-            <%- include('navbarlogged'); %>
-                <% } else { %>
-                    <!-- Default navbar when users arent logged in -->
-                    <%- include('navbar'); %>
-                        <% } %>
-                            <!-- home page -->
-
-                            <div class="main_page">
-                                <div class="strapline">
-                                    Live your life in
-                                </div>
-                                <div class="strapline_colour">
-                                    Colour
-                                </div>
-                                <div class="dictionary">
-                                    <div class="dictionary_title">Hue</div>
-                                    <div class="dictionary_noun">[hju] noun</div>
-                                    <div class="dictionary_def">The degree of lightness, darkness, and strength of a
-                                        colour.</div>
-                                </div>
-                            </div>
-                            <script src="/js/hamburger.js"></script>
+        <%- include('navbarlogged'); %>
+        <!-- home page -->
+        <div class="main_page">
+            <div class="strapline">
+                Live your life in
+            </div>
+            <div class="strapline_colour">
+                Colour
+            </div>
+            <div class="dictionary">
+                <div class="dictionary_title">Hue</div>
+                <div class="dictionary_noun">[hju] noun</div>
+                <div class="dictionary_def">The degree of lightness, darkness, and strength of a colour.
+            </div>
+        </div>
+    </div>
+    <script src="/js/hamburger.js"></script>
 
 </body>
 <%- include ('footer'); %>
