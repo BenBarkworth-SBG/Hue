@@ -78,7 +78,7 @@ async function getUserFavourites(user) {
   try {
     const userFavourites = await userInfo.findOne(user);
     const getFavouritePalettes = await getPaletteById(userFavourites.favourites[0].paletteId)
-    console.log(getFavouritePalettes)
+    // console.log(getFavouritePalettes)
     return getFavouritePalettes
   } catch (error) {
     console.error('Error retrieving data:', error);
@@ -86,7 +86,6 @@ async function getUserFavourites(user) {
   }
 }
 
-getUserFavourites({user: "matt"})
 // function to create user into database
 async function insertUser(data) {
   try {
@@ -115,7 +114,7 @@ async function updateUser(id, data) {
 async function deleteUser(id) {
   try {
     const deletedUser = await userInfo.findByIdAndDelete(id);
-    console.log("deleted user", deletedUser)
+    // console.log("deleted user", deletedUser)
     return deletedUser
   } catch (error) {
     console.error("Error deleting data:", error);
