@@ -43,18 +43,7 @@ router.get('/random', async (req, res) => {
 // add authorised check to all pages
 
 router.get('/', async (req, res) => {    
-  if (req.session.authorised) {
-    try {
-      // const data = await dataController.getAllColoursData();
-      res.render("home");
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  }
-  else {
-    res.render("login");
-  }
+    res.render("home");
 });
 
 
