@@ -76,7 +76,7 @@ async function getPaletteById(paletteId) {
 async function getUserFavourites(user) {
   try {
     const userFavourites = await userInfo.findOne(user);
-    const getFavouritePalettes = await getPaletteById(userFavourites.favourites.paletteId)
+    const getFavouritePalettes = await getPaletteById(userFavourites.favourites[0].paletteId)
     return getFavouritePalettes
   } catch (error) {
     console.error('Error retrieving data:', error);
