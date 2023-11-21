@@ -4,7 +4,6 @@
 <head>
     <!-- <script src="/js/cookie.js"></script> -->
     <!-- <script> checkCookie()</script> -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Profile Page</title>
     <meta charset="utf-8">
@@ -33,82 +32,26 @@
 
        <!-- Contenedor -->
        <!-- account drop down -->
-        <ul id="accordion" class="accordion">
-    <li>
-        <div class="link"><i class="fa fa-person"></i> Profile Picture <i class="fa fa-chevron-down"></i></div>
-        <ul class="submenu">
-            <li>
-                <input type="file" onchange="previewProfilePicture(event)">
-                
-            
-            </ul>
-        </li>
-        <li>
-        <div class="link"><i class="fa fa-database"></i>Account Details <i class="fa fa-chevron-down"></i></div>
-      <ul class="submenu">
-        <li><a href="#">Username: <%= username %></a></li>
-        <li><a href="#">Email: <%= email %></a></li>
-        <li><a href="/register">Change Password</a></li>
-      </ul>
-    </li>
-    <li>
-    <div class="link"><i class="fa fa-globe"></i>Settings<i class="fa fa-chevron-down"></i></div>
-    <ul class="submenu">
-      <!-- <li><a href="/profile/delete" id="deleteAccountBtn">Delete my Account</a></li> -->
-      <form method="post" action="/profile/delete">
-        <input type="hidden" name="userId" value="<%= id  %>" />
-        <div>
-          <input type="submit" value="Delete my Account" />
-        </div>
-      </form>
-    <!-- Add more menu items if needed -->
-    </ul>
+        <section class="accordion">
+          <div class="tab">
+          <div class="tab">
+            <input type="checkbox" name="accordion-1" id="cb1">
+            <label for="cb1" class="tab__label">Account Details</label>
+            <div class="tab__content">
+              <li><a href="#">Username: <%= username %></a></li>
+              <li><a href="#">Email: <%= email %></a></li>
+              <li><a href="/register">Change Password</a></li>
+            </div>
+          </div>
+          <div class="tab">
+            <input type="checkbox" name="accordion-1" id="cb2">
+            <label for="cb2" class="tab__label">Settings</label>
+            <div class="tab__content">
+              <a href="">Delete Account</a>
+            </div>
+          </div>
+        </section>
 
-  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-  <script>         
-  //   $(document).ready(function() {
-  //     $('#deleteAccountBtn').on('click', function() {
-  //       // Show a confirmation dialog
-  //       let confirmDelete = confirm("Are you sure you want to delete your account?");
-        
-  //       // If the user confirms, proceed with the deletion
-            
-  //         if (confirmDelete) {
-  //       // Make an AJAX request to delete the user's account
-  //       $.ajax({
-  //         url: '/profile/delete', // Update the URL to the appropriate endpoint
-  //         type: 'POST',
-  //         success: function (response) {
-  //           alert('You have successfully deleted your account.'); // Show a confirmation message
-  //           // Optionally, redirect the user to a different page or perform other actions after deletion
-  //         },
-  //         error: function (error) {
-  //           console.error(error);
-  //           alert('Error deleting account. Please try again later.');
-  //         }
-  //       });
-  //     }
-  //   });
-  // });
-          // Make an AJAX request to delete the user's account
-        //   $.ajax({
-        //     url: '/users/your-user-id', // Replace 'your-user-id' with the actual user ID
-        //     type: 'DELETE',
-        //     success: function(response) {
-        //       alert('You have successfully deleted your account.'); // Show a confirmation message
-        //       // Optionally, redirect the user to a different page or perform other actions after deletion
-        //     },
-        //     error: function(error) {
-        //       console.error(error);
-        //       alert('Error deleting account. Please try again later.');
-        //     }
-        //  });
-    //     }
-    //   });
-    // });
-  </script>
-
-  
         </div>
         <div class="savedpalette">
             <h1>Saved Palettes</h1>
@@ -142,7 +85,7 @@
 
     </div>
     <script src="/js/hamburger.js"></script>
-    <script> 
+    <!-- <script> 
 
     function showFileInput() {
         var fileInput = document.getElementById('profilePictureInput');
@@ -166,7 +109,7 @@ function previewProfilePicture(event) {
 }
     </script>
     <!-- User account dropdown -->
-    <script>
+    <!-- <script>
 $(document).ready(function() {
     var Accordion = function(el, multiple) {
       this.el = el || {};
@@ -193,7 +136,7 @@ $(document).ready(function() {
     var accordion = new Accordion($('#accordion'), false);
   });
 
-  </script>
+  </script> --> -->
 
 </body>
 <%- include ('footer'); %>
