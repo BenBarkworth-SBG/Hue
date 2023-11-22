@@ -42,8 +42,13 @@ router.get('/random', async (req, res) => {
 
 // add authorised check to all pages
 
-router.get('/', async (req, res) => {    
+router.get('/', async (req, res) => {   
+  if (req.session.authorised) { 
+    res.render("homeloggedin");
+  }
+  else {
     res.render("home");
+  }
 });
 
 
@@ -135,7 +140,7 @@ router.post("/profile/delete", async (req, res) => {
     const deletedUser = await dataController.deleteUser(req.body.userId);
     // console.log(deletedUser)
     req.session.destroy();
-    // res.redirect('/login');
+    res.redirect('/login');
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
@@ -143,13 +148,13 @@ router.post("/profile/delete", async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-  req.session.destroy();
-  res.redirect('/login');
-  // ((err) => {
-    // if (err) {
-    //   console.error(err);
-    // }
-  // });
+  try {
+    req.session.destroy();
+    res.redirect('/login');
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 module.exports = router;
