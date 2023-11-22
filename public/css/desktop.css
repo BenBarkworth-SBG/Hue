@@ -582,6 +582,11 @@ input[type=email] {
     border-radius: 4px;
 }
 
+.loginError {
+    font-size: larger;
+    color: red;
+}
+
 /* Add a hover effect for buttons */
 button:hover {
     opacity: 0.8;
@@ -605,7 +610,8 @@ img.avatar {
 /* Change styles for forgot and cancel button on extra small screens */
 .forgotpasswordcontainer {
     display: flex;
-    justify-content: right;
+    justify-content: center;
+    margin: 0.5% 0% 1% 0%;
 }
 
 .forgotpasswordbtn {
