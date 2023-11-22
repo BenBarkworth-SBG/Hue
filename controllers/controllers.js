@@ -112,7 +112,6 @@ async function updateUser(id, data) {
 async function deleteUser(id) {
   try {
     const deletedUser = await userInfo.findByIdAndDelete(id);
-    // console.log("deleted user", deletedUser)
     return deletedUser
   } catch (error) {
     console.error("Error deleting data:", error);
@@ -131,6 +130,30 @@ async function getUserByUsername(user) {
   }
 }
 
+// delete palette from favourites
+async function deletePaletteFromFavorites(userId, paletteIdToDelete) {
+  try {
+    const user = await userInfo.findById(userId);
+
+    if (!user) {
+      console.error("User not found");
+      return { error: "User not found" };
+    }
+
+    user.favourites = user.favourites.filter(
+      (palette) => palette.paletteId.toString() !== paletteIdToDelete
+    );
+
+    await user.save();
+
+    console.log("Palette deleted from favorites");
+    return { success: "Palette deleted from favorites" };
+  } catch (error) {
+    console.error("Error deleting palette from favorites:", error);
+    return { error: "Failed to delete palette from favorites" };
+  }
+}
+
 module.exports = {
   getAllColoursData,
   insertPalette,
@@ -141,5 +164,6 @@ module.exports = {
   getUserById,
   deleteUser,
   getUserByUsername,
-  getUserFavourites
+  getUserFavourites,
+  deletePaletteFromFavorites,
 };
