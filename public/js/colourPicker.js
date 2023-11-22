@@ -20,70 +20,71 @@ let checkboxSet = new Set();
 let hoverAlertNum = 0
 
 //image page changes 
-  const uploadInput = document.getElementById('upload');
-    const previewImage = document.getElementById('preview');
-    const colorPreview = document.getElementById('color-preview');
-    const imgColorPreview = document.getElementById('img-color-preview');
-    const colorBox = document.getElementById('color-box');
-    const hexCode = document.getElementById('hex-code');
-    const hexCodeOutside = document.getElementById('hex-code-outside');
-    uploadInput.addEventListener('change', handleImageUpload);
-    previewImage.addEventListener('mousemove', handleImageHover);
-    previewImage.addEventListener('mouseleave', hideColorPreview);
-    imgColorPreview.addEventListener('click', handleImageClick);
+const uploadInput = document.getElementById('upload');
+const previewImage = document.getElementById('preview');
+const colorPreview = document.getElementById('color-preview');
+const imgColorPreview = document.getElementById('img-color-preview');
+const colorBox = document.getElementById('color-box');
+const hexCode = document.getElementById('hex-code');
+const hexCodeOutside = document.getElementById('hex-code-outside');
+// browser console says this is null
+uploadInput.addEventListener('change', handleImageUpload); 
+previewImage.addEventListener('mousemove', handleImageHover);
+previewImage.addEventListener('mouseleave', hideColorPreview);
+imgColorPreview.addEventListener('click', handleImageClick);
 
-    function handleImageUpload(event) {
-        const file = event.target.files[0];
+function handleImageUpload(event) {
+  const file = event.target.files[0];
 
-        if (file) {
-            const reader = new FileReader();
+  if (file) {
+      const reader = new FileReader();
 
-            reader.onload = function (e) {
-                previewImage.src = e.target.result;
-            };
+      reader.onload = function (e) {
+          previewImage.src = e.target.result;
+      };
 
-            reader.readAsDataURL(file);
-        }
-    }
+      reader.readAsDataURL(file);
+  }
+}
 
 function handleImageHover(event) {
-    const x = event.layerX;
-    const y = event.layerY;
+  const x = event.layerX;
+  const y = event.layerY;
 
-    const canvas = document.createElement('canvas');
-    canvas.width = previewImage.width;
-    canvas.height = previewImage.height;
+  const canvas = document.createElement('canvas');
+  canvas.width = previewImage.width;
+  canvas.height = previewImage.height;
 
-    const context = canvas.getContext('2d');
-    context.drawImage(previewImage, 0, 0, previewImage.width, previewImage.height);
+  const context = canvas.getContext('2d');
+  context.drawImage(previewImage, 0, 0, previewImage.width, previewImage.height);
 
-    const pixel = context.getImageData(x, y, 1, 1).data;
-    const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
-    const hex = rgbToHex(pixel[0], pixel[1], pixel[2]);
+  const pixel = context.getImageData(x, y, 1, 1).data;
+  const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+  const hex = rgbToHex(pixel[0], pixel[1], pixel[2]);
 
-    colorBox.style.backgroundColor = color;
+  colorBox.style.backgroundColor = color;
 
-    // Display the hex code inside the color preview
-    hexCode.innerText = hex;
+  // Display the hex code inside the color preview
+  hexCode.innerText = hex;
 
-    colorPreview.style.display = 'block';
-    colorPreview.style.left = x + 'px';
-    colorPreview.style.top = y + 'px';
+  colorPreview.style.display = 'block';
+  colorPreview.style.left = x + 'px';
+  colorPreview.style.top = y + 'px';
 }
 
 
-    function hideColorPreview() {
-        colorPreview.style.display = 'none';
-    }
+function hideColorPreview() {
+    colorPreview.style.display = 'none';
+}
 
 function handleImageClick() {
-    const baseColor = colorBox.style.backgroundColor;
-    imgColorPreview.style.backgroundColor = baseColor;
-    imgColorPreview.style.display = 'inline-block';
+  const baseColor = colorBox.style.backgroundColor;
+  imgColorPreview.style.backgroundColor = baseColor;
+  imgColorPreview.style.display = 'inline-block';
 
-    // Set the hex code outside to the same value as hex code
-    hexCodeOutside.innerText = hexCode.innerText;
-    hexCodeOutside.style.display = 'inline-block';
+  // Set the hex code outside to the same value as hex code
+  hexCodeOutside.innerText = hexCode.innerText;
+  hexCodeOutside.style.display = 'inline-block';
 }
 
 
@@ -100,89 +101,70 @@ function handleImageClick() {
     //     return `rgb(${255 - parseInt(color.slice(4, 7))}, ${255 - parseInt(color.slice(9, 12))}, ${255 - parseInt(color.slice(14, 17))})`;
     // }
 
-    // function rgbToHex(r, g, b) {
-    //     return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
-    // }
+// function generatePalettes2() {
+//   let value = hexCodeOutside.innerText;
+//   let checkboxArray = Array.from(checkboxSet)
+//   let palettes;
 
-    // function componentToHex(c) {
-    //     const hex = c.toString(16);
-    //     return hex.length === 1 ? '0' + hex : hex;
-    // }
-
-    function generatePalettes2() {
-  let value = hexCodeOutside.innerText;
-  let checkboxArray = Array.from(checkboxSet)
-  let palettes;
-  // let element = document.getElementsByClassName("swatch")
-
-  for (let i = 0; i < checkboxArray.length; i++) {
-    if (checkboxArray[i] == "monochromatic") {
-      // monochromaticContainer.style.backgroundColor = "";
-      palettes = generateMonochromePalette(value)
-      monochromaticContainer.innerHTML = '';
+//   for (let i = 0; i < checkboxArray.length; i++) {
+//     if (checkboxArray[i] == "monochromatic") {
+//       palettes = generateMonochromePalette(value)
+//       monochromaticContainer.innerHTML = '';
     
-      document.getElementById("monochromatic").style.display = "inline-block";
-    }
-    if (checkboxArray[i] == "complementary") {
-      const complementaryColor = getComplementaryColor(value);
-      palettes = generateComplementaryPalette(value, complementaryColor);
-      complementaryContainer.innerHTML = '';
-      document.getElementById("complementary").style.display = "inline-block";
-    }
-    if (checkboxArray[i] == "analogous") {
-      palettes = generateAnalogousPalette(value)
-      analogousContainer.innerHTML = '';
-      document.getElementById("analogous").style.display = "inline-block";
-    }
-    if (checkboxArray[i] == "split") {
-      const complementaryColor = getComplementaryColor(value);
-      palettes = generateSplitComplementaryPalette(value, complementaryColor)
-      splitContainer.innerHTML = '';
-      document.getElementById("split").style.display = "inline-block";
-    }
-  //   for (let i = 0; i < palettes.length; i++) {
-  //     console.log(element)
-  //     console.log(palettes[i])
-  //     element[i].style.backgroundColor = palettes[i]
-  // }
+//       document.getElementById("monochromatic").style.display = "inline-block";
+//     }
+//     if (checkboxArray[i] == "complementary") {
+//       const complementaryColor = getComplementaryColor(value);
+//       palettes = generateComplementaryPalette(value, complementaryColor);
+//       complementaryContainer.innerHTML = '';
+//       document.getElementById("complementary").style.display = "inline-block";
+//     }
+//     if (checkboxArray[i] == "analogous") {
+//       palettes = generateAnalogousPalette(value)
+//       analogousContainer.innerHTML = '';
+//       document.getElementById("analogous").style.display = "inline-block";
+//     }
+//     if (checkboxArray[i] == "split") {
+//       const complementaryColor = getComplementaryColor(value);
+//       palettes = generateSplitComplementaryPalette(value, complementaryColor)
+//       splitContainer.innerHTML = '';
+//       document.getElementById("split").style.display = "inline-block";
+//     }
 
-    palettes.forEach(color => {
-      const element = document.createElement('div');
-      element.style.backgroundColor = color;
-      element.value = color
-      element.style.width = "20%"
-      element.style.height = "100px"
-      element.className = 'swatch';
-      let hexConversion = hexToRgb(color);
-      let rgbConversion = rgbToCmyk(hexConversion[0], hexConversion[1], hexConversion[2])
-      let blackValue = rgbConversion[3]
-      element.addEventListener("mouseenter", function(){
-        // this applies CSS class to div innerHTML
-        if (blackValue > 80) {
-          element.innerHTML = `<p class="lightColours"> ${element.value}</p>`
-        }
-        else {
-          element.innerHTML = `<p class="darkColours"> ${element.value}</p>`
-        }
-      })
-      element.addEventListener("mouseleave", function(){
-        element.innerHTML = ''
-      })
-      containerChosen = String(checkboxArray[i] + "Container")
-      // applies append child method to the palette container specified by the user
-      window[containerChosen].appendChild(element);
-    });
-  }
-  if (hoverAlertNum < 1) {
-    alert("Hover over the colours to see the corresponding hex code.")
-  }
-  hoverAlertNum += 1
-}
-
-
+//     palettes.forEach(color => {
+//       const element = document.createElement('div');
+//       element.style.backgroundColor = color;
+//       element.value = color
+//       element.style.width = "20%"
+//       element.style.height = "100px"
+//       element.className = 'swatch';
+//       let hexConversion = hexToRgb(color);
+//       let rgbConversion = rgbToCmyk(hexConversion[0], hexConversion[1], hexConversion[2])
+//       let blackValue = rgbConversion[3]
+//       element.addEventListener("mouseenter", function(){
+//         // this applies CSS class to div innerHTML
+//         if (blackValue > 80) {
+//           element.innerHTML = `<p class="lightColours"> ${element.value}</p>`
+//         }
+//         else {
+//           element.innerHTML = `<p class="darkColours"> ${element.value}</p>`
+//         }
+//       })
+//       element.addEventListener("mouseleave", function(){
+//         element.innerHTML = ''
+//       })
+//       containerChosen = String(checkboxArray[i] + "Container")
+//       // applies append child method to the palette container specified by the user
+//       window[containerChosen].appendChild(element);
+//     });
+//   }
+//   if (hoverAlertNum < 1) {
+//     alert("Hover over the colours to see the corresponding hex code.")
+//   }
+//   hoverAlertNum += 1
+// }
 
 // end of image page changes
-
 
 function componentToHex(c) {
     // converts number to a string using base 16
@@ -199,14 +181,7 @@ function rgbToHex(r, g, b) {
   }
 
 function hexToRgb(hex) {
-  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-  // let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  // hex = hex.replace(shorthandRegex, function(m, r, g, b) {
-  //   return r + r + g + g + b + b;
-  // });
-
   let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  // console.log(result)
   let r = parseInt(result[1], 16)
   let g = parseInt(result[2], 16)
   let b = parseInt(result[3], 16)
@@ -225,18 +200,7 @@ function rgbToCmyk (r,g,b) {
   let greenNum = parseInt( (''+g).replace(/\s/g,''),10 ); 
   let blueNum = parseInt( (''+b).replace(/\s/g,''),10 ); 
   
-  // if ( redNum==null || greenNum==null || blueNum==null ||
-  //     isNaN(redNum) || isNaN(greenNum)|| isNaN(blueNum) )
-  // {
-  //   alert ('Please enter numeric RGB values!');
-  //   return;
-  // }
-  // if (redNum<0 || greenNum<0 || blueNum<0 || redNum>255 || greenNum>255 || blueNum>255) {
-  //   alert ('RGB values must be in the range 0 to 255.');
-  //   return;
-  // }
-  
-  // BLACK
+  // black value setting to avoid issue
   if (redNum==0 && greenNum==0 && blueNum==0) {
     k = 100;
     return [0,0,0,100];
@@ -278,14 +242,23 @@ function colors(){
 }
 
 function generatePalettes() {
-  let value = colors();
+
+  let value; 
+  if (hexCodeOutside !== null) {
+    value = hexCodeOutside.innerText;
+  }
+  else {
+    value = colors();
+  }
+  if (value === '') {
+    alert("Please select a colour.")
+    return;
+  }
   let checkboxArray = Array.from(checkboxSet)
   let palettes;
-  // let element = document.getElementsByClassName("swatch")
 
   for (let i = 0; i < checkboxArray.length; i++) {
     if (checkboxArray[i] == "monochromatic") {
-      // monochromaticContainer.style.backgroundColor = "";
       palettes = generateMonochromePalette(value)
       monochromaticContainer.innerHTML = '';
     
@@ -308,11 +281,6 @@ function generatePalettes() {
       splitContainer.innerHTML = '';
       document.getElementById("split").style.display = "inline-block";
     }
-  //   for (let i = 0; i < palettes.length; i++) {
-  //     console.log(element)
-  //     console.log(palettes[i])
-  //     element[i].style.backgroundColor = palettes[i]
-  // }
 
     palettes.forEach(color => {
       const element = document.createElement('div');
@@ -363,33 +331,6 @@ function checkboxChecker(paletteType) {
   }
   return checkboxSet;
 }
-
-// function resetColors() {
-//   // reset the input and span element values
-//   document.getElementById('red').value = 0;
-//   document.getElementById('green').value = 0;
-//   document.getElementById('blue').value = 0;
-//   document.getElementById('output').innerHTML = 'rgb(0, 0, 0)';
-//   document.getElementById('hexOutput').innerHTML = 'hex(#000000)';
-//   // Clear the palette containers
-//   monochromaticContainer.innerHTML = ''; 
-//   complementaryContainer.innerHTML = '';
-//   analogousContainer.innerHTML = '';
-//   splitContainer.innerHTML = '';
-//   // Clear the background color of the palette containers
-//   monochromaticContainer.style.backgroundColor = "";
-//   complementaryContainer.style.backgroundColor = "";
-//   analogousContainer.style.backgroundColor = "";
-//   splitContainer.style.backgroundColor = "";
-//   // reset colour output
-//   outputs.style.backgroundColor = 'rgb(0, 0, 0)';
-//   // Uncheck all checkboxes
-//   monochromatic.checked = false;
-//   complementary.checked = false;
-//   analogous.checked = false;
-//   split.checked = false;
-//   paletteGeneratorBtn.disabled = true;
-// }
 
 function generateMonochromePalette(baseColor) {
     const palette = [];
