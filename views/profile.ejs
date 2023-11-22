@@ -51,6 +51,12 @@
             </div>
           </div>
         </section>
+        <form method="post" action="/profile/delete">
+          <input type="hidden" name="userId" value="<%= id  %>" />
+          <div>
+            <input type="submit" value="Delete my Account" />
+          </div>
+        </form>
 
         </div>
         <div class="savedpalette">
