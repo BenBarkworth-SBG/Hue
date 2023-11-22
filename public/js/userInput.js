@@ -7,50 +7,43 @@ function userInput() {
         return;
     }
     if (userHexInput.value.trim().length > 0) {
-        console.log(typeof userHexInput.value)
-
         let regex = new RegExp("^#[a-fA-F0-9]{6}$")
         if (!regex.test(userHexInput.value)) {
             alert("Please ensure the hex code inputted follows the hexadecimal system.")
             userHexInput.value = userHexInput.defaultValue;
             return;
         }
-        console.log(userHexInput.value)
         const hexConversion = hexToRgb(userHexInput.value)
-        console.log(hexConversion)
         document.getElementById('red').value = hexConversion[0]
         document.getElementById('green').value = hexConversion[1]
         document.getElementById('blue').value = hexConversion[2]
     }
     else {
-        let regex = new RegExp("^\\([0-9,]+\\)$")
+        // regex to ensureinput is three values separated by commas in brackets
+        let regex = new RegExp("^\\(\\d+,\\d+,\\d+\\)$")
         if (!regex.test(userRgbInput.value)) {
             alert("Please ensure the rgb value inputted follows the correct format.")
             userRgbInput.value = userRgbInput.defaultValue;
             return;
         }
-        console.log(userRgbInput.value)
         // backslashes needed to match brackets literally
-        let removeBrackets = userRgbInput.value.replace(/\(|\)/g, '')
-        console.log(userRgbInput.value.replace(/(|)/g, ''))
-        console.log(removeBrackets)
-        let splitRGB = removeBrackets.split(',')
-        console.log(splitRGB)
-        for (let i = 0; i < splitRGB.length; i++) {
-            if (parseInt(splitRGB[i]) < 0 || parseInt(splitRGB[i]) > 255) {
+        cleanedString = userRgbInput.value.replace(/\(|\)/g, '').split(',')
+        for (let i = 0; i < cleanedString.length; i++) {
+            if (parseInt(cleanedString[i]) > 255) {
                 userRgbInput.value = userRgbInput.defaultValue
-                break;
+                alert("Please ensure none of the individual values are above 255.")
+                return;
             }
         }
-        console.log(splitRGB[0],splitRGB[1],splitRGB[2])
-        document.getElementById('red').value = splitRGB[0]
-        document.getElementById('green').value = splitRGB[1]
-        document.getElementById('blue').value = splitRGB[2]
+        document.getElementById('red').value = cleanedString[0]
+        document.getElementById('green').value = cleanedString[1]
+        document.getElementById('blue').value = cleanedString[2]
     }
     colors()
     if (checkboxSet.size > 0) {
         generatePalettes()
     }
+    // resetting inputs
     userHexInput.value = userHexInput.defaultValue;
     userRgbInput.value = userRgbInput.defaultValue;
 }
