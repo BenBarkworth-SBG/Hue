@@ -40,8 +40,6 @@ router.get('/random', async (req, res) => {
   // }
 });
 
-// add authorised check to all pages
-
 router.get('/', async (req, res) => {   
   if (req.session.authorised) { 
     res.render("homeloggedin");
@@ -54,14 +52,13 @@ router.get('/', async (req, res) => {
 
 //Handle palette creation
 router.post('/palette', async (req, res) => {    
-
   try {
     // has to be declared here to be accessed later in the try block
     let paletteDbInsertion;
     const {hexCodes, paletteType, name} = req.body;
     const username = req.session.user
     const data = await dataController.getAllPalettesData(); 
-    const check = data.filter((d) => d.paletteType == paletteType && d.hexCodes == hexCodes);
+    const check = data.filter((d) => d.paletteType == paletteType && d.hexCodes[0] == hexCodes[0]);
     if (check.length == 0) {
        paletteDbInsertion = await dataController.insertPalette({hexCodes, paletteType});
     }
@@ -77,7 +74,7 @@ router.post('/palette', async (req, res) => {
       await dataController.updateUser(pullUser._id.toString(), {$push: {favourites: {paletteName: name, paletteId: paletteDbInsertion._id}}});
     }
     else {
-      throw error.message("Database already contains that palette")
+      throw new Error("Database already contains that palette")
     }
     res.send(req.body)
   } 
@@ -89,7 +86,7 @@ router.post('/palette', async (req, res) => {
 
 router.post ('/login', loginController);
 
-  //writes to DB after request from frontend
+//writes to DB after request from frontend
 router.post('/users', async (req, res) => {    
   try {
     const {user, email, pass, favourites} = req.body;
@@ -114,8 +111,8 @@ router.post('/users', async (req, res) => {
 
 router.get('/profile', async (req, res) => {
   if (req.session.authorised) {
-    const userId = req.session.userid; // Assuming user ID is stored in the 'id' property
-    const userEmail = req.session.email; // Assuming user email is stored in the 'email' property
+    const userId = req.session.userid; 
+    const userEmail = req.session.email; 
     const user = req.session.user;
     const favouritePalettes = await dataController.getUserFavourites({user: user})
     res.render('profile', {username: user, email: userEmail, id: userId, favouritePalettes: favouritePalettes});
@@ -124,21 +121,9 @@ router.get('/profile', async (req, res) => {
   }
 })
 
-// router.get('/profile', (req, res) => {
-//   if (req.session.user) {
-//     const userId = req.session.user.id; // Assuming user ID is stored in the 'id' property
-//     const userEmail = req.session.user.email; // Assuming user email is stored in the 'email' property
-//     const user = req.session.user.user;
-//     res.render('profile', { user : req.session.user, userEmail, userId});
-//   } else {
-//     res.redirect('login');
-//   }
-// });
-
 router.post("/profile/delete", async (req, res) => {
   try {
     const deletedUser = await dataController.deleteUser(req.body.userId);
-    // console.log(deletedUser)
     req.session.destroy();
     res.redirect('/login');
   } catch (err) {
