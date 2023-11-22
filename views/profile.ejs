@@ -51,6 +51,12 @@
             </div>
           </div>
         </section>
+        <form method="post" action="/profile/delete">
+          <input type="hidden" name="userId" value="<%= id  %>" />
+          <div>
+            <input type="submit" value="Delete my Account" />
+          </div>
+        </form>
 
         </div>
         <div class="savedpalette">
@@ -87,9 +93,9 @@
     <script src="/js/hamburger.js"></script>
     <!-- <script> 
 
-    function showFileInput() {
-        var fileInput = document.getElementById('profilePictureInput');
-        fileInput.click(); // Simulate a click on the file input element
+function showFileInput() {
+  var fileInput = document.getElementById('profilePictureInput');
+  fileInput.click(); // Simulate a click on the file input element
 }
 
 function previewProfilePicture(event) {
@@ -104,7 +110,6 @@ function previewProfilePicture(event) {
     preview.innerHTML = ''; // Clear previous preview, if any
     preview.appendChild(image);
   };
-  
   reader.readAsDataURL(input.files[0]);
 }
     </script>

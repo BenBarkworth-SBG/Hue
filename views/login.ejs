@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-  <script src="/js/cookie.js"></script>
   <title>Log-in Hue</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,29 +38,32 @@
           <input type="checkbox" checked="checked" name="remember"> Remember me
 
         </label>
-
+        <!-- locals avoids error when page is first accessed as it's an obkject passed
+        in from server side -->
+        <% if (locals.error) { %>
+          <p><%= locals.error %></p>
+        <% } %>
       </div>
     </form>
     <script> // listens for the register button when users register
       document.getElementById("login").addEventListener("submit", sendRegister);
       function sendRegister(e){
-          const user = document.getElementById("username").value;
-          const pass = document.getElementById("password").value;
+        const user = document.getElementById("username").value;
+        const pass = document.getElementById("password").value;
 
-          const body = {
-              user: user,
-              pass: pass,
-          };
+        const body = {
+            user: user,
+            pass: pass,
+        };
 
-          const jsonBody = JSON.stringify(body);
-          
-          fetch("/login", {method: "POST",
-                           headers: {"Content-Type": "application/json"},
-                           body: `${jsonBody}`
-                          }).then(res => console.log(res))
-          // prevent routing to other page or refresh
-          e.preventDefault();
-          return false;
+        const jsonBody = JSON.stringify(body);
+        
+        fetch("/login", {method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: `${jsonBody}`
+        }).then(res => console.log(res))
+        // prevent routing to other page or refresh
+        
       }
   </script>
   </div>
