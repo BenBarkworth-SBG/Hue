@@ -29,20 +29,22 @@
           <button type="button" class="forgotpasswordbtn">Forgot Password?</button>
         </div>
 
-        <div class="accountbtns">
-          <button type="submit" class="loginbtn" id="login">Login</button>
-          <a href="/register" type="submit" class="signupbtn">Sign-up</a>
+        <!-- locals avoids error when page is first accessed as it's an obkject passed
+        in from server side -->
+        <div class="loginError">
+          <% if (locals.error) { %>
+            <p><%= locals.error %></p>
+          <% } %>
         </div>
-
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
 
         </label>
-        <!-- locals avoids error when page is first accessed as it's an obkject passed
-        in from server side -->
-        <% if (locals.error) { %>
-          <p><%= locals.error %></p>
-        <% } %>
+
+        <div class="accountbtns">
+          <button type="submit" class="loginbtn" id="login">Login</button>
+          <a href="/register" type="submit" class="signupbtn">Sign-up</a>
+        </div>
       </div>
     </form>
     <script> // listens for the register button when users register
