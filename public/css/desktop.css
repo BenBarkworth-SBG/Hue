@@ -885,13 +885,7 @@ a {
  ===========================*/
 
 /* accordion */
-:root {
-    --primary: #227093;
-    --background: #eee;
-    --highlight: #ffda79;
-    /* Theme color */
-    --theme: var(--primary);
-}
+
 
 *,
 *::before,
@@ -899,18 +893,7 @@ a {
     box-sizing: border-box;
 }
 
-.accordion > body {
-    display: grid;
-    place-content: center;
-    grid-template-columns: repeat(auto-fit, min(100%, 30rem));
-    min-height: 100vh;
-    place-items: start;
-    gap: 1rem;
-    margin: 0;
-    padding: 1rem;
-    color: var(--primary);
-    background: var(--background);
-}
+
 
 /* Core styles/functionality */
 .tab input {
@@ -931,8 +914,8 @@ a {
 
 /* Visual styles */
 .accordion {
-    color: var(--theme);
-    border: 2px solid;
+    background: white;
+    border: 1px solid;
     border-radius: 0.5rem;
     overflow: hidden;
     width: 50%;
@@ -942,7 +925,12 @@ a {
 .tab__close {
     display: flex;
     color: white;
-    background: var(--theme);
+    background: linear-gradient(to right,
+                #9AD0F8 20%,
+                #8DB2f3 40%,
+                #7B86ED 60%,
+                #7577Ec 80%,
+                #6d62e9 100%);
     cursor: pointer;
 }
 
@@ -975,9 +963,7 @@ a {
     font-size: 0.75rem;
 }
 
-.accordion--radio {
-    --theme: var(--secondary);
-}
+
 
 /* Arrow animation */
 .tab input:not(:checked)+.tab__label:hover::after {
