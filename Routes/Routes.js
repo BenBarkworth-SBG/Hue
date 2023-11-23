@@ -133,6 +133,16 @@ router.post("/profile/delete", async (req, res) => {
   }
 });
 
+router.post("/profile/deletePalette", async (req, res) => {
+ try {
+    const deletedPalette = await dataController.deletePaletteFromFavorites(req.session.userid, req.body.paletteID)
+    res.redirect('/profile')
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
 router.get('/logout', (req, res) => {
   try {
     req.session.destroy();

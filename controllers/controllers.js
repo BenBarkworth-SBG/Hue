@@ -73,16 +73,36 @@ async function getPaletteById(paletteId) {
 }
 
 // get user favourites
+// async function getUserFavourites(user) {
+//   try {
+//     const userFavourites = await userInfo.findOne(user);
+//     const getFavouritePalettes = await getPaletteById(userFavourites.favourites[0].paletteId)
+//     return getFavouritePalettes
+//   } catch (error) {
+//     console.error('Error retrieving data:', error);
+//     return({ error: 'Failed to retrieve data' });
+//   }
+// }
+
 async function getUserFavourites(user) {
   try {
     const userFavourites = await userInfo.findOne(user);
-    const getFavouritePalettes = await getPaletteById(userFavourites.favourites[0].paletteId)
-    return getFavouritePalettes
+    const favoritePalettes = userFavourites.favourites;
+
+    const palettes = [];
+
+    for (const favorite of favoritePalettes) {
+      const getFavouritePalette = await getPaletteById(favorite.paletteId);
+      palettes.push(getFavouritePalette);
+    }
+
+    return palettes;
   } catch (error) {
     console.error('Error retrieving data:', error);
-    return({ error: 'Failed to retrieve data' });
+    return { error: 'Failed to retrieve data' };
   }
 }
+
 
 // create a user
 async function insertUser(data) {

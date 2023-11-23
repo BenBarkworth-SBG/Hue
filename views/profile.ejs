@@ -15,23 +15,18 @@
 
 <body>
     <!--top nav bar-->
-
-    <div class="container">
+  <div class="container">
         <!-- nav bar -->
     <%- include ('navbarlogged'); %>
     <div class="profpage">
-        <div class="userprofile">
-            
-            <div class="accname">
-
-                <h1 class="usergradient"><%= username %>'s Profile </h1>
-
-
-            </div>
-            
-
-       <!-- Contenedor -->
-       <!-- account drop down -->
+      <div class="savedpalette">
+        <h1 class="usergradient"> Welcome <%= username %>! </h1>
+      </div>
+      <div class="userprofile">
+        <div class="accname">
+        </div>
+      <!-- Contenedor -->
+      <!-- account drop down -->
         <section class="accordion">
           <div class="tab">
             <input type="checkbox" name="accordion-1" id="cb1">
@@ -39,8 +34,7 @@
             <div class="tab__content">
               <li><a href="#">Username: <%= username %></a></li>
               <li><a href="#">Email: <%= email %></a></li>
-
-                <button class="changePass" onclick="redirectToLogin()">Change Password</button>
+              <!-- <button class="changePass" onclick="redirectToLogin()">Change Password</button> -->
             </div>
           </div>
           <div class="tab">
@@ -54,46 +48,38 @@
             </div>
           </div>
         </section>
-
-        </div>
-        <div class="savedpalette">
-            <h1>Saved Palettes</h1>
-            <!-- Drop down for palette selection -->
-            <select name="favselect" id="favselect">
-                <option value="all">All</option>
-                <option value="monochromatic">Monochromatic</option>
-                <option value="complementary">Complementary</option>
-                <option value="analogous">Analogous</option>
-            </select>
-            <br><br>
-
-            <input type="submit" value="View Palettes">
-            <button class="dltpalette" onclick="deleteUserPalettes()">Delete all palettes</button>
-            <% if (favouritePalettes && favouritePalettes.hexCodes && favouritePalettes.hexCodes.length > 0) { %>
-            <div class="testcontainer">
-                    <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test1" style= 'background-color: <%= favouritePalettes.hexCodes[0] %>;'></div>
-                    <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test2" style= 'background-color: <%= favouritePalettes.hexCodes[1] %>;'></div>
-                    <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test3" style= 'background-color: <%= favouritePalettes.hexCodes[2] %>;'></div>
-                    <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test4" style= 'background-color: <%= favouritePalettes.hexCodes[3] %>;'></div>
-                    <div <% /* eslint-disable css-propertyvalueexpected */ %> id="test5" style= 'background-color: <%= favouritePalettes.hexCodes[4] %>;'></div>
-            </div>
-            <% } else { %>
-                <p>You have no saved palettes.</p>
-            <% } %>
-
-        
-            
-
-        </div>
-
+      </div>
     </div>
+        <h2 class="profileHeading">Saved Palettes</h2>
+        <div class="profilePaletteContainer">
+          <% if (favouritePalettes && favouritePalettes.length > 0) { %>
+            <% for (let i = 0; i < Math.min(4, favouritePalettes.length); i++) { %>
+              <div class="palette" id="test<%= i + 1 %>">
+                <h3 class="profileHThree"><%= favouritePalettes[i].paletteType %></h3>
+                <div class="paletteInside">
+                  <% for (let j = 0; j < favouritePalettes[i].hexCodes.length; j++) { %>
+                  <div <% /* eslint-disable css-propertyvalueexpected */ %> class="color" style='background-color: <%= favouritePalettes[i].hexCodes[j] %>;'></div>
+                  <% } %>
+                </div>
+                <div>
+                  <form method="post" action="/profile/deletePalette">
+                    <button class="dltpalette" name="paletteID" value="<%= favouritePalettes[i]._id %>" >Delete Palette</button>
+                  </form>
+                </div>
+              </div>
+            <% } %>
+          <% } else { %>
+            <p>You have no saved palettes.</p>
+          <% } %>
+        </div>
+    
+  </div>  
     <script src="/js/hamburger.js"></script>
-    <script>
+    <!-- <script>
       function redirectToLogin() {
         window.location.href = "/login";
       }
-    </script>
-
+    </script> -->
 </body>
 <%- include ('footer'); %>
 
