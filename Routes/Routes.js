@@ -125,7 +125,8 @@ router.post("/profile/delete", async (req, res) => {
   try {
     const deletedUser = await dataController.deleteUser(req.body.userId);
     req.session.destroy();
-    res.redirect('/login');
+    return res.render('register', { message: 'Account deleted successfully' });
+    // res.redirect('/login');
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });

@@ -27,7 +27,11 @@
                 <input type="password" id="password" name="password" required><br>
                 <button class="signupbtn" type="submit">Register</button>
             </form>
-
+            <div class="deleteAccount">
+                <% if (locals.message) { %>
+                  <p><%= locals.message %></p>
+                <% } %>
+              </div>
         </div>
     </div>
     
