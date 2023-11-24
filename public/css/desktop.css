@@ -397,6 +397,7 @@ input[type=submit],
 
 .hamburger {
     display: none;
+
 }
 
 .bar {
@@ -415,6 +416,7 @@ input[type=submit],
     align-items: center;
     list-style: none;
     gap: 20px;
+    z-index: 9999;
 }
 
 
@@ -464,6 +466,7 @@ input[type=submit],
     .hamburger {
         display: block;
         cursor: pointer;
+        z-index: 9999;
     }
 
     .hamburger.active .bar:nth-child(2) {
