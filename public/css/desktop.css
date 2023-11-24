@@ -1209,7 +1209,7 @@ a {
 
 .paletteInside {
     display: flex;
-    height: 200px;
+    height: 75px;
 }
 
 .profileHeading {
@@ -1226,7 +1226,7 @@ a {
 
 .color{
     display: flex;
-    height: 200px;
+    height: 75px;
     flex-grow: 1;
 }
 
