@@ -53,7 +53,7 @@
         <h2 class="profileHeading">Saved Palettes</h2>
         <div class="profilePaletteContainer">
           <% if (favouritePalettes && favouritePalettes.length > 0) { %>
-            <% for (let i = 0; i < Math.min(4, favouritePalettes.length); i++) { %>
+            <% for (let i = 0; i < favouritePalettes.length; i++) { %>
               <div class="palette" id="test<%= i + 1 %>">
                 <h3 class="profileHThree"><%= favouritePalettes[i].paletteType %></h3>
                 <div class="paletteInside">

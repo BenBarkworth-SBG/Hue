@@ -1233,7 +1233,7 @@ a {
 .profilePaletteContainer {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 50% 50%;
+
     gap: 10px;
     margin-top: 5%;
 }
