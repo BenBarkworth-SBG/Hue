@@ -491,8 +491,8 @@ input[type=submit],
     color: black;
 }
 
-.gradient>a,
-.logofoot {
+.gradient>a, .logofoot, .start_text{
+
     font-family: 'Paytone One', sans-serif;
     font-weight: bold;
     font-size: 72px;
@@ -677,141 +677,109 @@ img.avatar {
     background-attachment: fixed;
     background-color: white;
     overflow: auto;
-    width: 100%;
+    width: 100vw;
+    padding-top: 5%;
 }
 
-
-
-.strapline,
-.strapline_colour {
+.strapline {
+    text-align: left;
+    margin-left: 5%;
+}
+.strapline_main {
     color: #a9bbf9;
     font-family: 'Paytone One', sans-serif;
     font-size: 80px;
+    letter-spacing: 2px;
     display: flex;
-    justify-content: flex-end;
-    padding-right: 17%;
+    display: inline-block;
 }
 
 .strapline_colour {
-    width: max-content;
-    background: linear-gradient(to right,
-            #F56363 10%,
-            #F2AF4A 20%,
-            #F2F467 30%,
-            #35AD41 100%);
+    background: linear-gradient(to right, 
+    #F56363 10%, 
+    #F2AF4A 20%, 
+    #F2F467 30%, 
+    #35AD41 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    position: absolute;
-    right: 0;
-    font-size: 130px;
-}
-
-.dictionary {
-    height: 400px;
-    width: 700px;
-    margin-left: 10%;
-    margin-bottom: 5%;
-    border-radius: 40px;
-    background: linear-gradient(to top right,
-            #f1f6ffc2 40%,
-            #fdfeff00 60%);
-    box-shadow: 2px 5px #bbbaba81;
-}
-
-.dictionary_def,
-.dictionary_noun,
-.dictionary_title {
-    padding-left: 40px;
     font-family: 'Paytone One', sans-serif;
-    color: #a9bbf9;
+    font-size: 90px;
+    letter-spacing: 5px;
+    display: inline-block;
+    margin-left: 2%;
+}
+    
+.main_info {
+
+    height: 400px;
+    width: 1000px;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    flex-direction: column;
 }
 
-.dictionary_title {
-    font-size: 80px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+.home_description {
+    font-family: 'Paytone One', sans-serif;
+    color: #000000;
 }
 
-.dictionary_noun {
-    font-size: 50px;
+.home_description {
+    font-size: 30px;
     padding-bottom: 30px;
+    max-width:60%;
+    margin-left: 5%;
 }
 
-.dictionary_def {
-    font-size: 35px;
-}
-
-/* home page mobile  */
-@media only screen and (max-width: 870px) {
-    .main_page {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        left: 0;
-    }
-
-    .dictionary {
-        margin: 0;
-        padding-top: 20px;
-        padding-left: 0px;
-        padding-bottom: 70px;
-        height: auto;
-        width: auto;
-    }
-
-    .strapline,
-    .strapline_colour {
-        font-size: 50px;
-        padding-right: 0;
-        justify-content: center;
-    }
-
-    .strapline_colour {
-        font-size: 80px;
-        padding-top: 40px;
-        padding-right: 50px;
-        justify-content: center;
-    }
-
-
-}
-
-@media screen and (max-width: 380px){
-    .main_page {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            left: 0;
-        }
+.start_text{
+    font-size: 40px;
+    text-align: center;
+    vertical-align: middle;
     
-        .dictionary {
-            margin: 0;
-            padding-top: 40px;
-            padding-left: 0px;
-            padding-bottom: 70px;
-            height: auto;
-            width: auto;
-        }
-    
-        .strapline,
-        .strapline_colour {
-            font-size: 50px;
-            padding-right: 0;
-            justify-content: center;
-        }
-    
-        .strapline_colour {
-            font-size: 80px;
-            left: 0;
-            padding-top: 120px;
-            padding-right: 50px;
-            justify-content: center;
-            }
+}
+
+.start_button {
+    border-radius: 40px;
+    background: rgba(248, 249, 249, 0.805);
+    width: fit-content;
+    box-shadow: 2px 5px #bbbaba81;
+    margin-left: 20%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+   
 
 }
 
-/* end of home page mobile */
-/* end of home page css */
+@media screen and (max-width: 1230px) {
+    .main_info{
+
+    }
+    .strapline_main{
+       font-size: 6.5vw;
+    }
+    .strapline_colour{
+        font-size: 6.8vw; 
+    }
+}
+
+@media screen and (max-width: 880px) {
+    .start_button{
+        position: absolute;
+        align-items: center;
+        margin-left: 0px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .home_description{
+        font-size: 3.5vw;
+        padding-right: 550px;
+    }
+}
+
+
 /* start of footer css*/
 footer {
 
@@ -933,6 +901,41 @@ a {
     font-size: 14px;
     text-decoration: inherit;
     color: #000000;
+}
+
+@media screen and (max-width: 600px) {
+    /*.footercontainer{
+        display: grid;
+    }
+    .Hue{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    .follow{
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+    .contact{
+        grid-column-start: 2;
+        grid-column-end: 3;
+    }
+    .privacy-policy{
+        font-size: 10px;
+        text-align: right;
+        padding-right: 10px;
+    } */
+}
+@media screen and (max-width: 1000px) {
+    .footercontainer{  
+    }
+    .grid{
+        padding-right: 20px;
+    }
+    .privacy-policy{
+        font-size: 10px;
+        text-align: right;
+        padding-right: 20px;
+    }
 }
 
 /* end of footer css*/
