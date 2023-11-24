@@ -6,7 +6,10 @@
 }
 
 body {
-    margin-bottom: 200px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
 }
 
 
@@ -672,11 +675,12 @@ img.avatar {
     background-position: center bottom;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    position: fixed;
     background-color: white;
     overflow: auto;
-    width: 100vw;
+    width: 100%;
 }
+
+
 
 .strapline,
 .strapline_colour {
@@ -815,11 +819,12 @@ footer {
     color: #2a2a32;
     height: auto;
     width: auto;
-    position: fixed;
+    position: relative;
     overflow: hidden;
     bottom: 0;
     left: 0;
     right: 0;
+    margin-top: auto;
     padding-top: 30px;
     padding-bottom: 30px;
     padding-left: 30px;
