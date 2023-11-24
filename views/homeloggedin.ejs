@@ -12,23 +12,30 @@
 
 <body>
     <div class="container">
+
+        <!-- nav bar -->
         <%- include('navbarlogged'); %>
-        <!-- home page -->
-        <div class="main_page">
-            <div class="strapline">
-                Live your life in
+            <!-- home page -->
+
+            <div class="main_page">
+                <div class="main_content">
+                    <div class="strapline">
+                        <div class="strapline_main">Live your life in</div>
+                        <div class="strapline_colour">Colour</div>
+                    </div>
+                    <div class="main_info">
+                        <div class="home_description">Generate and save your favourite colour palettes using our
+                            interactive tools</div>
+                        <a href="/register" class="nav-link">
+                            <div class="start_button">
+                                <div class="start_text">Get Started!</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="strapline_colour">
-                Colour
-            </div>
-            <div class="dictionary">
-                <div class="dictionary_title">Hue</div>
-                <div class="dictionary_noun">[hju] noun</div>
-                <div class="dictionary_def">The degree of lightness, darkness, and strength of a colour.
-            </div>
-        </div>
-    </div>
-    <script src="/js/hamburger.js"></script>
+            <script src="/js/hamburger.js"></script>
+
 
 </body>
 <%- include ('footer'); %>
