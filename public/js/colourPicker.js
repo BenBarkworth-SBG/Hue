@@ -15,9 +15,9 @@ document.getElementById("complementary").style.display = "none";
 document.getElementById("analogous").style.display = "none";
 document.getElementById("split").style.display = "none";
 // generate palette button
-paletteGeneratorBtn = document.getElementById("paletteGenBtn")
-checkboxSet = new Set();
-
+let paletteGeneratorBtn = document.getElementById("paletteGenBtn")
+let checkboxSet = new Set();
+let hoverAlertNum = 0
 
 function componentToHex(c) {
     // converts number to a string using base 16
@@ -34,12 +34,6 @@ function rgbToHex(r, g, b) {
   }
 
 function hexToRgb(hex) {
-  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-  // let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  // hex = hex.replace(shorthandRegex, function(m, r, g, b) {
-  //   return r + r + g + g + b + b;
-  // });
-
   let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   let r = parseInt(result[1], 16)
   let g = parseInt(result[2], 16)
@@ -59,18 +53,7 @@ function rgbToCmyk (r,g,b) {
   let greenNum = parseInt( (''+g).replace(/\s/g,''),10 ); 
   let blueNum = parseInt( (''+b).replace(/\s/g,''),10 ); 
   
-  // if ( redNum==null || greenNum==null || blueNum==null ||
-  //     isNaN(redNum) || isNaN(greenNum)|| isNaN(blueNum) )
-  // {
-  //   alert ('Please enter numeric RGB values!');
-  //   return;
-  // }
-  // if (redNum<0 || greenNum<0 || blueNum<0 || redNum>255 || greenNum>255 || blueNum>255) {
-  //   alert ('RGB values must be in the range 0 to 255.');
-  //   return;
-  // }
-  
-  // BLACK
+  // black value setting to avoid issue
   if (redNum==0 && greenNum==0 && blueNum==0) {
     k = 100;
     return [0,0,0,100];
@@ -112,14 +95,23 @@ function colors(){
 }
 
 function generatePalettes() {
-  const value = colors()
+  const hexCodeOutside = document.getElementById('hex-code-outside');
+  let value; 
+  if (hexCodeOutside !== null) {
+    value = hexCodeOutside.innerText;
+  }
+  else {
+    value = colors();
+  }
+  if (value === '') {
+    alert("Please select a colour.")
+    return;
+  }
   let checkboxArray = Array.from(checkboxSet)
   let palettes;
-  // let element = document.getElementsByClassName("swatch")
 
   for (let i = 0; i < checkboxArray.length; i++) {
     if (checkboxArray[i] == "monochromatic") {
-      // monochromaticContainer.style.backgroundColor = "";
       palettes = generateMonochromePalette(value)
       monochromaticContainer.innerHTML = '';
     
@@ -142,11 +134,6 @@ function generatePalettes() {
       splitContainer.innerHTML = '';
       document.getElementById("split").style.display = "inline-block";
     }
-  //   for (let i = 0; i < palettes.length; i++) {
-  //     console.log(element)
-  //     console.log(palettes[i])
-  //     element[i].style.backgroundColor = palettes[i]
-  // }
 
     palettes.forEach(color => {
       const element = document.createElement('div');
@@ -175,7 +162,10 @@ function generatePalettes() {
       window[containerChosen].appendChild(element);
     });
   }
-  alert("Hover over the colours to see the corresponding hex code.")
+  if (hoverAlertNum < 1) {
+    alert("Hover over the colours to see the corresponding hex code.")
+  }
+  hoverAlertNum += 1
 }
 
 // function to disable or enable checkboxes
@@ -194,33 +184,6 @@ function checkboxChecker(paletteType) {
   }
   return checkboxSet;
 }
-
-// function resetColors() {
-//   // reset the input and span element values
-//   document.getElementById('red').value = 0;
-//   document.getElementById('green').value = 0;
-//   document.getElementById('blue').value = 0;
-//   document.getElementById('output').innerHTML = 'rgb(0, 0, 0)';
-//   document.getElementById('hexOutput').innerHTML = 'hex(#000000)';
-//   // Clear the palette containers
-//   monochromaticContainer.innerHTML = ''; 
-//   complementaryContainer.innerHTML = '';
-//   analogousContainer.innerHTML = '';
-//   splitContainer.innerHTML = '';
-//   // Clear the background color of the palette containers
-//   monochromaticContainer.style.backgroundColor = "";
-//   complementaryContainer.style.backgroundColor = "";
-//   analogousContainer.style.backgroundColor = "";
-//   splitContainer.style.backgroundColor = "";
-//   // reset colour output
-//   outputs.style.backgroundColor = 'rgb(0, 0, 0)';
-//   // Uncheck all checkboxes
-//   monochromatic.checked = false;
-//   complementary.checked = false;
-//   analogous.checked = false;
-//   split.checked = false;
-//   paletteGeneratorBtn.disabled = true;
-// }
 
 function generateMonochromePalette(baseColor) {
     const palette = [];
@@ -281,38 +244,9 @@ function generateAnalogousPalette(baseColor) {
       const newHex = hslToHex({ h: newHue, s: hsl.s, l: hsl.l });
       palette.push(newHex);
   }
+
   return palette;
 }
-
-// DUPLICATION
-// function hexToHsl(hex) {
-//   hex = hex.replace(/^#/, '');
-//   const r = parseInt(hex.slice(0, 2), 16) / 255;
-//   const g = parseInt(hex.slice(2, 4), 16) / 255;
-//   const b = parseInt(hex.slice(4, 6), 16) / 255;
-//   const max = Math.max(r, g, b);
-//   const min = Math.min(r, g, b);
-//   const l = (max + min) / 2;
-//   let h, s;
-//   if (max === min) {
-//       h = s = 0; // achromatic
-//   } else {
-//       const d = max - min;
-//       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-//       switch (max) {
-//           case r:
-//               h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
-//               break;
-//           case g:
-//               h = ((b - r) / d + 2) / 6;
-//               break;
-//           case b:
-//               h = ((r - g) / d + 4) / 6;
-//               break;
-//       }
-//   }
-//   return { h: h * 360, s: s * 100, l: l * 100 };
-// }
 
 function hexToHsl(hex) {
   hex = hex.replace(/^#/, '');
@@ -365,7 +299,7 @@ function hslToHex(hsl) {
   const red = Math.round(calcHue(p, q, h + 1 / 3) * 255);
   const green = Math.round(calcHue(p, q, h) * 255);
   const blue = Math.round(calcHue(p, q, h - 1 / 3) * 255);
-  return `#${(1 << 24 | red << 16 | green << 8 | blue).toString(16).slice(1).toUpperCase()}`;
+  return `#${(1 << 24 | red << 16 | green << 8 | blue).toString(16).slice(1).toLowerCase()}`;
 }
 
 function generateSplitComplementaryPalette(baseColour, complementaryColor) {

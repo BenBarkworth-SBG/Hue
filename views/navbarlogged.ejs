@@ -13,13 +13,10 @@
                 <ul class="nav-menu">
                     <li><a href="/" class="nav-link">Home</a></li>
                     <li><a href="/palette" class="nav-link">Palette Picker</a></li>
+                    <li><a href="/imagepalette" class="nav-link">Image</a></li>
                     <li><a href="/profile" class="nav-link">Profile</a></li>
                     <li><a href="/logout" class="nav-link">Logout</a>
-                    <% if (userLoggedIn) { %>
-                        <form method="GET" action="logout"></form>
-                    <% } else { %>
-                        <a href="/login">Login</a>
-                    <% } %></li>
+                   
                 </ul>
             </nav>
         </div>

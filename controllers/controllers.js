@@ -1,11 +1,10 @@
-const { ObjectId } = require('mongodb');
 const { db } = require('../db');
 const coloursCollection = db.collection('Colours');
 const usersCollection = db.collection('Users');
 const userInfo = require('../models/user');
 const palette = require('../models/palette');
 
-// Function to get all colours data from DB
+// get all colours data from DB
 async function getAllColoursData() {
   try {
     const colours = await coloursCollection.find().toArray();
@@ -16,7 +15,7 @@ async function getAllColoursData() {
   }
 }
 
-//Function to get all user data
+// get all user data
 async function getAllUserData() {
   try {
     const users = await usersCollection.find().toArray();
@@ -27,7 +26,7 @@ async function getAllUserData() {
   }
 }
 
-// function to getuserbyid
+// get user from objectId
 async function getUserById(id) {
   try {
     const user = await userInfo.findById(id);
@@ -39,11 +38,10 @@ async function getUserById(id) {
   }
 }
 
-// Function to insert a palette into DB
+// insert palette into DB
 async function insertPalette(data) {
   try {
     const paletteDocument = await palette.create(data);
-    // console.log(paletteDocument._id)
     return paletteDocument;
   } 
   catch (error) {
@@ -52,6 +50,7 @@ async function insertPalette(data) {
   }
 }
 
+// get all palettes
 async function getAllPalettesData() {
   try {
     const allPalettes = await palette.find();
@@ -62,7 +61,50 @@ async function getAllPalettesData() {
   }
 }
 
-// function to create user into database
+// get palette by paletteId
+async function getPaletteById(paletteId) {
+  try {
+    const getPalette = await palette.findById(paletteId);
+    return getPalette
+  } catch (error) {
+    console.error('Error retrieving data:', error);
+    return({ error: 'Failed to retrieve data' });
+  }
+}
+
+// get user favourites
+// async function getUserFavourites(user) {
+//   try {
+//     const userFavourites = await userInfo.findOne(user);
+//     const getFavouritePalettes = await getPaletteById(userFavourites.favourites[0].paletteId)
+//     return getFavouritePalettes
+//   } catch (error) {
+//     console.error('Error retrieving data:', error);
+//     return({ error: 'Failed to retrieve data' });
+//   }
+// }
+
+async function getUserFavourites(user) {
+  try {
+    const userFavourites = await userInfo.findOne(user);
+    const favoritePalettes = userFavourites.favourites;
+
+    const palettes = [];
+
+    for (const favorite of favoritePalettes) {
+      const getFavouritePalette = await getPaletteById(favorite.paletteId);
+      palettes.push(getFavouritePalette);
+    }
+
+    return palettes;
+  } catch (error) {
+    console.error('Error retrieving data:', error);
+    return { error: 'Failed to retrieve data' };
+  }
+}
+
+
+// create a user
 async function insertUser(data) {
   try {
     const userDocument = await userInfo.create(data);
@@ -73,7 +115,7 @@ async function insertUser(data) {
   }
 }
 
-// function to update users
+// update a user
 async function updateUser(id, data) {
   try {
     const updatedUser = await userInfo.findByIdAndUpdate(id, data, {
@@ -86,11 +128,10 @@ async function updateUser(id, data) {
   }
 }
 
-// function to delete a user
+// delete a user
 async function deleteUser(id) {
   try {
     const deletedUser = await userInfo.findByIdAndDelete(id);
-    console.log("deleted user", deletedUser)
     return deletedUser
   } catch (error) {
     console.error("Error deleting data:", error);
@@ -98,7 +139,7 @@ async function deleteUser(id) {
   }
 }
 
-//function to get user by username
+// get user by username
 async function getUserByUsername(user) {
   try {
     const getUser = await userInfo.findOne(user);
@@ -109,19 +150,30 @@ async function getUserByUsername(user) {
   }
 }
 
-async function logout(userID) {
-  {
-    req.session.destroy((err) => {
-      if (err) {
-        console.error(err);
-      }
-      res.redirect('login');
-    });
+// delete palette from favourites
+async function deletePaletteFromFavorites(userId, paletteIdToDelete) {
+  try {
+    const user = await userInfo.findById(userId);
+
+    if (!user) {
+      console.error("User not found");
+      return { error: "User not found" };
+    }
+
+    user.favourites = user.favourites.filter(
+      (palette) => palette.paletteId.toString() !== paletteIdToDelete
+    );
+
+    await user.save();
+
+    console.log("Palette deleted from favorites");
+    return { success: "Palette deleted from favorites" };
+  } catch (error) {
+    console.error("Error deleting palette from favorites:", error);
+    return { error: "Failed to delete palette from favorites" };
   }
-};
+}
 
-
-// Export all functions below
 module.exports = {
   getAllColoursData,
   insertPalette,
@@ -132,5 +184,6 @@ module.exports = {
   getUserById,
   deleteUser,
   getUserByUsername,
-  logout
+  getUserFavourites,
+  deletePaletteFromFavorites,
 };

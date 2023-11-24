@@ -2,9 +2,8 @@
 <html lang="en">
 
 <head>
-    <script src="/js/cookie.js"></script>
-    <script> checkCookie()</script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="/js/cookie.js"></script> -->
+    <!-- <script> checkCookie()</script> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Profile Page</title>
     <meta charset="utf-8">
@@ -16,167 +15,71 @@
 
 <body>
     <!--top nav bar-->
-
-    <div class="container">
+  <div class="container">
         <!-- nav bar -->
-        <%- include ('navbarlogged'); %>
+    <%- include ('navbarlogged'); %>
     <div class="profpage">
-        <div class="userprofile">
-            
-            <div class="accname">
-
-                <h1 class="usergradient"><%= user.user %>'s Profile </h1>
-
-
+      <div class="savedpalette">
+        <h1 class="usergradient"> Welcome <%= username %>! </h1>
+      </div>
+      <div class="userprofile">
+        <div class="accname">
+        </div>
+      <!-- Contenedor -->
+      <!-- account drop down -->
+        <section class="accordion">
+          <div class="tab">
+            <input type="checkbox" name="accordion-1" id="cb1">
+            <label for="cb1" class="tab__label">Account Details</label>
+            <div class="tab__content">
+              <li><a href="#">Username: <%= username %></a></li>
+              <li><a href="#">Email: <%= email %></a></li>
+              <!-- <button class="changePass" onclick="redirectToLogin()">Change Password</button> -->
             </div>
-            
-
-       <!-- Contenedor -->
-       <!-- account drop down -->
-        <ul id="accordion" class="accordion">
-    <li>
-        <div class="link"><i class="fa fa-person"></i> Profile Picture <i class="fa fa-chevron-down"></i></div>
-        <ul class="submenu">
-            <li>
-                <input type="file" onchange="previewProfilePicture(event)">
-                
-            
-            </ul>
-        </li>
-        <li>
-        <div class="link"><i class="fa fa-database"></i>Account Details <i class="fa fa-chevron-down"></i></div>
-      <ul class="submenu">
-        <li><a href="#">Username: <%= user.user %></a></li>
-        <li><a href="#">Email: <%= user.userEmail %></a></li>
-        <li><a href="/register">Change Password</a></li>
-      </ul>
-    </li>
-    <li>
-    <div class="link"><i class="fa fa-globe"></i>Settings<i class="fa fa-chevron-down"></i></div>
-    <ul class="submenu">
-      <li><a href="#" id="deleteAccountBtn">Delete my Account</a></li>
-      </li>
-    <!-- Add more menu items if needed -->
-  </ul>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      $('#deleteAccountBtn').on('click', function() {
-        // Show a confirmation dialog
-        var confirmDelete = confirm("Are you sure you want to delete your account?");
-        
-        // If the user confirms, proceed with the deletion
-            
-          if (confirmDelete) {
-        // Make an AJAX request to delete the user's account
-        $.ajax({
-          url: '/profile/delete', // Update the URL to the appropriate endpoint
-          type: 'POST',
-          success: function (response) {
-            alert('You have successfully deleted your account.'); // Show a confirmation message
-            // Optionally, redirect the user to a different page or perform other actions after deletion
-          },
-          error: function (error) {
-            console.error(error);
-            alert('Error deleting account. Please try again later.');
-          }
-        });
-      }
-    });
-  });
-          // Make an AJAX request to delete the user's account
-        //   $.ajax({
-        //     url: '/users/your-user-id', // Replace 'your-user-id' with the actual user ID
-        //     type: 'DELETE',
-        //     success: function(response) {
-        //       alert('You have successfully deleted your account.'); // Show a confirmation message
-        //       // Optionally, redirect the user to a different page or perform other actions after deletion
-        //     },
-        //     error: function(error) {
-        //       console.error(error);
-        //       alert('Error deleting account. Please try again later.');
-        //     }
-        //  });
-    //     }
-    //   });
-    // });
-  </script>
-
-  
-        </div>
-        <div class="savedpalette">
-            <h1>Saved Palettes</h1>
-            <!-- Drop down for palette selection -->
-            <select name="favselect" id="favselect">
-                <option value="all">All</option>
-                <option value="monochromatic">Monochromatic</option>
-                <option value="complementary">Complementary</option>
-                <option value="analogous">Analogous</option>
-            </select>
-            <br><br>
-
-            <input type="submit" value="View Palettes">
-            <button onclick="deleteUserPalettes()">Delete all palettes</button>
-        
-            
-
-        </div>
-
+          </div>
+          <div class="tab">
+            <input type="checkbox" name="accordion-1" id="cb2">
+            <label for="cb2" class="tab__label">Settings</label>
+            <div class="tab__content">
+              <form method="post" action="/profile/delete">
+                <input type="hidden" name="userId" value="<%= id  %>" />
+                <button type="submit" class="delete-button">Delete Account</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
+        <h2 class="profileHeading">Saved Palettes</h2>
+        <div class="profilePaletteContainer">
+          <% if (favouritePalettes && favouritePalettes.length > 0) { %>
+            <% for (let i = 0; i < Math.min(4, favouritePalettes.length); i++) { %>
+              <div class="palette" id="test<%= i + 1 %>">
+                <h3 class="profileHThree"><%= favouritePalettes[i].paletteType %></h3>
+                <div class="paletteInside">
+                  <% for (let j = 0; j < favouritePalettes[i].hexCodes.length; j++) { %>
+                  <div <% /* eslint-disable css-propertyvalueexpected */ %> class="color" style='background-color: <%= favouritePalettes[i].hexCodes[j] %>;'></div>
+                  <% } %>
+                </div>
+                <div>
+                  <form method="post" action="/profile/deletePalette">
+                    <button class="dltpalette" name="paletteID" value="<%= favouritePalettes[i]._id %>" >Delete Palette</button>
+                  </form>
+                </div>
+              </div>
+            <% } %>
+          <% } else { %>
+            <p>You have no saved palettes.</p>
+          <% } %>
+        </div>
+    
+  </div>  
     <script src="/js/hamburger.js"></script>
-    <script> 
-    function showFileInput() {
-        var fileInput = document.getElementById('profilePictureInput');
-        fileInput.click(); // Simulate a click on the file input element
-}
-
-function previewProfilePicture(event) {
-  var input = event.target;
-  var reader = new FileReader();
-  
-  reader.onload = function(){
-    var dataURL = reader.result;
-    var preview = document.getElementById('preview');
-    var image = new Image();
-    image.src = dataURL;
-    preview.innerHTML = ''; // Clear previous preview, if any
-    preview.appendChild(image);
-  };
-  
-  reader.readAsDataURL(input.files[0]);
-}
-    </script>
-    <!-- User account dropdown -->
-    <script>
-$(document).ready(function() {
-    var Accordion = function(el, multiple) {
-      this.el = el || {};
-      this.multiple = multiple || false;
-
-      var links = this.el.find('.link');
-      
-      links.on('click', { el: this.el, multiple: this.multiple }, this.dropdown);
-    };
-
-    Accordion.prototype.dropdown = function(e) {
-      var $el = e.data.el;
-      var $this = $(this);
-      var $next = $this.next();
-
-      $next.slideToggle();
-      $this.parent().toggleClass('open');
-
-      if (!e.data.multiple) {
-        $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+    <!-- <script>
+      function redirectToLogin() {
+        window.location.href = "/login";
       }
-    };
-
-    var accordion = new Accordion($('#accordion'), false);
-  });
-
-  </script>
-
+    </script> -->
 </body>
 <%- include ('footer'); %>
 

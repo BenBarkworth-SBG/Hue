@@ -2,12 +2,9 @@
 <html lang="en">
 
 <head>
-    <script src="/js/cookie.js"></script>
-    <script> checkCookie()</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hue</title>
-    <!-- <link rel="stylesheet" href="/css/mobile.css"> -->
     <link rel="stylesheet" href="/css/desktop.css">
     <!-- link to fonts -->
     <link rel="icon" type="image/x-icon" href="/images/favicon_logo.png">
@@ -15,6 +12,7 @@
 
 <body>
     <div class="container">
+
         <!-- nav bar -->
         <!-- checks wether user is logged in to determine which navbar to use -->
         <% if (userLoggedIn) { %>
@@ -43,6 +41,7 @@
                                 </div>
                             </div>
                             <script src="/js/hamburger.js"></script>
+
 
 </body>
 <%- include ('footer'); %>
