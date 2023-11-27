@@ -78,13 +78,15 @@ async function getUserFavourites(user) {
     const favoritePalettes = userFavourites.favourites;
 
     const palettes = [];
+    const names = []
 
     for (const favorite of favoritePalettes) {
       const getFavouritePalette = await getPaletteById(favorite.paletteId);
+      names.push(favorite.paletteName)
       palettes.push(getFavouritePalette);
     }
 
-    return palettes;
+    return {palettes,names};
   } catch (error) {
     console.error('Error retrieving data:', error);
     return { error: 'Failed to retrieve data' };

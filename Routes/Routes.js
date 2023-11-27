@@ -125,7 +125,7 @@ router.get('/profile', async (req, res) => {
     const userEmail = req.session.email; 
     const user = req.session.user;
     const favouritePalettes = await dataController.getUserFavourites({user: user})
-    res.render('profile', {username: user, email: userEmail, id: userId, favouritePalettes: favouritePalettes});
+    res.render('profile', {username: user, email: userEmail, id: userId, favouritePalettes: favouritePalettes.palettes, paletteNames: favouritePalettes.names});
   } else {
     res.redirect('/login');
   }

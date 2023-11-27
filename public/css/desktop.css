@@ -1218,6 +1218,20 @@ a {
     height: 75px;
 }
 
+.profileHexCodes {
+    font-size: 12px;
+    line-height: 50px;
+    font-weight: bolder;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 640px) {
+    .color{
+        width: 20%;
+    }
+}
+
 .profileHeading {
     text-align: center;
     margin-top: 1%;
