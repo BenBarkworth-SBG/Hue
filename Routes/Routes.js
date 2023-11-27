@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const dataController = require('../controllers/controllers');
-const db = require('../db');
 const bcrypt = require('bcrypt'); 
-const { error } = require('console');
 const loginController = require('../controllers/loginController');
 
 //render the register page
@@ -32,15 +30,7 @@ router.get('/palette', async (req, res) => {
   }
 });
 
-//render the palette page
-router.get('/random', async (req, res) => {    
-  // if (req.session.authorised) {
-    res.render('random');
-  // } else {
-  //   res.redirect('login');
-  // }
-});
-
+//render the homeLoggedIn page
 router.get('/', async (req, res) => {   
   if (req.session.authorised) { 
     res.render("homeloggedin");
@@ -54,7 +44,6 @@ router.get('/', async (req, res) => {
 //Handle palette creation
 router.post('/palette', async (req, res) => {    
   try {
-    // has to be declared here to be accessed later in the try block
     let paletteDbInsertion;
     const {hexCodes, paletteType, name} = req.body;
     const username = req.session.user
@@ -69,7 +58,6 @@ router.post('/palette', async (req, res) => {
     const dataTest = {user: username}
     const pullUser = await dataController.getUserByUsername(dataTest);
     const userID = await dataController.getUserById(pullUser._id.toString());
-    // conversion to string needed to ensure comparison can be made as they are complex object types
     const userPaletteCheck = userID.favourites.filter((favourite) => favourite.paletteId.toString() === paletteDbInsertion._id.toString() || favourite.paletteName === name);
     if (userPaletteCheck.length == 0) {
       await dataController.updateUser(pullUser._id.toString(), {$push: {favourites: {paletteName: name, paletteId: paletteDbInsertion._id}}});
@@ -85,15 +73,15 @@ router.post('/palette', async (req, res) => {
   }
 });
 
+//handle login
 router.post ('/login', loginController);
 
-//writes to DB after request from frontend
-router.post('/users', async (req, res) => {    
+//Handle user creation
+router.post('/signUp', async (req, res) => {    
   try {
     const {user, email, pass, favourites} = req.body;
     const hashedPassword = await bcrypt.hash(pass, 10); // Hash the password
     let userID = await dataController.insertUser({user, email, pass: hashedPassword, favourites}); // Store the hashed password
-    // console.log(req.body)
 
     let username;
     if (typeof user == 'string') {
@@ -101,7 +89,6 @@ router.post('/users', async (req, res) => {
     } else {
       username = req.session.user;
     }
-    // console.log(username)
     res.redirect('/profile')
   } catch (error) {
     console.log(error);
@@ -109,7 +96,7 @@ router.post('/users', async (req, res) => {
   }
 });
 
-
+//render profile page
 router.get('/profile', async (req, res) => {
   if (req.session.authorised) {
     const userId = req.session.userid; 
@@ -122,18 +109,19 @@ router.get('/profile', async (req, res) => {
   }
 })
 
+//handle delete user
 router.post("/profile/delete", async (req, res) => {
   try {
     const deletedUser = await dataController.deleteUser(req.body.userId);
     req.session.destroy();
     return res.render('register', { message: 'Account deleted successfully' });
-    // res.redirect('/login');
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
+//handle delete palette
 router.post("/profile/deletePalette", async (req, res) => {
  try {
     const deletedPalette = await dataController.deletePaletteFromFavorites(req.session.userid, req.body.paletteID)
@@ -144,6 +132,7 @@ router.post("/profile/deletePalette", async (req, res) => {
     }
 });
 
+//handle logout
 router.get('/logout', (req, res) => {
   try {
     req.session.destroy();
