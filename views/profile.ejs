@@ -50,7 +50,7 @@
           <% if (favouritePalettes && favouritePalettes.length > 0) { %>
             <% for (let i = 0; i < favouritePalettes.length; i++) { %>
               <div class="palette" id="test<%= i + 1 %>">
-                <h3 class="profileHThree"><%= favouritePalettes[i].paletteType %></h3>
+                <h3 class="profileHThree"><%= paletteNames[i] %></h3>
                 <div class="paletteInside">
                   <% for (let j = 0; j < favouritePalettes[i].hexCodes.length; j++) { %>
                   <div <% /* eslint-disable css-propertyvalueexpected */ %> class="color" style='background-color: <%= favouritePalettes[i].hexCodes[j] %>;'></div>
@@ -70,6 +70,33 @@
     
   </div>  
     <script src="/js/hamburger.js"></script>
+    <script src="/js/colourPicker.js"></script>
+    <script>
+      let element = document.getElementsByClassName("color")
+      for (let index = 0; index < element.length; index++) {
+        // console.log(element)
+        element[index].addEventListener("mouseenter", function(){
+        // element[index].value = element[index].style.backgroundColor
+        console.log(element[index].style.backgroundColor)
+        let rgbSnippet = element[index].style.backgroundColor.substr(4,11);
+        let rgbSplit = rgbSnippet.split(',')
+        console.log(rgbSplit)
+        // console.log(rgbSnippet)
+        let hexConversion = rgbToHex(rgbSplit[0],rgbSplit[1],rgbSplit[2]);
+        element[index].value = hexConversion
+        // this applies CSS class to div innerHTML
+        // if (blackValue > 80) {
+        //   element.innerHTML = `<p class="lightColours"> ${element.value}</p>`
+        // }
+        // else {
+          element[index].innerHTML = `<p class="profileHexCodes"> ${element[index].value}</p>`
+        // }
+      })
+      element[index].addEventListener("mouseleave", function(){
+        element[index].innerHTML = ''
+      })
+      }
+    </script>
 </body>
 <%- include ('footer'); %>
 
