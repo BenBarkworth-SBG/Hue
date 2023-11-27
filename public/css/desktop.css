@@ -768,9 +768,13 @@ img.avatar {
 
 @media screen and (max-width: 880px) {
     .start_button{
-        position: absolute;
+        display: flex;
+        justify-content: center;
         align-items: center;
-        margin-left: 0px;
+        position: fixed;
+    }
+    .strapline{
+        
     }
 }
 
