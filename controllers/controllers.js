@@ -105,14 +105,24 @@ async function insertUser(data) {
 
 // update a user
 async function updateUser(id, data) {
+  let updatedUser = null;
   try {
-    const updatedUser = await userInfo.findByIdAndUpdate(id, data, {
+    updatedUser = await userInfo.findByIdAndUpdate(id, data, {
+      runValidators: true,
       new: true,
     });
     return updatedUser;
   } catch (error) {
-    console.error("error updating data", error);
-    return {error: "failed to update data"}
+    if (error.name === 'ValidationError') {
+      const errorMessage = error.errors['favourites.paletteName'].message;
+      // if updatedUser is null, create an object to store the error
+      updatedUser = updatedUser || {};
+      updatedUser.error = errorMessage
+    } else {
+      updatedUser = updatedUser || {};
+      updatedUser.error = "Error updating user data";
+    }
+    return updatedUser;
   }
 }
 

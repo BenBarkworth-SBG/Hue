@@ -16,16 +16,15 @@ async function savePalette(elem) {
         for (let index = 0; index < divChildren.length; index++) {
             hexCodes.push(divChildren[index].value)
         }
-        // let hexSplit = hex.slice(4,11)
-        const body = {hexCodes: hexCodes, paletteType: buttonId, name: namePrompt}
+        const body = {hexCodes: hexCodes, paletteType: buttonId, paletteName: namePrompt}
         const namePattern = /[^A-Za-z0-9\s]/;
         if (!body.paletteType || !body.hexCodes) {
             alert("Internal server error.")
             return;
-        } else if (!body.name.trim()) {
+        } else if (!body.paletteName.trim()) {
             alert("Please ensure you provide a name.")
             return;
-        } else if (namePattern.test(body.name) || body.name.length > 20) {
+        } else if (namePattern.test(body.paletteName) || body.paletteName.length > 20) {
             alert("Please ensure you provide a name that contains only letters and numbers and is less than 20 characters long.")
             return;
         } else {
@@ -37,22 +36,22 @@ async function savePalette(elem) {
             })
             .then(response => {
                 if (response.ok) {
+                    checkboxSet.delete(buttonId)        
+                    let combined = elem.id + "Container"
+                    const identifier = document.getElementById(combined)
+                    identifier.innerHTML = '';
+                    elem.style.display = "none";
+                    const checkboxName = String(buttonId + "Checkbox")
+                    const checkbox = document.getElementById(checkboxName)
+                    checkbox.checked = false
+                    if (checkboxSet.size === 0) {
+                        paletteGeneratorBtn.disabled = true;
+                        // window.location.reload()
+                    }
                     alert("Saved to database")
                 } 
                 else {
                     alert("The palette is already in the database or the name has been used previously")
-                }
-                checkboxSet.delete(buttonId)        
-                let combined = elem.id + "Container"
-                const identifier = document.getElementById(combined)
-                identifier.innerHTML = '';
-                elem.style.display = "none";
-                const checkboxName = String(buttonId + "Checkbox")
-                const checkbox = document.getElementById(checkboxName)
-                checkbox.checked = false
-                if (checkboxSet.size === 0) {
-                    paletteGeneratorBtn.disabled = true;
-                    // window.location.reload()
                 }
                 return response.json();
             })
