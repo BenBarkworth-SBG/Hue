@@ -1,8 +1,14 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    user: String,
-    email: String,
+    user: {
+        type: String,
+        unique: true
+    },
+    email: {
+        type: String,
+        unique: true
+    },
     pass: String,
     favourites: [{
         paletteName: {

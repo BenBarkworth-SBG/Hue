@@ -99,7 +99,7 @@ router.post('/palette', async (req, res) => {
 router.post ('/login', loginController);
 
 //Handle user creation
-router.post('/signUp', async (req, res) => {    
+router.post('/register', async (req, res) => {    
   try {
     const {user, email, pass, favourites} = req.body;
     const hashedPassword = await bcrypt.hash(pass, 10); // Hash the password
@@ -113,8 +113,18 @@ router.post('/signUp', async (req, res) => {
     }
     res.redirect('/profile')
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error.message });
+    if (error.keyValue) {
+        let value;
+        for (const prop in error.keyValue) {
+            // access enum properties in object
+            value = error.keyValue[prop]
+        }
+        return res.status(400).json({ error: `${value} already exists in the database.` });
+    }
+    else {
+        console.log(error)
+        return res.status(400).json({error: error.message});
+    }
   }
 });
 
