@@ -3,6 +3,8 @@ const router = express.Router();
 const dataController = require('../controllers/controllers');
 const bcrypt = require('bcrypt'); 
 const loginController = require('../controllers/loginController');
+const userInfo = require('../models/user');
+const palette = require('../models/palette');
 
 //render the register page
 router.get('/register', (req, res) => {    
@@ -41,13 +43,21 @@ router.get('/', async (req, res) => {
 });
 
 
-//Handle palette creation
-router.post('/palette', async (req, res) => {    
+// handle palette creation
+router.post('/palette', async (req, res) => {  
+  // these have to be declared here to be accessed in the catch block 
+  let paletteCheck; 
+  let updateUserValidation;
   try {
     let paletteDbInsertion;
-    const {hexCodes, paletteType, name} = req.body;
+    const {hexCodes, paletteType, paletteName} = req.body;
     const username = req.session.user
     const data = await dataController.getAllPalettesData(); 
+    const paletteInformation = new palette({hexCodes: hexCodes, paletteType: paletteType});
+    paletteCheck = await paletteInformation.validateSync();
+    if (paletteCheck && paletteCheck.errors) {
+      throw new Error("Palette validation failed");
+    }
     const check = data.filter((d) => d.paletteType == paletteType && d.hexCodes[0] == hexCodes[0]);
     if (check.length == 0) {
        paletteDbInsertion = await dataController.insertPalette({hexCodes, paletteType});
@@ -55,12 +65,16 @@ router.post('/palette', async (req, res) => {
     else {
       paletteDbInsertion = check[0]
     }
-    const dataTest = {user: username}
-    const pullUser = await dataController.getUserByUsername(dataTest);
+    const userDetails = {user: username}
+    const pullUser = await dataController.getUserByUsername(userDetails);
     const userID = await dataController.getUserById(pullUser._id.toString());
-    const userPaletteCheck = userID.favourites.filter((favourite) => favourite.paletteId.toString() === paletteDbInsertion._id.toString() || favourite.paletteName === name);
+    // conversion to string needed to ensure comparison can be made as they are complex object types
+    const userPaletteCheck = userID.favourites.filter((favourite) => favourite.paletteId.toString() === paletteDbInsertion._id.toString() || favourite.paletteName === paletteName);
     if (userPaletteCheck.length == 0) {
-      await dataController.updateUser(pullUser._id.toString(), {$push: {favourites: {paletteName: name, paletteId: paletteDbInsertion._id}}});
+      updateUserValidation = await dataController.updateUser(pullUser._id.toString(), {$push: {favourites: {paletteName: paletteName, paletteId: paletteDbInsertion._id}}});
+      if (updateUserValidation && updateUserValidation.error) {
+        throw new Error("Palette name validation failed");
+      }
     }
     else {
       throw new Error("Database already contains that palette")
@@ -68,8 +82,16 @@ router.post('/palette', async (req, res) => {
     res.send(req.body)
   } 
   catch (error) {
-    console.log(error)
-    return res.status(400).json({error: error.message});
+    if (paletteCheck && paletteCheck.errors && paletteCheck.errors['paletteType']) {
+      return res.status(400).json({ error: paletteCheck.errors['paletteType'].message });
+    }
+    else if (updateUserValidation.error === 'Must only contain letters and numbers and be less than 20 characters') {
+      return res.status(400).json({ error: updateUserValidation.error});
+    }
+    else {
+      console.log(error)
+      return res.status(400).json({error: error.message});
+    }
   }
 });
 
