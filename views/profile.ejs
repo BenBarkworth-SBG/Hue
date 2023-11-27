@@ -74,23 +74,19 @@
     <script>
       let element = document.getElementsByClassName("color")
       for (let index = 0; index < element.length; index++) {
-        // console.log(element)
         element[index].addEventListener("mouseenter", function(){
-        // element[index].value = element[index].style.backgroundColor
-        console.log(element[index].style.backgroundColor)
         let rgbSnippet = element[index].style.backgroundColor.substr(4,11);
         let rgbSplit = rgbSnippet.split(',')
-        console.log(rgbSplit)
-        // console.log(rgbSnippet)
         let hexConversion = rgbToHex(rgbSplit[0],rgbSplit[1],rgbSplit[2]);
         element[index].value = hexConversion
-        // this applies CSS class to div innerHTML
-        // if (blackValue > 80) {
-        //   element.innerHTML = `<p class="lightColours"> ${element.value}</p>`
-        // }
-        // else {
+        let cmykValues = rgbToCmyk(rgbSplit[0],rgbSplit[1],rgbSplit[2])
+        let blackValue = cmykValues[3]
+        if (blackValue > 80) {
+          element[index].innerHTML = `<p class="profileHexCodesLight"> ${element[index].value}</p>`
+        }
+        else {
           element[index].innerHTML = `<p class="profileHexCodes"> ${element[index].value}</p>`
-        // }
+        }
       })
       element[index].addEventListener("mouseleave", function(){
         element[index].innerHTML = ''
