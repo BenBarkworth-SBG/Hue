@@ -2,15 +2,12 @@
 <html lang="en">
 
 <head>
-    <!-- <script src="/js/cookie.js"></script> -->
-    <!-- <script> checkCookie()</script> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Profile Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/desktop.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon_logo.png">
-    <!-- add css stylesheet in this and other EJS files -->
 </head>
 
 <body>
@@ -25,7 +22,6 @@
       <div class="userprofile">
         <div class="accname">
         </div>
-      <!-- Contenedor -->
       <!-- account drop down -->
         <section class="accordion">
           <div class="tab">
@@ -34,7 +30,6 @@
             <div class="tab__content">
               <li><a href="#">Username: <%= username %></a></li>
               <li><a href="#">Email: <%= email %></a></li>
-              <!-- <button class="changePass" onclick="redirectToLogin()">Change Password</button> -->
             </div>
           </div>
           <div class="tab">
@@ -75,11 +70,6 @@
     
   </div>  
     <script src="/js/hamburger.js"></script>
-    <!-- <script>
-      function redirectToLogin() {
-        window.location.href = "/login";
-      }
-    </script> -->
 </body>
 <%- include ('footer'); %>
 

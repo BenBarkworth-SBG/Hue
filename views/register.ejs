@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/desktop.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon_logo.png">
-    <!-- add css stylesheet in this and other EJS files -->
 </head>
 
 <body>
@@ -36,7 +35,7 @@
     </div>
     
 
-    <script> // listens for the register button when users register
+    <script>
         document.getElementById("regform").addEventListener("submit", sendRegister);
         function sendRegister(e){
             const user = document.getElementById("username").value;
@@ -51,14 +50,13 @@
 
             const jsonBody = JSON.stringify(body);
             
-            fetch("/users", {
+            fetch("/signUp", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: `${jsonBody}`,
             })
             .then((res) => {
                 if (res.ok) {
-                    // redirect to profile page
                     window.location.href = res.url;
                 } else {
                     console.log("Registration failed");

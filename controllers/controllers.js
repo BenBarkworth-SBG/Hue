@@ -30,7 +30,6 @@ async function getAllUserData() {
 async function getUserById(id) {
   try {
     const user = await userInfo.findById(id);
-    // console.log(user)
     return user;
   } catch (error) {
     console.error("error retrieving user", error);
@@ -72,18 +71,7 @@ async function getPaletteById(paletteId) {
   }
 }
 
-// get user favourites
-// async function getUserFavourites(user) {
-//   try {
-//     const userFavourites = await userInfo.findOne(user);
-//     const getFavouritePalettes = await getPaletteById(userFavourites.favourites[0].paletteId)
-//     return getFavouritePalettes
-//   } catch (error) {
-//     console.error('Error retrieving data:', error);
-//     return({ error: 'Failed to retrieve data' });
-//   }
-// }
-
+// get user favourites by username
 async function getUserFavourites(user) {
   try {
     const userFavourites = await userInfo.findOne(user);

@@ -31,12 +31,11 @@ const conn = mongoose.connect(MONGO_URI, {
   console.error('Error connecting to MongoDB:', err);
 });
 
-// function to close connection to mongodb
+// function to close connection to mongodb if needed
 async function closeConnection() {
   await client.close();
   console.log('Closed MongoDB connection');
 }
-//closeConnection()
 
 // export variables
 module.exports = {
