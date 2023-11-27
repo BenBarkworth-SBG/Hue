@@ -36,6 +36,7 @@ body {
         min-width: 95%;
         align-items: center;
         margin-right: 0px;
+        margin-bottom: 10px;
     }
 
     .divPaletteContainer {
@@ -62,6 +63,7 @@ body {
     border-radius: 20px;
     padding: 2.5% 0 0 0;
     margin-right: 5%;
+    margin-bottom: 10px;
 }
 
 .divPaletteContainer {
@@ -163,6 +165,7 @@ span {
     border-radius: 8px;
     margin: 1% 0 0 0;
     padding: 1.5%;
+    margin-bottom: 10px;
     box-shadow: 0 2.5px 2.5px rgba(37, 37, 37, 0.95);
 }
 
@@ -200,6 +203,7 @@ input[type=submit],
     border: solid 20px #ebf1fd;
     border-radius: 20px;
     display: flex;
+    margin-bottom: 10px;
     /* align-items: center; */
 }
 
