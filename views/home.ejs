@@ -12,32 +12,30 @@
 
 <body>
     <div class="container">
-
         <!-- nav bar -->
         <%- include('navbar'); %>
             <!-- home page -->
     </div>
-            <div class="main_page">
-                <div class="main_content">
-                    <div class="strapline">
-                        <div class="strapline_main">Live your life in</div>
-                        <div class="strapline_colour">Colour</div>
-                    </div>
-                    <div class="main_info">
-                        <div class="home_description">Generate and save your favourite colour palettes using our
-                            interactive tools</div>
-                        <a href="/register" class="nav-link">
-                            <div class="start_button">
-                                <div class="start_text">Get Started!</div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+    <div class="main_page">
+        <div class="main_content">
+            <div class="strapline">
+                <div class="strapline_main">Live your life in</div>
+                <div class="strapline_colour">Colour</div>
             </div>
-            <script src="/js/hamburger.js"></script>
-
-
+            <div class="main_info">
+                <div class="home_description">Generate and save your favourite colour palettes using our
+                    interactive tools!
+                </div>
+                <a href="/register" class="nav-link">
+                    <div class="start_button">
+                        <div class="start_text">Get Started!</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="/js/hamburger.js"></script>
+    <%- include ('footer'); %>
 </body>
-<%- include ('footer'); %>
 
 </html>
