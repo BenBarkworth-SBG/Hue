@@ -49,7 +49,6 @@ body {
         display: flex;
         flex-direction: column;
         align-items: center;
-        /* vertical-align:center; */
     }
 
     .lbl {
@@ -148,7 +147,6 @@ span {
     background: #84c4e1;
     color: #fff;
     padding: 2px 20px;
-    /* box-shadow: 0 0 20px rgba(0, 139, 253, 0.25); */
     font-size: 18px;
     letter-spacing: 0.5px;
     border-radius: 2px;
@@ -223,13 +221,6 @@ input[type=submit],
     animation: textShine 2s ease-in-out infinite alternate;
 }
 
-/* .swatch {
-    width: 20%;
-    height: 100px;
-    border-left: solid #ebf1fd 5px;
-    border-right: solid #ebf1fd 5px;
-} */
-
 .darkColours {
     line-height: 60px;
 }
@@ -265,7 +256,6 @@ input[type=submit],
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
     background-size: 500% auto;
     animation: textShine 2s ease-in-out infinite alternate;
     border: none;
@@ -334,15 +324,11 @@ input[type=submit],
 }
 
 /* Navbar */
-
 .navbar {
     overflow: hidden;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-
-    /* padding: 1rem 1.5rem; */
 }
 
 .navbar a {
@@ -364,7 +350,6 @@ input[type=submit],
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
     background-size: 500% auto;
     animation: textShine 2s ease-in-out infinite alternate;
     border: none;
@@ -456,7 +441,6 @@ input[type=submit],
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        text-fill-color: transparent;
         background-size: 500% auto;
         animation: textShine 2s ease-in-out infinite alternate;
         border: none;
@@ -510,7 +494,6 @@ input[type=submit],
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
     background-size: 500% auto;
     animation: textShine 2s ease-in-out infinite alternate;
     border: none;
@@ -650,7 +633,6 @@ img.avatar {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
     background-size: 500% auto;
     animation: textShine 2s ease-in-out infinite alternate;
     border: none;
@@ -661,17 +643,6 @@ img.avatar {
     justify-content: space-evenly;
     margin-bottom: 5%;
 }
-
-/* 
-.lbl {
-    align-items: center;
-    min-width: 10%;
-}
-
-/* .i {
-    align-items: center;
-} */
-
 
 /* start of main home page css */
 .main_page {
@@ -791,9 +762,7 @@ img.avatar {
     .start_text{
         font-size: 30px;
     }
-    .strapline{
-       
-    }
+
 }
 @media screen and (max-width: 313px) {
     .home_description{
@@ -868,7 +837,6 @@ spanfoot {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-fill-color: transparent;
     background-size: 500% auto;
 }
 
@@ -996,8 +964,6 @@ a {
     margin-top: 5%;
 }
 
-
-
 /* End of Profile Page */
 /* accordion */
 .tab input {
@@ -1020,6 +986,7 @@ a {
 .accordion {
     background: white;
     border: 1px solid;
+    border-color: #6d62e9;
     border-radius: 0.5rem;
     overflow: hidden;
     width: 100%;
@@ -1067,8 +1034,6 @@ a {
     font-size: 0.75rem;
 }
 
-
-
 /* Arrow animation */
 .tab input:not(:checked)+.tab__label:hover::after {
     animation: bounce .5s infinite;
@@ -1083,8 +1048,6 @@ a {
         transform: rotate(90deg) translate(-.25rem);
     }
 }
-
-
 /* end of accordion */
 
 
