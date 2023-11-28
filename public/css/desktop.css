@@ -680,13 +680,17 @@ img.avatar {
     background-repeat: no-repeat;
     background-color: white;
     overflow: auto;
-    padding-top: 5%;
+}
+.main_content{
+    height: 550px;
+    margin-top: 5%;
 }
 
 .strapline {
     text-align: left;
     margin-left: 5%;
 }
+
 .strapline_main {
     color: #a9bbf9;
     font-family: 'Paytone One', sans-serif;
@@ -708,11 +712,10 @@ img.avatar {
     font-size: 90px;
     letter-spacing: 5px;
     display: inline-block;
-    margin-left: 2%;
+    margin-left: 1%;
 }
     
 .main_info {
-
     height: 400px;
     width: 1000px;
     margin-left: 5%;
@@ -731,13 +734,13 @@ img.avatar {
     padding-bottom: 30px;
     max-width:60%;
     margin-left: 5%;
+    margin-top: 5%;
 }
 
 .start_text{
     font-size: 40px;
     text-align: center;
     vertical-align: middle;
-    
 }
 
 .start_button {
@@ -750,14 +753,11 @@ img.avatar {
     padding-right: 3%;
     padding-top: 1%;
     padding-bottom: 1%;
-   
-
+    vertical-align: middle;
+    margin-top: 2%;
 }
 
 @media screen and (max-width: 1230px) {
-    .main_info{
-
-    }
     .strapline_main{
        font-size: 6.5vw;
     }
@@ -773,9 +773,6 @@ img.avatar {
         align-items: center;
         position: fixed;
     }
-    .strapline{
-        
-    }
 }
 
 @media screen and (max-width: 750px) {
@@ -785,10 +782,27 @@ img.avatar {
     }
 }
 
+@media screen and (max-width: 471px) {
+    .home_description{
+        font-size: 4vw;
+        width: 250px;
+    }
+    .start_text{
+        font-size: 30px;
+    }
+    .strapline{
+       
+    }
+}
+@media screen and (max-width: 313px) {
+    .home_description{
+        font-size: 3.5vw;
+        width: 200px;
+    }
+}
 
 /* start of footer css*/
 footer {
-
     background-color: #e6ebf5;
     color: #2a2a32;
     height: auto;
@@ -910,37 +924,41 @@ a {
 }
 
 @media screen and (max-width: 600px) {
-    /*.footercontainer{
-        display: grid;
-    }
-    .Hue{
-        grid-column-start: 1;
-        grid-column-end: 3;
-    }
-    .follow{
-        grid-column-start: 1;
-        grid-column-end: 2;
-    }
-    .contact{
-        grid-column-start: 2;
-        grid-column-end: 3;
-    }
-    .privacy-policy{
+    .a{
         font-size: 10px;
-        text-align: right;
-        padding-right: 10px;
-    } */
-}
-@media screen and (max-width: 1000px) {
-    .footercontainer{  
     }
+    .email{
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
     .grid{
         padding-right: 20px;
+        grid-template-columns: 140px 140px;
+
     }
     .privacy-policy{
         font-size: 10px;
         text-align: right;
         padding-right: 20px;
+    }
+    .email{
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .grid{
+        padding-right: 20px;
+        grid-template-columns: 120px 120px;
+    }
+    .email{
+        font-size: 12px;
+    }
+
+    .strapline_foot{
+        font-size: 12px;
     }
 }
 
