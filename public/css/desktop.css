@@ -522,10 +522,18 @@ form {
 
 
 /* Full-width inputs */
+#regform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 input[type=text],
 input[type=password],
 input[type=email] {
-    width: 100%;
+    width: 25%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -535,6 +543,14 @@ input[type=email] {
     border-radius: 4px;
 }
 
+.userPass{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+}
 /* Sets the display for the register and login buttons */
 .accountbtns {
     display: flex;
