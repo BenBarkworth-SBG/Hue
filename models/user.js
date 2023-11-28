@@ -3,11 +3,15 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     user: {
         type: String,
-        unique: true
+        unique: true,
+        match: /^(?! )[A-Za-z0-9\s]+$/,
+        maxlength: 30
     },
     email: {
         type: String,
-        unique: true
+        unique: true,
+        match: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        maxlength: 50
     },
     pass: String,
     favourites: [{
