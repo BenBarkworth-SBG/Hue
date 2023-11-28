@@ -30,7 +30,7 @@
                 <% if (locals.message) { %>
                   <p><%= locals.message %></p>
                 <% } %>
-              </div>
+            </div>
         </div>
     </div>
     
@@ -50,19 +50,41 @@
 
             const jsonBody = JSON.stringify(body);
             
-            fetch("/signUp", {
+            fetch("/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: `${jsonBody}`,
+                body: jsonBody,
             })
             .then((res) => {
                 if (res.ok) {
                     window.location.href = res.url;
-                } else {
-                    console.log("Registration failed");
+                }
+                else {
+                    // console.log(res)
+                    return res.json();
                 }
             })
-            .catch((err) => console.error(err));
+            .then((errorData) => {
+                // Handle the error data
+                if (errorData && errorData.error) {
+                    let errorMessage;
+                    try {
+                        const errorObject = JSON.parse(errorData.error);
+                        // Check if the parsed object has a 'message' property
+                        if (errorObject.message) {
+                            errorMessage = errorObject.message;
+                        } else {
+                            errorMessage = 'An unknown error occurred.';
+                        }
+                    } catch (e) {
+                        errorMessage = errorData.error;
+                    }
+                    alert(errorMessage)
+                }                    
+            })
+            .catch((err) => {
+                console.error(err);
+            });
             e.preventDefault();
             return false;
         }

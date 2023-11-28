@@ -100,8 +100,9 @@ async function insertUser(data) {
     const userDocument = await userInfo.create(data);
     console.log(`Inserted a document with ID: ${userDocument._id}`);
     return userDocument._id
-  } catch (err) {
-    console.error('Error inserting document', err);
+  } catch (error) {
+    // sends the error up the call stack
+    throw error;
   }
 }
 
