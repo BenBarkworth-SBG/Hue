@@ -82,10 +82,11 @@ router.post('/palette', async (req, res) => {
     res.send(req.body)
   } 
   catch (error) {
+    console.log(error)
     if (paletteCheck && paletteCheck.errors && paletteCheck.errors['paletteType']) {
       return res.status(400).json({ error: paletteCheck.errors['paletteType'].message });
     }
-    else if (updateUserValidation.error === 'Must only contain letters and numbers and be less than 20 characters') {
+    else if (updateUserValidation && updateUserValidation.errors && updateUserValidation.error === 'Must only contain letters and numbers and be less than 20 characters') {
       return res.status(400).json({ error: updateUserValidation.error});
     }
     else {
