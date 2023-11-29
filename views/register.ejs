@@ -17,7 +17,7 @@
     <!--log-in form-->
 
         <div class="reg">
-            <form id="regform" method="POST">
+            <form id="regform">
                 <label for="username"><b>Username</b></label>
                 <input type="text" id="username" name="username" required><br>
                 <label for="email"><b>Email</b></label>
@@ -42,51 +42,60 @@
             const email = document.getElementById("email").value;
             const pass = document.getElementById("password").value;
 
-            const body = {
-                user: user,
-                email: email,
-                pass: pass,
-            };
+            const namePattern = /^[^<>]{10,50}$/;
+            if (!namePattern.test(pass)) {
+                alert("Please ensure you provide a password that is between 10 and 50 characters long and doesn't contain arrow symbols")
+                return;
+            }
+            else {
+                const body = {
+                    user: user,
+                    email: email,
+                    pass: pass,
+                };
 
-            const jsonBody = JSON.stringify(body);
-            
-            fetch("/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: jsonBody,
-            })
-            .then((res) => {
-                if (res.ok) {
-                    window.location.href = res.url;
-                }
-                else {
-                    // console.log(res)
-                    return res.json();
-                }
-            })
-            .then((errorData) => {
-                // Handle the error data
-                if (errorData && errorData.error) {
-                    let errorMessage;
-                    try {
-                        const errorObject = JSON.parse(errorData.error);
-                        // Check if the parsed object has a 'message' property
-                        if (errorObject.message) {
-                            errorMessage = errorObject.message;
-                        } else {
-                            errorMessage = 'An unknown error occurred.';
-                        }
-                    } catch (e) {
-                        errorMessage = errorData.error;
+                const jsonBody = JSON.stringify(body);
+                
+                fetch("/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: jsonBody,
+                })
+                .then((res) => {
+                    if (res.ok) {
+                        window.location.href = res.url;
                     }
-                    alert(errorMessage)
-                }                    
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-            e.preventDefault();
-            return false;
+                    else {
+                        // console.log(res)
+                        return res.json();
+                    }
+                })
+                .then((errorData) => {
+                    // Handle the error data
+                    if (errorData && errorData.error) {
+                        let errorMessage;
+                        try {
+                            const errorObject = JSON.parse(errorData.error);
+                            // Check if the parsed object has a 'message' property
+                            if (errorObject.message) {
+                                errorMessage = errorObject.message;
+                            } else {
+                                errorMessage = 'An unknown error occurred.';
+                            }
+                        } catch (e) {
+                            
+                            errorList = errorData.error.split(':')
+                            errorMessage = errorList[errorList.length - 1].trim();
+                        }
+                        alert(errorMessage)
+                    }                    
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+                e.preventDefault();
+                return false;
+            }
         }
         </script>
     <script src="/js/hamburger.js"></script>
