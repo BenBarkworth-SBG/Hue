@@ -26,6 +26,8 @@ Use the `nodemon` or `node index` commands to launch the application. If Nodemon
 
 #### 6. Create an account, log in and enjoy Hue
 
+#### [Figma](https://www.figma.com/file/rmriXpQ8pQZex3dBjibTMx/Figma-basics?type=design&node-id=1669%3A162202&mode=design&t=fW6RTsRNhcqj2bwt-1) <- Wireframe
+
 ### **Members**
 - Benjamin Barkworth
 - Danni Baumeister

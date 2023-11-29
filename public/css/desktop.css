@@ -696,6 +696,7 @@ img.avatar {
     #F2F467 30%, 
     #35AD41 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-family: 'Paytone One', sans-serif;
     font-size: 90px;
@@ -1219,8 +1220,8 @@ a {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 5%; 
-    background-color: #ebf1fd;
+    margin-bottom: 5%;
+    background-color: white;
     border: 10px #ebf1fd;
     border-radius: 5px;
     padding: 3%;
