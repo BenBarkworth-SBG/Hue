@@ -32,6 +32,7 @@
                 <li><a href="#">Username: <%= username %></a></li>
                 <li><a href="#">Email: <%= email %></a></li>
               </ul>
+              <button class="updateUsername" id="updateUsername" name="username" onclick="updateUsername()">Change Username</button>
             </div>
           </div>
           <div class="tab">
@@ -95,6 +96,45 @@
         element[index].innerHTML = ''
       })
       }
+    </script>
+    <script>
+      updateUsernameBtn = document.getElementById("updateUsername")
+      async function updateUsername() {
+          try {    
+              let usernamePrompt = prompt("Please enter a new username")
+              if (usernamePrompt == null) {
+                  return; 
+              }
+              const body = {user: usernamePrompt}
+              const usernamePattern = /^(?! )[A-Za-z0-9]+$/;
+              if (!usernamePattern.test(usernamePrompt) || usernamePrompt.length > 30) {
+                  alert("Please ensure you provide a name that contains only letters and numbers and is less than 30 characters long.")
+                  return;
+              } else {
+                  const jsonBody = JSON.stringify(body);
+                  const request = await fetch('/profile/updateUsername', {
+                      method: 'POST',
+                      headers: {"Content-Type": "application/json"},
+                      body: jsonBody,
+                  })
+                  .then(response => {
+                      if (response.ok) {
+                          alert("Saved to database")
+                          window.location.reload()
+                      } 
+                      else {
+                          alert("Unable to change username")
+                      }
+                      return response.json();
+                  })
+                  .then(data => {
+                  })
+              }
+          }
+          catch(err) {
+              console.error('Error:', err);
+          }
+      };
     </script>
 </body>
 <%- include ('footer'); %>
