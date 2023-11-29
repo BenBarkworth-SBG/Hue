@@ -167,19 +167,28 @@ router.post("/profile/deletePalette", async (req, res) => {
 
 // update username
 router.post('/profile/updateUsername', async (req, res) => {  
+		let updateUsernameValidation;
     try {
       const {user} = req.body;
 			const pullUser = await dataController.getUserByUsername({user});
 			if (pullUser !== null) {
-				throw new Error("Username already in database");
+					throw new Error("Username already in database");
 			}
-			dataController.updateUser(req.session.userid, req.body)
+			updateUsernameValidation = await dataController.updateUser(req.session.userid, req.body)
+			if (updateUsernameValidation && updateUsernameValidation.error) {
+        throw new Error("Username change validation failed");
+      }
 			req.session.user = user;
       res.send(req.body)
-    } 
+  	} 
     catch (error) {
+			if (updateUsernameValidation && updateUsernameValidation.errors && updateUsernameValidation.error === 'Must only contain letters and numbers and be less than 30 characters') {
+				return res.status(400).json({ error: updateUsernameValidation.error});
+			}
+			else {
       console.log(error)
       return res.status(400).json({error: error.message});
+			}
     }
   });
 

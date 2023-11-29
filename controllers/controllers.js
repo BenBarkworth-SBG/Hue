@@ -117,7 +117,14 @@ async function updateUser(id, data) {
     return updatedUser;
   } catch (error) {
     if (error.name === 'ValidationError') {
-      const errorMessage = error.errors['favourites.paletteName'].message;
+      let errorMessage;
+      if (error.errors && error.errors['favourites.paletteName']) {
+          errorMessage = error.errors['favourites.paletteName'].message;
+      } else if (error.errors && error.errors['user']) {
+          errorMessage = error.errors['user'].message;
+      } else {
+          errorMessage = "Unknown error in user data";
+      }
       // if updatedUser is null, create an object to store the error
       updatedUser = updatedUser || {};
       updatedUser.error = errorMessage

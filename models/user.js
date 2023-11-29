@@ -4,8 +4,7 @@ const userSchema = new mongoose.Schema({
     user: {
         type: String,
         unique: true,
-        match: /^(?! )[A-Za-z0-9\s]+$/,
-        maxlength: 30
+        match: [/^(?! )[A-Za-z0-9\s]{1,30}$/, 'Must only contain letters and numbers and be less than 30 characters']
     },
     email: {
         type: String,
