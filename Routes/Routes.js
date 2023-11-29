@@ -165,6 +165,24 @@ router.post("/profile/deletePalette", async (req, res) => {
     }
 });
 
+// update username
+router.post('/profile/updateUsername', async (req, res) => {  
+    try {
+      const {user} = req.body;
+			const pullUser = await dataController.getUserByUsername({user});
+			if (pullUser !== null) {
+				throw new Error("Username already in database");
+			}
+			dataController.updateUser(req.session.userid, req.body)
+			req.session.user = user;
+      res.send(req.body)
+    } 
+    catch (error) {
+      console.log(error)
+      return res.status(400).json({error: error.message});
+    }
+  });
+
 //handle logout
 router.get('/logout', (req, res) => {
   try {
