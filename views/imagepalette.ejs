@@ -16,7 +16,7 @@
         <!-- palette picker -->
         <div class="colourContainer">
             <div class="colourPicker">
-                <input type="file" id="upload" accept="image/*">
+                <input type="file" id="upload" aria-label="imageupload" accept="image/*">
                 <div id="image-container">
                     <img id="preview" alt="Preview Image" onclick="handleImageClick()">
                     <div id="color-preview">
@@ -75,6 +75,7 @@
                 </div>
             </div>
         </div>
+        <script src="/js/converters.js"></script>
         <script src="/js/colourPicker.js"></script>
         <script src="/js/imagePaletteGenerator.js"></script>
         <script src="/js/savePalette.js"></script>

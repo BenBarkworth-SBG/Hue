@@ -28,8 +28,10 @@
             <input type="checkbox" name="accordion-1" id="cb1">
             <label for="cb1" class="tab__label">Account Details</label>
             <div class="tab__content">
-              <li><a href="#">Username: <%= username %></a></li>
-              <li><a href="#">Email: <%= email %></a></li>
+              <ul>
+                <li><a href="#">Username: <%= username %></a></li>
+                <li><a href="#">Email: <%= email %></a></li>
+              </ul>
             </div>
           </div>
           <div class="tab">
@@ -71,7 +73,7 @@
     
   </div>  
     <script src="/js/hamburger.js"></script>
-    <script src="/js/colourPicker.js"></script>
+    <script src="/js/converters.js"></script>
     <script>
       let element = document.getElementsByClassName("color")
       for (let index = 0; index < element.length; index++) {
