@@ -667,16 +667,16 @@ img.avatar {
     background-position: center bottom;
     background-repeat: no-repeat;
     background-color: white;
-    overflow: auto;
+    overflow: hidden;
 }
 .main_content{
     height: 550px;
-    margin-top: 5%;
 }
 
 .strapline {
     text-align: left;
     margin-left: 5%;
+    margin-top: 2%;
 }
 
 .strapline_main {
@@ -686,6 +686,7 @@ img.avatar {
     letter-spacing: 2px;
     display: flex;
     display: inline-block;
+    margin-top: 5%;
 }
 
 .strapline_colour {
@@ -752,6 +753,9 @@ img.avatar {
     .strapline_colour{
         font-size: 6.8vw; 
     }
+    .strapline_main{
+        margin-top: 10%;
+    }
 }
 
 @media screen and (max-width: 880px) {
@@ -759,14 +763,17 @@ img.avatar {
         display: flex;
         justify-content: center;
         align-items: center;
-        position: fixed;
+        position: absolute;
     }
 }
 
 @media screen and (max-width: 750px) {
     .home_description{
-        font-size: 3.5vw;
+        font-size: 3vw;
         padding-right: 550px;
+    }
+    .strapline_main{
+        margin-top: 20%;
     }
 }
 
@@ -774,11 +781,11 @@ img.avatar {
     .home_description{
         font-size: 4vw;
         width: 250px;
+        margin-left: 5%;
     }
     .start_text{
         font-size: 30px;
     }
-
 }
 @media screen and (max-width: 313px) {
     .home_description{
