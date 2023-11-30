@@ -39,7 +39,6 @@ app.use(session({
 
 // Mount the routes
 app.use("/", routes);
-app.use('/api', routes);
 
 
 app.listen(3000, () => {

@@ -12,67 +12,67 @@
 
 <body>
 
-<div class="container">
   <!--nav bar-->
   <%- include ('navbar'); %>
+  <div class="container">
     <!--log-in form-->
-  <div class="login">
-    <form action="/login" method="post">
+    <div class="login">
+      <form action="/login" method="post">
 
-      <div class="usernamecontainer">
-        <div class="userPass">
-          <label for="user"><b>Username</b></label>
-          <input type="text" placeholder="Enter Username" name="user" required>
+        <div class="usernamecontainer">
+          <div class="userPass">
+            <label for="user"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="user" required>
+            
+            <label for="pass"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="pass" required>
+          </div>
+          <div class="forgotpasswordcontainer" style="background-color:white">
+            <button type="button" class="forgotpasswordbtn">Forgot Password?</button>
+          </div>
+
+          <!-- locals avoids error when page is first accessed as it's an object passed
+          in from server side -->
+          <div class="loginError">
+            <% if (locals.error) { %>
+              <p><%= locals.error %></p>
+            <% } %>
+          </div>
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+
+          </label>
+
+          <div class="accountbtns">
+            <button type="submit" class="loginbtn" id="login">Login</button>
+            <a href="/register" type="submit" class="signupbtn">Sign-up</a>
+          </div>
+        </div>
+      </form>
+      <script> // listens for the register button when users register
+        document.getElementById("login").addEventListener("submit", sendRegister);
+        function sendRegister(e){
+          const user = document.getElementById("username").value;
+          const pass = document.getElementById("password").value;
+
+          const body = {
+              user: user,
+              pass: pass,
+          };
+
+          const jsonBody = JSON.stringify(body);
           
-          <label for="pass"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="pass" required>
-        </div>
-        <div class="forgotpasswordcontainer" style="background-color:white">
-          <button type="button" class="forgotpasswordbtn">Forgot Password?</button>
-        </div>
-
-        <!-- locals avoids error when page is first accessed as it's an object passed
-        in from server side -->
-        <div class="loginError">
-          <% if (locals.error) { %>
-            <p><%= locals.error %></p>
-          <% } %>
-        </div>
-        <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-
-        </label>
-
-        <div class="accountbtns">
-          <button type="submit" class="loginbtn" id="login">Login</button>
-          <a href="/register" type="submit" class="signupbtn">Sign-up</a>
-        </div>
-      </div>
-    </form>
-    <script> // listens for the register button when users register
-      document.getElementById("login").addEventListener("submit", sendRegister);
-      function sendRegister(e){
-        const user = document.getElementById("username").value;
-        const pass = document.getElementById("password").value;
-
-        const body = {
-            user: user,
-            pass: pass,
-        };
-
-        const jsonBody = JSON.stringify(body);
-        
-        fetch("/login", {method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: `${jsonBody}`
-        }).then(res => console.log(res))
-        // prevent routing to other page or refresh
-        
-      }
-  </script>
-  </div>
+          fetch("/login", {method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: `${jsonBody}`
+          }).then(res => console.log(res))
+          // prevent routing to other page or refresh
+          
+        }
+      </script>
+    </div>
   <script src="/js/hamburger.js"></script>
-</div>
+  </div>
 </body>
 <%- include ('footer'); %>
 </html>

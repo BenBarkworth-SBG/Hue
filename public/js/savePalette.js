@@ -8,7 +8,6 @@ async function savePalette(elem) {
         if (namePrompt == null) {
             return; // breaks out of the function if the user clicks cancel on prompt
         }
-        // let hex = document.getElementById('hexOutput').innerHTML;
         const className = buttonId + "Container"
         const divContainer = document.getElementById(className)
         const divChildren = divContainer.children
@@ -18,14 +17,14 @@ async function savePalette(elem) {
         }
         const body = {hexCodes: hexCodes, paletteType: buttonId, paletteName: namePrompt}
         // checks that the string only consists of letters and digits and doesn't start with a space
-        const namePattern = /^(?! )[A-Za-z0-9]+$/;
+        const namePattern = /^(?! )[\w\s']{1,20}$/;
         if (!body.paletteType || !body.hexCodes) {
             alert("Internal server error.")
             return;
         } else if (!body.paletteName.trim()) {
             alert("Please ensure you provide a name.")
             return;
-        } else if (!namePattern.test(body.paletteName) || body.paletteName.length > 20) {
+        } else if (!namePattern.test(body.paletteName)) {
             alert("Please ensure you provide a name that contains only letters and numbers and is less than 20 characters long.")
             return;
         } else {
@@ -57,8 +56,6 @@ async function savePalette(elem) {
                 return response.json();
             })
             .then(data => {
-            // logs data passed into database in console
-                // console.log(data)
             })
         }
     }
