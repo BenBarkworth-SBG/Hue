@@ -10,12 +10,10 @@
 </head>
 
 <body>
-
+    <!-- nav bar -->
+    <%- include ('navbar'); %>
     <div class="container">
-        <!-- nav bar -->
-        <%- include ('navbar'); %>
-    <!--log-in form-->
-
+        <!--log-in form-->
         <div class="reg">
             <form id="regform">
                 <label for="username"><b>Username</b></label>
@@ -33,8 +31,6 @@
             </div>
         </div>
     </div>
-    
-
     <script>
         document.getElementById("regform").addEventListener("submit", sendRegister);
         function sendRegister(e){
@@ -97,9 +93,8 @@
                 return false;
             }
         }
-        </script>
+    </script>
     <script src="/js/hamburger.js"></script>
-
+    <%- include ('footer'); %>
 </body>
-<%- include ('footer'); %>
 </html>

@@ -2,6 +2,8 @@
 ### **Background**
 This is our group project for SHU assignment one. It's a web application that lets users create palettes based off of a specific colour.
 
+Follow this [link](https://www.figma.com/file/rmriXpQ8pQZex3dBjibTMx/Figma-basics?type=design&node-id=1669%3A162202&mode=design&t=fW6RTsRNhcqj2bwt-1) to see our wireframes.
+
 ### **Set Up**
 #### 1. Cloning
 First, clone this repository in the directory that you would like to store this project by running:
@@ -25,8 +27,6 @@ If you get a MongoDB error that looks like this: `ECONNREFUSED 127.0.0.1:27017`.
 Use the `nodemon` or `node index` commands to launch the application. If Nodemon causes an error, run `npm install -g nodemon` and try the `nodemon` command again.
 
 #### 6. Create an account, log in and enjoy Hue
-
-#### [Figma](https://www.figma.com/file/rmriXpQ8pQZex3dBjibTMx/Figma-basics?type=design&node-id=1669%3A162202&mode=design&t=fW6RTsRNhcqj2bwt-1) <- Wireframe
 
 ### **Members**
 - Benjamin Barkworth

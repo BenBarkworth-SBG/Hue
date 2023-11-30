@@ -12,9 +12,9 @@
 
 <body>
     <!--top nav bar-->
-  <div class="container">
         <!-- nav bar -->
     <%- include ('navbarlogged'); %>
+    <div class="container">
     <div class="profpage">
       <div class="savedpalette">
         <h1 class="usergradient"> Welcome <%= username %>! </h1>
@@ -106,8 +106,8 @@
                   return; 
               }
               const body = {user: usernamePrompt}
-              const usernamePattern = /^(?! )[A-Za-z0-9]+$/;
-              if (!usernamePattern.test(usernamePrompt) || usernamePrompt.length > 30) {
+              const usernamePattern = /^(?! )[\w\s']{1,30}$/;
+              if (!usernamePattern.test(usernamePrompt)) {
                   alert("Please ensure you provide a name that contains only letters and numbers and is less than 30 characters long.")
                   return;
               } else {
