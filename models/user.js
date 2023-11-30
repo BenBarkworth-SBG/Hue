@@ -24,7 +24,6 @@ const userSchema = new mongoose.Schema({
 },
 {collection: "Users"}
 );
-
 const userInfo = mongoose.model("userInfo", userSchema);
 
 module.exports = userInfo;

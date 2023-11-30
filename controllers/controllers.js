@@ -76,16 +76,13 @@ async function getUserFavourites(user) {
   try {
     const userFavourites = await userInfo.findOne(user);
     const favoritePalettes = userFavourites.favourites;
-
     const palettes = [];
     const names = []
-
     for (const favorite of favoritePalettes) {
       const getFavouritePalette = await getPaletteById(favorite.paletteId);
       names.push(favorite.paletteName)
       palettes.push(getFavouritePalette);
     }
-
     return {palettes,names};
   } catch (error) {
     console.error('Error retrieving data:', error);
@@ -93,12 +90,10 @@ async function getUserFavourites(user) {
   }
 }
 
-
 // create a user
 async function insertUser(data) {
   try {
     const userDocument = await userInfo.create(data);
-    console.log(`Inserted a document with ID: ${userDocument._id}`);
     return userDocument._id
   } catch (error) {
     // sends the error up the call stack
@@ -167,14 +162,10 @@ async function deletePaletteFromFavorites(userId, paletteIdToDelete) {
       console.error("User not found");
       return { error: "User not found" };
     }
-
     user.favourites = user.favourites.filter(
       (palette) => palette.paletteId.toString() !== paletteIdToDelete
     );
-
     await user.save();
-
-    console.log("Palette deleted from favorites");
     return { success: "Palette deleted from favorites" };
   } catch (error) {
     console.error("Error deleting palette from favorites:", error);

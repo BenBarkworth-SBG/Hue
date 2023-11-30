@@ -50,7 +50,6 @@ function handleImageHover(event) {
   colorPreview.style.top = y + 'px';
 }
 
-
 function hideColorPreview() {
     colorPreview.style.display = 'none';
 }
@@ -59,7 +58,6 @@ function handleImageClick() {
   const baseColor = colorBox.style.backgroundColor;
   imgColorPreview.style.backgroundColor = baseColor;
   imgColorPreview.style.display = 'inline-block';
-
   // Set the hex code outside to the same value as hex code
   hexCodeOutside.innerText = hexCode.innerText;
   hexCodeOutside.style.display = 'inline-block';

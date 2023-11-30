@@ -11,43 +11,42 @@
 </head>
 
 <body>
-    <!--top nav bar-->
-        <!-- nav bar -->
+    <!-- nav bar -->
     <%- include ('navbarlogged'); %>
     <div class="container">
-    <div class="profpage">
-      <div class="savedpalette">
-        <h1 class="usergradient"> Welcome <%= username %>! </h1>
-      </div>
-      <div class="userprofile">
-        <div class="accname">
+      <div class="profpage">
+        <div class="savedpalette">
+          <h1 class="usergradient"> Welcome <%= username %>! </h1>
         </div>
-      <!-- account drop down -->
-        <section class="accordion">
-          <div class="tab">
-            <input type="checkbox" name="accordion-1" id="cb1">
-            <label for="cb1" class="tab__label">Account Details</label>
-            <div class="tab__content">
-              <ul>
-                <li><a href="#">Username: <%= username %></a></li>
-                <li><a href="#">Email: <%= email %></a></li>
-              </ul>
-              <button class="updateUsername" id="updateUsername" name="username" onclick="updateUsername()">Change Username</button>
-            </div>
+        <div class="userprofile">
+          <div class="accname">
           </div>
-          <div class="tab">
-            <input type="checkbox" name="accordion-1" id="cb2">
-            <label for="cb2" class="tab__label">Settings</label>
-            <div class="tab__content">
-              <form method="post" action="/profile/delete">
-                <input type="hidden" name="userId" value="<%= id  %>" />
-                <button type="submit" class="delete-button">Delete Account</button>
-              </form>
+        <!-- account drop down -->
+          <section class="accordion">
+            <div class="tab">
+              <input type="checkbox" name="accordion-1" id="cb1">
+              <label for="cb1" class="tab__label">Account Details</label>
+              <div class="tab__content">
+                <ul>
+                  <li><a href="#">Username: <%= username %></a></li>
+                  <li><a href="#">Email: <%= email %></a></li>
+                </ul>
+                <button class="updateUsername" id="updateUsername" name="username" onclick="updateUsername()">Change Username</button>
+              </div>
             </div>
-          </div>
-        </section>
+            <div class="tab">
+              <input type="checkbox" name="accordion-1" id="cb2">
+              <label for="cb2" class="tab__label">Settings</label>
+              <div class="tab__content">
+                <form method="post" action="/profile/delete">
+                  <input type="hidden" name="userId" value="<%= id  %>" />
+                  <button type="submit" class="delete-button">Delete Account</button>
+                </form>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
         <h2 class="profileHeading">Saved Palettes</h2>
         <div class="profilePaletteContainer">
           <% if (favouritePalettes && favouritePalettes.length > 0) { %>
@@ -70,72 +69,12 @@
             </div>
             <p class="noPalettes">You have no saved palettes.</p>
           <% } %>
-        </div>
-    
-  </div>  
+        </div>  
+    </div>  
     <script src="/js/hamburger.js"></script>
     <script src="/js/converters.js"></script>
-    <script>
-      let element = document.getElementsByClassName("color")
-      for (let index = 0; index < element.length; index++) {
-        element[index].addEventListener("mouseenter", function(){
-        let rgbSnippet = element[index].style.backgroundColor.substr(4,11);
-        let rgbSplit = rgbSnippet.split(',')
-        let hexConversion = rgbToHex(rgbSplit[0],rgbSplit[1],rgbSplit[2]);
-        element[index].value = hexConversion
-        let cmykValues = rgbToCmyk(rgbSplit[0],rgbSplit[1],rgbSplit[2])
-        let blackValue = cmykValues[3]
-        if (blackValue > 80) {
-          element[index].innerHTML = `<p class="profileHexCodesLight"> ${element[index].value}</p>`
-        }
-        else {
-          element[index].innerHTML = `<p class="profileHexCodes"> ${element[index].value}</p>`
-        }
-      })
-      element[index].addEventListener("mouseleave", function(){
-        element[index].innerHTML = ''
-      })
-      }
-    </script>
-    <script>
-      updateUsernameBtn = document.getElementById("updateUsername")
-      async function updateUsername() {
-          try {    
-              let usernamePrompt = prompt("Please enter a new username")
-              if (usernamePrompt == null) {
-                  return; 
-              }
-              const body = {user: usernamePrompt}
-              const usernamePattern = /^(?! )[\w\s']{1,30}$/;
-              if (!usernamePattern.test(usernamePrompt)) {
-                  alert("Please ensure you provide a name that contains only letters and numbers and is less than 30 characters long.")
-                  return;
-              } else {
-                  const jsonBody = JSON.stringify(body);
-                  const request = await fetch('/profile/updateUsername', {
-                      method: 'POST',
-                      headers: {"Content-Type": "application/json"},
-                      body: jsonBody,
-                  })
-                  .then(response => {
-                      if (response.ok) {
-                          alert("Saved to database")
-                          window.location.reload()
-                      } 
-                      else {
-                          alert("Unable to change username")
-                      }
-                      return response.json();
-                  })
-                  .then(data => {
-                  })
-              }
-          }
-          catch(err) {
-              console.error('Error:', err);
-          }
-      };
-    </script>
+    <script src="/js/profileHexCodeHover.js"></script>
+    <script src="/js/updateUsername.js"></script>
 </body>
 <%- include ('footer'); %>
 
