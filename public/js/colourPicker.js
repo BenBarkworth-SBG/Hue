@@ -19,7 +19,7 @@ let paletteGeneratorBtn = document.getElementById("paletteGenBtn")
 let checkboxSet = new Set();
 let hoverAlertNum = 0
 
-
+// colour converter
 function colors(){
     let red = document.getElementById('red').value;
     let green = document.getElementById('green').value;
@@ -35,6 +35,7 @@ function colors(){
     return rgbConversion
 }
 
+// generate palette master function
 function generatePalettes() {
   const hexCodeOutside = document.getElementById('hex-code-outside');
   let value; 
@@ -135,14 +136,17 @@ function generateMonochromePalette(baseColor) {
     }
     return palette;
 }
+
 function lightenColor(hex, percent) {
     hex = hex.replace(/^#/, '');
     const r = parseInt(hex.slice(0, 2), 16);
     const g = parseInt(hex.slice(2, 4), 16);
     const b = parseInt(hex.slice(4, 6), 16);
+    // adds a percentage of brightness
     const newR = Math.min(255, r + (percent * 2.55));
     const newG = Math.min(255, g + (percent * 2.55));
     const newB = Math.min(255, b + (percent * 2.55));
+    // constructs hex by rounding values, converting to hex and prepending with zero if needed
     const newHex = `#${Math.round(newR).toString(16).padStart(2, '0')}${Math.round(newG).toString(16).padStart(2, '0')}${Math.round(newB).toString(16).padStart(2, '0')}`;
     return newHex;
 }
@@ -185,7 +189,6 @@ function generateAnalogousPalette(baseColor) {
       const newHex = hslToHex({ h: newHue, s: hsl.s, l: hsl.l });
       palette.push(newHex);
   }
-
   return palette;
 }
 
@@ -199,14 +202,21 @@ function hexToHsl(hex) {
   const bNormalized = b / 255;
   const max = Math.max(rNormalized, gNormalized, bNormalized);
   const min = Math.min(rNormalized, gNormalized, bNormalized);
+
+  // Calculate lightness (l)
   let h, s, l = (max + min) / 2;
+  // check if colour has no hue
   if (max === min) {
-      h = s = 0; // achromatic
+      h = s = 0;
+
   } else {
+    // calculate saturation
       const d = max - min;
       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      // checks for highest r, g or b value
       switch (max) {
           case rNormalized:
+              // handles hue scale circular nature
               h = (gNormalized - bNormalized) / d + (gNormalized < bNormalized ? 6 : 0);
               break;
           case gNormalized:
@@ -216,16 +226,20 @@ function hexToHsl(hex) {
               h = (rNormalized - gNormalized) / d + 4;
               break;
       }
+      // normalisation
       h /= 6;
   }
+  // convert to hsl
   return { h: h * 360, s: s * 100, l: l * 100 };
 }
 
 function hslToHex(hsl) {
+  // normalisation
   const h = hsl.h / 360;
   const s = hsl.s / 100;
   const l = hsl.l / 100;
 
+  // helper function to calculate hue
   const calcHue = (p, q, t) => {
       if (t < 0) t += 1;
       if (t > 1) t -= 1;
@@ -235,28 +249,34 @@ function hslToHex(hsl) {
       return p;
   };
 
+  // variable for when lightness is below 0.5
   const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+  // intermediate value for extreme saturation
   const p = 2 * l - q;
+  // accounting for different hue angles
   const red = Math.round(calcHue(p, q, h + 1 / 3) * 255);
   const green = Math.round(calcHue(p, q, h) * 255);
   const blue = Math.round(calcHue(p, q, h - 1 / 3) * 255);
-  return `#${(1 << 24 | red << 16 | green << 8 | blue).toString(16).slice(1).toLowerCase()}`;
+  const conversion = rgbToHex(red,green,blue)
+  return conversion
 }
 
 function generateSplitComplementaryPalette(baseColour, complementaryColor) {
     const palette = [];
     // Calculate split complementary colors based on the complementary color
-    const firstSplitColor = rotateColor(complementaryColor, 30); // Rotate by 30 degrees
-    const secondSplitColor = rotateColor(complementaryColor, -30); // Rotate by -30 degrees
-    
+    // Rotate by 30 degrees
+    const firstSplitColor = rotateColor(complementaryColor, 30);
+    // Rotate by -30 degrees
+    const secondSplitColor = rotateColor(complementaryColor, -30);
     // Include the complementary color and two split complementary colors
     palette.push(baseColour, firstSplitColor, secondSplitColor);
 
     // Calculate two more split complementary colors
-    const thirdSplitColor = rotateColor(firstSplitColor, 30); // Rotate the first split color by 30 degrees
-    const fourthSplitColor = rotateColor(secondSplitColor, -30); // Rotate the second split color by -30 degrees
+    // Rotate the first split color by 30 degrees
+    const thirdSplitColor = rotateColor(firstSplitColor, 30);
+     // Rotate the second split color by -30 degrees
+    const fourthSplitColor = rotateColor(secondSplitColor, -30);
     palette.push(thirdSplitColor, fourthSplitColor);
-
     return palette;
 }
 
@@ -272,10 +292,13 @@ function splitHslToHex(hsl) {
     const l = hsl.l / 100;
     let r, g, b;
 
+     // achromatic / no hue
     if (s === 0) {
-        r = g = b = l; // achromatic
+        r = g = b = l;
     } else {
+        // helper function
         const hue2rgb = (p, q, t) => {
+            // normalisation
             if (t < 0) t += 1;
             if (t > 1) t -= 1;
             if (t < 1 / 6) return p + (q - p) * 6 * t;
@@ -283,29 +306,27 @@ function splitHslToHex(hsl) {
             if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
             return p;
         };
-
+        // intermediate values
         const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
         const p = 2 * l - q;
-
         r = hue2rgb(p, q, h + 1 / 3);
         g = hue2rgb(p, q, h);
         b = hue2rgb(p, q, h - 1 / 3);
     }
 
-    return `#${Math.round(r * 255).toString(16).padStart(2, '0')}${Math.round(g * 255).toString(16).padStart(2, '0')}${Math.round(b * 255).toString(16).padStart(2, '0')}`;
+    return rgbToHex(Math.round(r * 255), Math.round(g * 255), Math.round(b * 255));
 }
+
 // random colour generator
 function generateRandomPalette() {
     // Generate random RGB values for the base colour
     const randomRed = Math.floor(Math.random() * 256);
     const randomGreen = Math.floor(Math.random() * 256);
     const randomBlue = Math.floor(Math.random() * 256);
-
     // Set the random RGB values to the input fields
     document.getElementById('red').value = randomRed;
     document.getElementById('green').value = randomGreen;
     document.getElementById('blue').value = randomBlue;
-
     let paletteChosen;
     if (checkboxSet.size < 1) {
       // list of palettes

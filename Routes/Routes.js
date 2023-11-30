@@ -3,7 +3,6 @@ const router = express.Router();
 const dataController = require('../controllers/controllers');
 const bcrypt = require('bcrypt'); 
 const loginController = require('../controllers/loginController');
-const userInfo = require('../models/user');
 const palette = require('../models/palette');
 
 //render the register page
@@ -32,7 +31,7 @@ router.get('/palette', async (req, res) => {
   }
 });
 
-//render the homeLoggedIn page
+//render the correct homepage
 router.get('/', async (req, res) => {   
   if (req.session.authorised) { 
     res.render("homeloggedin");
@@ -54,6 +53,7 @@ router.post('/palette', async (req, res) => {
     const username = req.session.user
     const data = await dataController.getAllPalettesData(); 
     const paletteInformation = new palette({hexCodes: hexCodes, paletteType: paletteType});
+    // Mongoose validation
     paletteCheck = await paletteInformation.validateSync();
     if (paletteCheck && paletteCheck.errors) {
       throw new Error("Palette validation failed");
@@ -72,6 +72,7 @@ router.post('/palette', async (req, res) => {
     const userPaletteCheck = userID.favourites.filter((favourite) => favourite.paletteId.toString() === paletteDbInsertion._id.toString() || favourite.paletteName === paletteName);
     if (userPaletteCheck.length == 0) {
       updateUserValidation = await dataController.updateUser(pullUser._id.toString(), {$push: {favourites: {paletteName: paletteName, paletteId: paletteDbInsertion._id}}});
+      // Mongoose validation
       if (updateUserValidation && updateUserValidation.error) {
         throw new Error("Palette name validation failed");
       }
@@ -82,7 +83,6 @@ router.post('/palette', async (req, res) => {
     res.send(req.body)
   } 
   catch (error) {
-    console.log(error)
     if (paletteCheck && paletteCheck.errors && paletteCheck.errors['paletteType']) {
       return res.status(400).json({ error: paletteCheck.errors['paletteType'].message });
     }
@@ -90,7 +90,6 @@ router.post('/palette', async (req, res) => {
       return res.status(400).json({ error: updateUserValidation.error});
     }
     else {
-      console.log(error)
       return res.status(400).json({error: error.message});
     }
   }
@@ -103,9 +102,10 @@ router.post ('/login', loginController);
 router.post('/register', async (req, res) => {    
   try {
     const {user, email, pass, favourites} = req.body;
-    const hashedPassword = await bcrypt.hash(pass, 10); // Hash the password
-    let userID = await dataController.insertUser({user, email, pass: hashedPassword, favourites}); // Store the hashed password
-
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(pass, 10);
+    // Store the hashed password
+    let userID = await dataController.insertUser({user, email, pass: hashedPassword, favourites});
     let username;
     if (typeof user == 'string') {
       username = user;
@@ -123,7 +123,6 @@ router.post('/register', async (req, res) => {
         return res.status(400).json({ error: `${value} already exists in the database.` });
     }
     else {
-        console.log(error)
         return res.status(400).json({error: error.message});
     }
   }
@@ -149,7 +148,6 @@ router.post("/profile/delete", async (req, res) => {
     req.session.destroy();
     return res.render('register', { message: 'Account deleted successfully' });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -160,7 +158,6 @@ router.post("/profile/deletePalette", async (req, res) => {
     const deletedPalette = await dataController.deletePaletteFromFavorites(req.session.userid, req.body.paletteID)
     res.redirect('/profile')
     } catch (err) {
-      console.error(err);
       res.status(500).json({ error: "Internal Server Error" });
     }
 });
@@ -186,7 +183,6 @@ router.post('/profile/updateUsername', async (req, res) => {
 				return res.status(400).json({ error: updateUsernameValidation.error});
 			}
 			else {
-      console.log(error)
       return res.status(400).json({error: error.message});
 			}
     }
@@ -198,7 +194,6 @@ router.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/login');
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

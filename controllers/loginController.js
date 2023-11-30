@@ -1,11 +1,11 @@
 const bcrypt = require('bcrypt');
 const dataController = require('../controllers/controllers');
 
+// handles user login
 const loginController = async (req, res) => {
   try {
     const { user, pass } = req.body;
     const checkUser = await dataController.getUserByUsername({ user: user });
-
     if (!checkUser) {
       return res.render('login', { error: 'Wrong credentials: Invalid username or password' });
     }

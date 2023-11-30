@@ -16,7 +16,6 @@ const paletteSchema = new mongoose.Schema({
 },
 {collection: "Palettes"}
 );
-
 const paletteInfo = mongoose.model("paletteInfo", paletteSchema);
 
 module.exports = paletteInfo;
